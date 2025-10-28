@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الكنز المجاني - تصميم فاتح</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a5bd9;
+            --secondary: #6c757d;
+            --light: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-border: #e9ecef;
+            --dark: #1d2144;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--primary-dark);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 15px;
+            border-radius: 30px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-bg);
+            border: 1px solid var(--light-border);
+            border-radius: 30px;
+            padding: 8px 15px;
+            width: 300px;
+            transition: var(--transition);
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 5px 10px;
+            color: var(--dark);
+        }
+
+        .search-box input::placeholder {
+            color: var(--gray);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 170;
+            right: -50;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1001;
+            display: none;
+            width: 160px;
+            padding: 18px 15px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 1px;
+            border-bottom: 1px solid var(--light-border);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .search-result-item:hover {
+            background: var(--light-bg);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, var(--primary), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .search-result-category {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: var(--primary);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: white;
+        }
+
+        .close-modal {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--light-bg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-border);
+            border-radius: var(--border-radius);
+            background: var(--light);
+            color: var(--dark);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+            outline: none;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input {
+            accent-color: var(--primary);
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--gray);
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-border);
+        }
+
+        .auth-divider span {
+            padding: 0 15px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--light-border);
+            border-radius: var(--border-radius);
+            background: var(--light);
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background: var(--light-bg);
+        }
+
+        .social-btn.google:hover {
+            border-color: #db4437;
+            color: #db4437;
+        }
+
+        .social-btn.facebook:hover {
+            border-color: #4267B2;
+            color: #4267B2;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+        }
+
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .signup-link a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* User Menu */
+        .user-menu {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover {
+            background: var(--primary-dark);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 10px 0;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .user-menu.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background: var(--light-bg);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--light-border);
+            margin: 8px 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #6a11cb 100%);
+            color: white;
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 50px;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Categories Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .category-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .category-card h3 {
+            margin-bottom: 10px;
+        }
+
+        /* Apps Section */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .app-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-image {
+            height: 180px;
+            width: 100%;
+            background: linear-gradient(45deg, var(--primary), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ffc107;
+        }
+
+        .app-description {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .app-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* App Detail Page */
+        .app-detail {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .app-detail-header {
+            display: flex;
+            gap: 30px;
+            padding: 40px;
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .app-detail-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--primary), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            flex-shrink: 0;
+        }
+
+        .app-detail-info {
+            flex: 1;
+        }
+
+        .app-detail-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .app-detail-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+
+        .app-detail-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .app-detail-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .app-detail-content {
+            padding: 40px;
+        }
+
+        .app-detail-section {
+            margin-bottom: 40px;
+        }
+
+        .app-detail-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .screenshot {
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--light-bg);
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+
+        .reviews {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .review {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .reviewer {
+            font-weight: 600;
+        }
+
+        .review-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--light);
+            padding: 80px 0;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+        }
+
+        .feature-card:hover {
+            background: var(--light-bg);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary) 0%, #6a11cb 100%);
+            color: white;
+            padding: 80px 0;
+            border-radius: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-form {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--light);
+            padding: 60px 0 20px;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-border);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content, .contact-content, .app-detail-header {
+                flex-direction: column;
+            }
+            
+            .hero-text, .hero-image, .contact-text, .contact-form {
+                flex: none;
+                width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .app-detail-image {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+            
+            .app-detail-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .search-box {
+                width: 50px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .app-detail-header {
+                padding: 20px;
+            }
+            
+            .app-detail-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>الكنز المجاني</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="#home" class="active">الرئيسية</a>
+                    <a href="#apps">التطبيقات</a>
+                    <a href="#categories">الفئات</a>
+                    <a href="#features">المميزات</a>
+                    <a href="#contact">اتصل بنا</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-input" placeholder="ابحث عن تطبيق...">
+                        </div>
+                        <div class="search-results" id="search-results">
+                            <!-- Search results will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Login Button (shown when user is not logged in) -->
+                    <button class="btn btn-outline" id="login-btn">login</button>
+                    
+                    <!-- User Menu (shown when user is logged in) -->
+                    <div class="user-menu" id="user-menu" style="display: none;">
+                        <div class="user-avatar" id="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <a href="#profile" class="dropdown-item">
+                                <i class="fas fa-user-circle"></i>
+                                <span>الملف الشخصي</span>
+                            </a>
+                            <a href="#my-apps" class="dropdown-item">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>تطبيقاتي</span>
+                            </a>
+                            <a href="#settings" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                <span>الإعدادات</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>تسجيل الخروج</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2>تسجيل الدخول</h2>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                    </div>
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">تذكرني</label>
+                        </div>
+                        <a href="#forgot-password" class="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">login</button>
+                </form>
+                
+                <div class="auth-divider">
+                    <span>أو</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>جوجل</span>
+                    </button>
+                    <button class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>فيسبوك</span>
+                    </button>
+                </div>
+                
+                <div class="signup-link">
+                    <span>ليس لديك حساب؟</span>
+                    <a href="#" id="show-signup">إنشاء حساب جديد</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" id="close-signup-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2>إنشاء حساب جديد</h2>
+            </div>
+            <div class="modal-body">
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="fullname">الاسم الكامل</label>
+                        <input type="text" id="fullname" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">البريد الإلكتروني</label>
+                        <input type="email" id="signup-email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">كلمة المرور</label>
+                        <input type="password" id="signup-password" class="form-control" placeholder="أدخل كلمة المرور" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" class="form-control" placeholder="أعد إدخال كلمة المرور" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء الحساب</button>
+                </form>
+                
+                <div class="auth-divider">
+                    <span>أو</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        <span>جوجل</span>
+                    </button>
+                    <button class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>فيسبوك</span>
+                    </button>
+                </div>
+                
+                <div class="signup-link">
+                    <span>لديك حساب بالفعل؟</span>
+                    <a href="#" id="show-login">login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>اكتشف عالمًا من التطبيقات الرائعة</h1>
+                    <p>منصة واحدة تجمع أفضل التطبيقات لتجربة مستخدم استثنائية. استكشف آلاف التطبيقات المميزة في مختلف المجالات.</p>
+                    <a href="#apps" class="btn btn-primary">استكشف التطبيقات</a>
+                </div>
+                <div class="hero-image">
+                    <img src="data:image/jpg;base64,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 " alt="الكنز المجاني">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="container" id="categories">
+        <h2 class="section-title">الفئات الشائعة</h2>
+        <div class="categories">
+            <a href="#games" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>الألعاب</h3>
+                <p>أفضل الألعاب المسلية</p>
+            </a>
+            <a href="#work" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>العمل</h3>
+                <p>تطبيقات لزيادة الإنتاجية</p>
+            </a>
+            <a href="#design" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>التصميم</h3>
+                <p>أدوات إبداعية للمصممين</p>
+            </a>
+            <a href="#music" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>الموسيقى</h3>
+                <p>تطبيقات صوتية وموسيقية</p>
+            </a>
+            <a href="#health" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>الصحة</h3>
+                <p>تطبيقات اللياقة والعافية</p>
+            </a>
+            <a href="#education" class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>التعليم</h3>
+                <p>تطبيقات تعليمية مفيدة</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section class="container" id="apps">
+        <h2 class="section-title">التطبيقات المميزة</h2>
+        <div class="apps-grid" id="apps-container">
+            <!-- Apps will be loaded here by JavaScript -->
+        </div>
+    </section>
+
+    <!-- App Detail Section (Hidden by default) -->
+    <section class="container" id="app-detail" style="display: none;">
+        <!-- App detail will be loaded here by JavaScript -->
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">مميزات متجرنا</h2>
+            <div class="features-grid">
+                <a href="#security" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>آمن ومضمون</h3>
+                    <p>جميع تطبيقاتنا خاضعة لفحص دقيق للتأكد من أمانها وخلوها من البرمجيات الضارة.</p>
+                </a>
+                <a href="#speed" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>تحميل سريع</h3>
+                    <p>استمتع بسرعة تحميل فائقة مع خوادمنا الموزعة حول العالم.</p>
+                </a>
+                <a href="#support" class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم فني متكامل</h3>
+                    <p>فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h2>تواصل معنا</h2>
+                    <p>هل لديك استفسار أو تحتاج إلى مساعدة؟ فريق الدعم لدينا جاهز للإجابة على جميع أسئلتك.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-envelope"></i> info@appstore.com</p>
+                        <p><i class="fas fa-phone"></i> +966 123 456 789</p>
+                        <p><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="اسمك" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="بريدك الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" placeholder="رسالتك" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>الكنز المجاني</h3>
+                    <p>منصة رائدة لتجربة تطبيقات متميزة وآمنة تلبي جميع احتياجاتك الرقمية.</p>
+                    <div class="social-links">
+                        <a href="#facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#linkedin"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#apps">التطبيقات</a></li>
+                        <li><a href="#categories">الفئات</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الدعم</h3>
+                    <ul class="footer-links">
+                        <li><a href="#help">مركز المساعدة</a></li>
+                        <li><a href="#terms">الشروط والأحكام</a></li>
+                        <li><a href="#privacy">سياسة الخصوصية</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>النشرة البريدية</h3>
+                    <p>اشترك في نشرتنا البريدية لتصلك آخر التحديثات والعروض.</p>
+                    <div class="search-box" style="width: 100%; margin-top: 15px;">
+                        <input type="text" placeholder="بريدك الإلكتروني">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 الكنز المجاني. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Sample apps data with direct links
+        const apps = [
+            {
+                id: 1,
+                name: "MT Manager Pro Vip",
+                description: "تحميل تطبيق ام تي مانجر MT Manager Pro Vip مهكر هو أداة قوية لإدارة الملفات على أجهزة الأندرويد، يتيح للمستخدمين القيام بمهام متقدمة مثل تحرير الملفات وتعديلها، واستخراج وضغط الملفات، وحتى تعديل تطبيقات الأندرويد (APKs)، يُعتبر هذا التطبيق مثاليًا للمستخدمين المتقدمين والمطورين الذين يحتاجون إلى تحكم كامل في ملفات نظام الأندرويد، بالإضافة إلى ذلك يوفر التطبيق واجهة مستخدم بسيطة وسهلة الاستخدام، مع ميزات مثل تحرير النصوص البرمجية، وتعديل التصاريح، والبحث والاستبدال في النصوص، وإدارة التطبيقات المثبتة.",
+                category: "التصميم",
+                price: 0,
+                rating: 4.8,
+                icon: "fas fa-camera",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.photomaste.pro",
+                website: "https://www.mediafire.com/file/x9jh2c47u7tfngq/MT_Manager_2.14.5-clone%2528password_is%2529_12345.zip/file?dkey=1ktgahtp68s&r=1909",
+                features: ["تحرير متقدم", "فلاتر احترافية", "إزالة الخلفيات", "تصدير بدقة عالية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "أحمد محمد", rating: 5, date: "2023-10-15", comment: "أفضل تطبيق لتحرير الصور! ميزاته رائعة." },
+                    { user: "فاطمة علي", rating: 4, date: "2023-09-22", comment: "تطبيق ممتاز وسهل الاستخدام." }
+                ]
+            },
+            {
+                id: 2,
+                name: "FitTracker",
+                description: "تابع نشاطك البدني وخطط لتمارينك اليومية.",
+                category: "الصحة",
+                price: 4.99,
+                rating: 4.6,
+                icon: "fas fa-running",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.fittracker.app",
+                website: "https://fittracker.com",
+                features: ["تتبع النشاط", "خطط تمارين", "تحليل البيانات", "أهداف لياقة"],
+                screenshots: 5,
+                reviews: [
+                    { user: "خالد إبراهيم", rating: 5, date: "2023-11-05", comment: "ساعدني في تحقيق أهداف اللياقة البدنية." },
+                    { user: "نورة عبدالله", rating: 4, date: "2023-10-18", comment: "واجهة مستخدم جميلة وميزات مفيدة." }
+                ]
+            },
+            {
+                id: 3,
+                name: "LanguageLearn",
+                description: "تعلم لغات جديدة بطريقة تفاعلية وممتعة.",
+                category: "التعليم",
+                price: 0,
+                rating: 4.9,
+                icon: "fas fa-book",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.languagelearn.app",
+                website: "https://languagelearn.com",
+                features: ["دروس تفاعلية", "تمارين متنوعة", "تتبع التقدم", "مجتمع متعلمين"],
+                screenshots: 6,
+                reviews: [
+                    { user: "سارة أحمد", rating: 5, date: "2023-11-12", comment: "أتعلم الإنجليزية بسرعة بفضل هذا التطبيق!" },
+                    { user: "محمد حسن", rating: 5, date: "2023-10-29", comment: "طريقة رائعة لتعلم اللغات." }
+                ]
+            },
+            {
+                id: 4,
+                name: "WeatherPro",
+                description: "توقعات الطلب الأكثر دقة مع تحذيرات فورية.",
+                category: "الأدوات",
+                price: 2.99,
+                rating: 4.7,
+                icon: "fas fa-cloud-sun",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.weatherpro.app",
+                website: "https://weatherpro.com",
+                features: ["توقعات دقيقة", "خرائط الطقس", "تحذيرات فورية", "متابعة عالمية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "علي محمود", rating: 4, date: "2023-11-08", comment: "دقيق جدًا في توقعاته." },
+                    { user: "لينا كمال", rating: 5, date: "2023-10-25", comment: "أفضل تطبيق طقس استخدمته." }
+                ]
+            },
+            {
+                id: 5,
+                name: "MusicFlow",
+                description: "استمع إلى ملايين الأغاني بدون إعلانات.",
+                category: "الموسيقى",
+                price: 5.99,
+                rating: 4.5,
+                icon: "fas fa-music",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.musicflow.app",
+                website: "https://musicflow.com",
+                features: ["مكتبة ضخمة", "بث بدون إعلانات", "قوائم تشغيل", "تنزيل للاستماع بدون اتصال"],
+                screenshots: 5,
+                reviews: [
+                    { user: "ياسمين وليد", rating: 4, date: "2023-11-15", comment: "مكتبة موسيقى رائعة وجودة صوت عالية." },
+                    { user: "أيمن سعيد", rating: 5, date: "2023-10-30", comment: "أفضل من الباقات الأخرى بسعر أقل." }
+                ]
+            },
+            {
+                id: 6,
+                name: "TaskMaster",
+                description: "نظم مهامك وزد من إنتاجيتك اليومية.",
+                category: "العمل",
+                price: 0,
+                rating: 4.4,
+                icon: "fas fa-tasks",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.taskmaster.app",
+                website: "https://taskmaster.com",
+                features: ["إدارة المهام", "تذكيرات", "تعاون الفريق", "تقارير الإنتاجية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "ريم عبدالرحمن", rating: 4, date: "2023-11-02", comment: "ساعدني في تنظيم عملي بشكل أفضل." },
+                    { user: "طارق ناصر", rating: 5, date: "2023-10-19", comment: "بسيط وفعال لإدارة المهام." }
+                ]
+            },
+            {
+                id: 7,
+                name: "BudgetTracker",
+                description: "ادفع ميزانيتك وتتبع مصروفاتك بسهولة.",
+                category: "المال",
+                price: 3.99,
+                rating: 4.3,
+                icon: "fas fa-wallet",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.budgettracker.app",
+                website: "https://budgettracker.com",
+                features: ["تتبع المصروفات", "ميزانية شهرية", "تقارير مالية", "أهداف ادخار"],
+                screenshots: 5,
+                reviews: [
+                    { user: "نادر خالد", rating: 4, date: "2023-11-10", comment: "ساعدني في التحكم في مصروفي." },
+                    { user: "هدى فاروق", rating: 4, date: "2023-10-27", comment: "تطبيق مفيد جدًا للإدارة المالية." }
+                ]
+            },
+            {
+                id: 8,
+                name: "MeditationGuide",
+                description: "تمارين تأمل واسترخاء لتحسين صحتك النفسية.",
+                category: "الصحة",
+                price: 0,
+                rating: 4.8,
+                icon: "fas fa-spa",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.meditationguide.app",
+                website: "https://meditationguide.com",
+                features: ["جلسات تأمل", "موسيقى هادئة", "تتبع التقدم", "برامج متخصصة"],
+                screenshots: 4,
+                reviews: [
+                    { user: "سلمى أحمد", rating: 5, date: "2023-11-07", comment: "ساعدني في تقليل التوتر والقلق." },
+                    { user: "مازن علي", rating: 5, date: "2023-10-24", comment: "تطبيق رائع للاسترخاء والتركيز." }
+                ]
+            },
+            {
+                id: 9,
+                name: "RecipeBook",
+                description: "اكتشف وشارك آلاف الوصفات الشهية من حول العالم.",
+                category: "الطبخ",
+                price: 2.49,
+                rating: 4.6,
+                icon: "fas fa-utensils",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.recipebook.app",
+                website: "https://recipebook.com",
+                features: ["وصفات متنوعة", "فيديو تعليمي", "قوائم تسوق", "تقييم الوصفات"],
+                screenshots: 6,
+                reviews: [
+                    { user: "منى حسين", rating: 5, date: "2023-11-14", comment: "أصبحت طباخة ماهرة بفضل هذا التطبيق!" },
+                    { user: "فهد مبارك", rating: 4, date: "2023-10-31", comment: "وصفات لذيذة وسهلة التحضير." }
+                ]
+            },
+            {
+                id: 10,
+                name: "TravelCompanion",
+                description: "خطط رحلاتك واكتشف أماكن جديدة حول العالم.",
+                category: "السفر",
+                price: 0,
+                rating: 4.2,
+                icon: "fas fa-map-marked-alt",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.travelcompanion.app",
+                website: "https://travelcompanion.com",
+                features: ["تخطيط الرحلات", "اكتشاف الوجهات", "حجوزات", "مراجعات المسافرين"],
+                screenshots: 5,
+                reviews: [
+                    { user: "ليلى عبدالله", rating: 4, date: "2023-11-09", comment: "ساعدني في تخطيط رحلتي إلى أوروبا." },
+                    { user: "وسام نادر", rating: 4, date: "2023-10-26", comment: "مفيد جدًا للمسافرين." }
+                ]
+            },
+            {
+                id: 11,
+                name: "NewsHub",
+                description: "ابق على اطلاع بآخر الأخبار من مصادر موثوقة.",
+                category: "الأخبار",
+                price: 0,
+                rating: 4.4,
+                icon: "fas fa-newspaper",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.newshub.app",
+                website: "https://newshub.com",
+                features: ["أخبار متنوعة", "مصادر موثوقة", "تخصيص المحتوى", "إشعارات فورية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "باسل رامي", rating: 4, date: "2023-11-13", comment: "أفضل تطبيق للأخبار المحلية والعالمية." },
+                    { user: "جنى سامي", rating: 5, date: "2023-10-28", comment: "مصادر موثوقة وتحديث مستمر." }
+                ]
+            },
+            {
+                id: 12,
+                name: "CodeMaster",
+                description: "تعلم البرمجة بلغات متعددة مع تمارين تفاعلية.",
+                category: "التعليم",
+                price: 6.99,
+                rating: 4.9,
+                icon: "fas fa-code",
+                downloadLink: "https://play.google.com/store/apps/details?id=com.codemaster.app",
+                website: "https://codemaster.com",
+                features: ["دروس برمجة", "تمارين تفاعلية", "مشاريع عملية", "شهادات معتمدة"],
+                screenshots: 6,
+                reviews: [
+                    { user: "زياد كمال", rating: 5, date: "2023-11-06", comment: "بدأت كهاوي وأصبحت مبرمجًا محترفًا!" },
+                    { user: "رنا عادل", rating: 5, date: "2023-10-23", comment: "أفضل منصة لتعلم البرمجة للمبتدئين." }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeModal = document.getElementById('close-modal');
+        const closeSignupModal = document.getElementById('close-signup-modal');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const userMenu = document.getElementById('user-menu');
+        const userAvatar = document.getElementById('user-avatar');
+        const logoutBtn = document.getElementById('logout-btn');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const appsContainer = document.getElementById('apps-container');
+        const appDetailSection = document.getElementById('app-detail');
+        const backToTop = document.getElementById('back-to-top');
+
+        // Check if user is logged in (from localStorage)
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        let currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+        // Initialize the page
+        function init() {
+            updateUI();
+            setupEventListeners();
+            renderApps();
+            setupScrollEvents();
+            handleHashChange();
+        }
+
+        // Handle hash changes for direct app links
+        function handleHashChange() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#app-')) {
+                const appId = parseInt(hash.replace('#app-', ''));
+                showAppDetail(appId);
+            } else {
+                showAppList();
+            }
+        }
+
+        // Show app detail page
+        function showAppDetail(appId) {
+            const app = apps.find(a => a.id === appId);
+            if (!app) {
+                showAppList();
+                return;
+            }
+
+            // Hide apps grid and show app detail
+            document.getElementById('apps').style.display = 'none';
+            appDetailSection.style.display = 'block';
+
+            // Generate app detail HTML
+            appDetailSection.innerHTML = `
+                <div class="app-detail">
+                    <div class="app-detail-header">
+                        <div class="app-detail-image">
+                            <i class="${app.icon}"></i>
+                        </div>
+                        <div class="app-detail-info">
+                            <h1 class="app-detail-title">${app.name}</h1>
+                            <div class="app-detail-meta">
+                                <span><i class="fas fa-star"></i> ${app.rating}</span>
+                                <span><i class="fas fa-download"></i> ${(app.rating * 1000).toLocaleString()}+</span>
+                                <span><i class="fas fa-folder"></i> ${app.category}</span>
+                            </div>
+                            <p class="app-detail-description">${app.description}</p>
+                            <div class="app-detail-actions">
+                                <a href="${app.downloadLink}" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-download"></i> ${app.price === 0 ? 'تحميل مجاني' : `شراء - $${app.price}`}
+                                </a>
+                                <a href="${app.website}" class="btn btn-outline" target="_blank">
+                                    <i class="fas fa-globe"></i> الموقع الرسمي
+                                </a>
+                                <button class="btn btn-outline" onclick="showAppList()">
+                                    <i class="fas fa-arrow-right"></i> العودة للتطبيقات
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-detail-content">
+                        <div class="app-detail-section">
+                            <h3>المميزات الرئيسية</h3>
+                            <ul>
+                                ${app.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="app-detail-section">
+                            <h3>لقطات من التطبيق</h3>
+                            <div class="screenshots">
+                                ${Array.from({length: app.screenshots}, (_, i) => `
+                                    <div class="screenshot">لقطة ${i+1}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="app-detail-section">
+                            <h3>التقييمات والمراجعات</h3>
+                            <div class="reviews">
+                                ${app.reviews.map(review => `
+                                    <div class="review">
+                                        <div class="review-header">
+                                            <span class="reviewer">${review.user}</span>
+                                            <div>
+                                                <span class="review-rating">
+                                                    ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                                                </span>
+                                                <span class="review-date">${review.date}</span>
+                                            </div>
+                                        </div>
+                                        <p>${review.comment}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Scroll to top of app detail
+            appDetailSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show app list (main page)
+        function showAppList() {
+            document.getElementById('apps').style.display = 'block';
+            appDetailSection.style.display = 'none';
+            window.location.hash = 'apps';
+        }
+
+        // Update UI based on login status
+        function updateUI() {
+            if (isLoggedIn) {
+                // User is logged in
+                loginBtn.style.display = 'none';
+                userMenu.style.display = 'block';
+                
+                // Update user avatar with first letter of name
+                if (currentUser.fullname) {
+                    userAvatar.innerHTML = currentUser.fullname.charAt(0).toUpperCase();
+                }
+            } else {
+                // User is not logged in
+                loginBtn.style.display = 'block';
+                userMenu.style.display = 'none';
+            }
+        }
+
+        // Render apps to the page
+        function renderApps(filteredApps = apps) {
+            appsContainer.innerHTML = '';
+            
+            if (filteredApps.length === 0) {
+                appsContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">لا توجد تطبيقات تطابق معايير البحث</p>';
+                return;
+            }
+            
+            filteredApps.forEach(app => {
+                const appCard = document.createElement('a');
+                appCard.className = 'app-card';
+                appCard.href = `#app-${app.id}`;
+                
+                appCard.innerHTML = `
+                    <div class="app-image">
+                        <i class="${app.icon}"></i>
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3 class="app-title">${app.name}</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${app.rating}</span>
+                            </div>
+                        </div>
+                        <p class="app-description">${app.description}</p>
+                        <div class="app-footer">
+                            <span class="app-price">${app.price === 0 ? 'مجاني' : `$${app.price}`}</span>
+                            <span class="btn btn-primary">${app.price === 0 ? 'تحميل' : 'شراء'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                appsContainer.appendChild(appCard);
+            });
+        }
+
+        // Search functionality
+        function performSearch(query) {
+            if (!query) {
+                searchResults.style.display = 'none';
+                renderApps();
+                return;
+            }
+            
+            const filteredApps = apps.filter(app => 
+                app.name.toLowerCase().includes(query.toLowerCase()) ||
+                app.description.toLowerCase().includes(query.toLowerCase()) ||
+                app.category.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            // Update search results
+            searchResults.innerHTML = '';
+            
+            if (filteredApps.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">لا توجد نتائج تطابق بحثك</div>';
+            } else {
+                filteredApps.slice(0, 5).forEach(app => {
+                    const resultItem = document.createElement('a');
+                    resultItem.className = 'search-result-item';
+                    resultItem.href = `#app-${app.id}`;
+                    resultItem.innerHTML = `
+                        <div class="search-result-icon">
+                            <i class="${app.icon}"></i>
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-name">${app.name}</div>
+                            <div class="search-result-category">${app.category}</div>
+                        </div>
+                    `;
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+            
+            searchResults.style.display = 'block';
+        }
+
+        // Setup scroll events for back to top button
+        function setupScrollEvents() {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Login button click
+            loginBtn.addEventListener('click', () => {
+                loginModal.style.display = 'flex';
+            });
+
+            // Close modal buttons
+            closeModal.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+            });
+
+            closeSignupModal.addEventListener('click', () => {
+                signupModal.style.display = 'none';
+            });
+
+            // Switch between login and signup modals
+            showSignup.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'flex';
+            });
+
+            showLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                signupModal.style.display = 'none';
+                loginModal.style.display = 'flex';
+            });
+
+            // Login form submission
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple validation
+                if (email && password) {
+                    // In a real app, you would send this to a server
+                    // For demo purposes, we'll just simulate a successful login
+                    simulateLogin(email);
+                } else {
+                    alert('يرجى ملء جميع الحقول');
+                }
+            });
+
+            // Signup form submission
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const fullname = document.getElementById('fullname').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Validation
+                if (!fullname || !email || !password || !confirmPassword) {
+                    alert('يرجى ملء جميع الحقول');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('كلمات المرور غير متطابقة');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    alert('كلمة المرور يجب أن تكون 6 أحرف على الأقل');
+                    return;
+                }
+                
+                // In a real app, you would send this to a server
+                // For demo purposes, we'll just simulate account creation
+                simulateSignup(fullname, email, password);
+            });
+
+            // User menu toggle
+            userAvatar.addEventListener('click', () => {
+                userMenu.classList.toggle('active');
+            });
+
+            // Logout button
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+
+            // Search input event
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    searchResults.style.display = 'none';
+                }
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (e.target === signupModal) {
+                    signupModal.style.display = 'none';
+                }
+                
+                // Close user menu when clicking outside
+                if (!userMenu.contains(e.target) && userMenu.classList.contains('active')) {
+                    userMenu.classList.remove('active');
+                }
+            });
+
+            // Handle hash changes
+            window.addEventListener('hashchange', handleHashChange);
+        }
+
+        // Simulate login process
+        function simulateLogin(email) {
+            // Show loading state
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل الدخول...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // For demo, we'll create a mock user
+                currentUser = {
+                    email: email,
+                    fullname: email.split('@')[0] // Use part of email as name for demo
+                };
+                
+                // Save to localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                isLoggedIn = true;
+                
+                // Update UI
+                updateUI();
+                
+                // Close modal
+                loginModal.style.display = 'none';
+                
+                // Reset form
+                loginForm.reset();
+                
+                // Show success message
+                alert('تم تسجيل الدخول!');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        }
+
+        // Simulate signup process
+        function simulateSignup(fullname, email, password) {
+            // Show loading state
+            const submitBtn = signupForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                // Create user object
+                currentUser = {
+                    fullname: fullname,
+                    email: email
+                };
+                
+                // Save to localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                isLoggedIn = true;
+                
+                // Update UI
+                updateUI();
+                
+                // Close modal
+                signupModal.style.display = 'none';
+                
+                // Reset form
+                signupForm.reset();
+                
+                // Show success message
+                alert('تم إنشاء الحساب بنجاح!');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        }
+
+        // Logout function
+        function logout() {
+            // Clear user data
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            
+            isLoggedIn = false;
+            currentUser = {};
+            
+            // Update UI
+            updateUI();
+            
+            // Close user menu
+            userMenu.classList.remove('active');
+            
+            // Show success message
+            alert('تم تسجيل الخروج بنجاح!');
+        }
+
+        // Make showAppList function globally available
+        window.showAppList = showAppList;
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
