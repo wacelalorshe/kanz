@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الكنـز المـجـانـيات - نظام مركزي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a5bd9;
+            --secondary: #6c757d;
+            --light: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-border: #e9ecef;
+            --dark: #1d2144;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-border);
+            border-radius: var(--border-radius);
+            background-color: var(--light-bg);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-border);
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: var(--light-bg);
+        }
+
+        .search-result-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            color: var(--primary);
+        }
+
+        .search-result-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-weight: 500;
+        }
+
+        .search-result-category {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        /* Apps Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .app-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            
+            border-bottom: 6px groove  #000; 
+    border-top: 6px   groove  #000; 
+border-left: 0px ridge #000;
+border-right: 0px groove #000; border-radius: 19px 19px 19px 19px;"
+            
+            
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: var(--light-bg);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .app-rating i {
+            color: var(--warning);
+        }
+
+        .app-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .app-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: var(--light);
+            border: 1px solid var(--light-border);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary);
+            color: var(--light);
+            border-color: var(--primary);
+        }
+
+        /* Loading */
+        .loading-apps {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--light);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                width: 100%;
+            }
+            
+            .apps-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .category-filter {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>الكنـز المـجـانـيات</span>
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="#home">الرئيسية</a>
+                    <a href="#apps">التطبيقات</a>
+                    <a href="#categories">الفئات</a>
+                    <a href="#about">عن المتجر</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="search-input" placeholder="ابحث عن تطبيق...">
+                        <div class="search-results" id="search-results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Apps Section -->
+    <section class="container" id="apps">
+        <h2 style="margin: 30px 0 20px; text-align: center;">التطبيقات المتاحة</h2>
+        
+        <!-- Category Filter -->
+        <div class="category-filter" id="category-filter">
+            <button class="category-btn active" data-category="all">الكل</button>
+            <button class="category-btn" data-category="التصميم">التصميم</button>
+            <button class="category-btn" data-category="tv">tv</button>
+            <button class="category-btn" data-category="التعليم">التعليم</button>
+            <button class="category-btn" data-category="الأدوات">الأدوات</button>
+            <button class="category-btn" data-category="الموسيقى">الموسيقى</button>
+            <button class="category-btn" data-category="العمل">العمل</button>
+            <button class="category-btn" data-category="المال">المال</button>
+            <button class="category-btn" data-category="الطبخ">الطبخ</button>
+            <button class="category-btn" data-category="السفر">السفر</button>
+            <button class="category-btn" data-category="الأخبار">الأخبار</button>
+        </div>
+        
+        <div class="apps-grid" id="apps-container">
+            <!-- Apps will be loaded here -->
+        </div>
+        <div class="loading-apps" id="loading-apps">
+            <div class="loading"></div>
+            <p>جاري تحميل التطبيقات...</p>
+        </div>
+    </section>
+
+    <script>
+        // Default apps data
+        const defaultApps = [
+            {
+                id: 1,
+                name: "Best Flash Tool by BossV",
+                description: "BFT Best Flash Tool من BossV هو برنامج قوي ومجاني لنظام Windows يساعدك على إصلاح IMEI، وفلاش البرامج الثابتة، وفتح قفل الشاشة والأمان على الهواتف التي تعمل بنظام Android التي تعتمد على MediaTek MTK و UniSOC و Qualcomm بسهولة.",
+                category: "التعليم",
+                price: 0,
+                rating: 4.8,
+                icon: "fas fa-camera",
+                iconImage: "https://bypassfrpfiles.com/wp-content/uploads/2025/04/BFT-Tool-5.jpg.webp", // رابط الصورة هنا
+                downloadLink: "https://www.jiocloud.com/l/?u=e4cL68Q4hiXe1VtFrPUXnaEQjcUIRv_6doXjJ2Q8fj1swplCZZpBd4qsAshB70L-NL3",
+                website: "https://www.jiocloud.com/l/?u=e4cL68Q4hiXe1VtFrPUXnaEQjcUIRv_6doXjJ2Q8fj1swplCZZpBd4qsAshB70L-NL3",
+                features: ["تحرير متقدم", "فلاتر احترافية", "إزالة الخلفيات", "تصدير بدقة عالية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "أحمد محمد", rating: 5, date: "2023-10-15", comment: "أفضل تطبيق لتحرير الصور! ميزاته رائعة." },
+                    { user: "فاطمة علي", rating: 4, date: "2023-09-22", comment: "تطبيق ممتاز وسهل الاستخدام." }
+                ]
+            },
+            {
+                id: 2,
+                name: "ES File Explorer لـ Android - قم بتنزيل تطبيق مهكر",
+                description: "البرنامج يسمح لأي مستخدم أندرويد أن يدير كل ملفاته بسهولة ، و يتمكن من الولوج في أي وقت على جهازه المحمول ثم يشاركه إذا أراد. رفع الصور، مشاهدة الأفلام.",
+                category: "تعليم",
+                price: 0,
+                rating: 4.6,
+                icon: "fas fa-running",
+                iconImage: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ45aEy0sGMNT77ZnHA9A1q2IVd1W2Oq5LDKnFBtdzVfWpk6EphKa5P2GYDOioRCyfqUlwME-D-RUB4LkznO50dgNZXGeSWbwPqVJR5oA", // رابط الصورة هنا
+                downloadLink: "https://www.mediafire.com/file/lp5zk4n6sg70hp9/UltData_v3.4.21.apk/file?dkey=sv5abna0e6j&r=1424",
+                website: "https://fittracker.com",
+                features: ["تتبع النشاط", "خطط تمارين", "تحليل البيانات", "أهداف لياقة"],
+                screenshots: 5,
+                reviews: [
+                    { user: "خالد إبراهيم", rating: 5, date: "2023-11-05", comment: "ساعدني في تحقيق أهداف اللياقة البدنية." },
+                    { user: "نورة عبدالله", rating: 4, date: "2023-10-18", comment: "واجهة مستخدم جميلة وميزات مفيدة." }
+                ]
+            },
+            {
+                id: 3,
+                name: "aseel tv",
+                description: "ويتميز التطبيق Aseel Live tv يقدم بتوفير جدول المباريات بشكل يومي لمشاهدتها بشكل مباشر، حيث يمكنك متابعة مبارياتك المفضلة ومشاهدتها",
+                category: "tv",
+                price: 0,
+                rating: 4.9,
+                icon: "fas fa-book",
+                iconImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNiIkZhiQmGLtZi7kGoyZ4eG2PLk3yw8pGC9OmXIobJw&s=10", // رابط الصورة هنا
+                downloadLink: "https://wacelalorshe.github.io/kanz/Aseel.html",
+                website: "https://languagelearn.com",
+                features: ["دروس تفاعلية", "تمارين متنوعة", "تتبع التقدم", "مجتمع متعلمين"],
+                screenshots: 6,
+                reviews: [
+                    { user: "سارة أحمد", rating: 5, date: "2023-11-12", comment: "أتعلم الإنجليزية بسرعة بفضل هذا التطبيق!" },
+                    { user: "محمد حسن", rating: 5, date: "2023-10-29", comment: "طريقة رائعة لتعلم اللغات." }
+                ]
+            },
+            {
+                id: 4,
+                name: "تحميل تطبيق دراما بوكس DramaBox مهكر Apk للاندرويد 2026 اخر اصدار مجانا",
+                description: "مميزات تحميل تطبيق درامابوكس DramaBox مهكر · مشاهدة جميع المسلسلات العربية والعالمية مجانًا بدون أي اشتراك شهري. · واجهة سهلة وبسيطة.",
+                category: "tv",
+                price: 0,
+                rating: 4.7,
+                icon: "fas fa-cloud-sun",
+                iconImage: "https://img.utdstc.com/icon/1cb/cda/1cbcda7e556f5173bbaf9a04caec6c1815a1111b7551538739a7acea2a3d40d5:200", // رابط الصورة هنا
+                downloadLink: "https://wacelalorshe.github.io/kanz/dramabox.html",
+                website: "https://weatherpro.com",
+                features: ["توقعات دقيقة", "خرائط الطقس", "تحذيرات فورية", "متابعة عالمية"],
+                screenshots: 4,
+                reviews: [
+                    { user: "علي محمود", rating: 4, date: "2023-11-08", comment: "دقيق جدًا في توقعاته." },
+                    { user: "لينا كمال", rating: 5, date: "2023-10-25", comment: "أفضل تطبيق طقس استخدمته." }
+                ]
+            },
+            {
+                id: 5,
+                name: "اسم",
+                description: "وصف",
+                category: "الموسيقى",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " ♥", // رابط الصورة هنا
+                downloadLink: "رابط",
+                website: "https://musicflow.com",
+                features: ["مكتبة ضخمة", "بث بدون إعلانات", "قوائم تشغيل", "تنزيل للاستماع بدون اتصال"],
+                screenshots: 5,
+                reviews: [
+                    { user: "ياسمين وليد", rating: 4, date: "2023-11-15", comment: "مكتبة موسيقى رائعة وجودة صوت عالية." },
+                    { user: "أيمن سعيد", rating: 5, date: "2023-10-30", comment: "أفضل من الباقات الأخرى بسعر أقل." }
+                ]
+            },
+            {
+                id: 6,
+                name: "اسم",
+                description: "وصف",
+                category: "الموسيقى",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " ♥", // رابط الصورة هنا
+                downloadLink: "رابط",
+                website: "https://musicflow.com",
+                features: ["مكتبة ضخمة", "بث بدون إعلانات", "قوائم تشغيل", "تنزيل للاستماع بدون اتصال"],
+                screenshots: 5,
+                reviews: [
+                    { user: "ياسمين وليد", rating: 4, date: "2023-11-15", comment: "مكتبة موسيقى رائعة وجودة صوت عالية." },
+                    { user: "أيمن سعيد", rating: 5, date: "2023-10-30", comment: "أفضل من الباقات الأخرى بسعر أقل." }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const appsContainer = document.getElementById('apps-container');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const categoryFilter = document.getElementById('category-filter');
+        const loadingApps = document.getElementById('loading-apps');
+
+        // Current state
+        let currentApps = [];
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+
+        // Initialize the page
+        function init() {
+            loadApps();
+            setupEventListeners();
+        }
+
+        // Load apps
+        function loadApps() {
+            showLoading(true);
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                currentApps = JSON.parse(localStorage.getItem('store_apps')) || defaultApps;
+                renderApps(currentApps);
+                showLoading(false);
+            }, 800);
+        }
+
+        // Show/hide loading indicator
+        function showLoading(show) {
+            if (loadingApps) {
+                loadingApps.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Render apps to the main page
+        function renderApps(apps = []) {
+            if (!appsContainer) return;
+            
+            appsContainer.innerHTML = '';
+            
+            if (apps.length === 0) {
+                appsContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">لا توجد تطبيقات متاحة</p>';
+                return;
+            }
+            
+            apps.forEach(app => {
+                const appCard = document.createElement('a');
+                appCard.className = 'app-card';
+                appCard.href = app.downloadLink;
+                appCard.target = "_blank";
+                
+                // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
+                const iconContent = app.iconImage 
+                    ? `<img src="${app.iconImage}" alt="${app.name}">`
+                    : `<i class="${app.icon}"></i>`;
+                
+                appCard.innerHTML = `
+                    <div class="app-image">
+                        ${iconContent}
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3 class="app-title">${app.name}</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${app.rating}</span>
+                            </div>
+                        </div>
+                        <p class="app-description">${app.description.substring(0, 120)}...</p>
+                        <div class="app-footer">
+                            <span class="app-price">${app.price === 0 ? 'مجاني' : `$${app.price}`}</span>
+                            <span class="btn btn-primary">${app.price === 0 ? 'تحميل' : 'شراء'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                appsContainer.appendChild(appCard);
+            });
+        }
+
+        // Filter apps by category
+        function filterAppsByCategory(category) {
+            if (category === 'all') {
+                return currentApps;
+            }
+            
+            return currentApps.filter(app => app.category === category);
+        }
+
+        // Search functionality - محسّن
+        function performSearch(query) {
+            currentSearchQuery = query;
+            
+            if (!query) {
+                searchResults.style.display = 'none';
+                applyFilters();
+                return;
+            }
+            
+            // تقسيم النص إلى كلمات للبحث عن كل كلمة
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            // فلترة التطبيقات بناءً على البحث
+            const filteredApps = currentApps.filter(app => {
+                const appName = app.name.toLowerCase();
+                const appDescription = app.description.toLowerCase();
+                const appCategory = app.category.toLowerCase();
+                
+                // البحث عن تطابق مع أي من كلمات البحث
+                return searchTerms.some(term => 
+                    appName.includes(term) || 
+                    appDescription.includes(term) || 
+                    appCategory.includes(term)
+                );
+            });
+            
+            // تحديث نتائج البحث المنسدلة
+            searchResults.innerHTML = '';
+            
+            if (filteredApps.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">لا توجد نتائج تطابق بحثك</div>';
+            } else {
+                filteredApps.slice(0, 5).forEach(app => {
+                    const resultItem = document.createElement('a');
+                    resultItem.className = 'search-result-item';
+                    resultItem.href = app.downloadLink;
+                    resultItem.target = "_blank";
+                    
+                    // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
+                    const iconContent = app.iconImage 
+                        ? `<img src="${app.iconImage}" alt="${app.name}">`
+                        : `<i class="${app.icon}"></i>`;
+                    
+                    resultItem.innerHTML = `
+                        <div class="search-result-icon">
+                            ${iconContent}
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-name">${app.name}</div>
+                            <div class="search-result-category">${app.category}</div>
+                        </div>
+                    `;
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+            
+            searchResults.style.display = 'block';
+            
+            // حفظ نتائج البحث لتطبيق المرشحات
+            currentSearchResults = filteredApps;
+            applyFilters();
+        }
+
+        // Apply both category and search filters
+        function applyFilters() {
+            let filteredApps = currentApps;
+            
+            // Apply category filter
+            if (currentCategory !== 'all') {
+                filteredApps = filteredApps.filter(app => app.category === currentCategory);
+            }
+            
+            // Apply search filter
+            if (currentSearchQuery) {
+                const searchTerms = currentSearchQuery.toLowerCase().split(' ');
+                filteredApps = filteredApps.filter(app => {
+                    const appName = app.name.toLowerCase();
+                    const appDescription = app.description.toLowerCase();
+                    const appCategory = app.category.toLowerCase();
+                    
+                    return searchTerms.some(term => 
+                        appName.includes(term) || 
+                        appDescription.includes(term) || 
+                        appCategory.includes(term)
+                    );
+                });
+            }
+            
+            renderApps(filteredApps);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input event
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    performSearch(e.target.value);
+                });
+            }
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (searchResults && !e.target.closest('.search-container')) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Category filter buttons
+            if (categoryFilter) {
+                categoryFilter.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('category-btn')) {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked button
+                        e.target.classList.add('active');
+                        
+                        // Update current category
+                        currentCategory = e.target.getAttribute('data-category');
+                        
+                        // Apply filters
+                        applyFilters();
+                    }
+                });
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
