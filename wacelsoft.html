@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر التطبيقات - نظام الإدارة</title>
+    <title>متجر التطبيقات - نظام مركزي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -398,6 +398,21 @@
             font-size: 0.85rem;
         }
 
+        /* Loading Spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Login Modal */
         .modal {
             display: none;
@@ -410,12 +425,10 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .modal.show {
+            display: flex;
         }
 
         .modal-content {
@@ -984,6 +997,32 @@
             transform: translateY(-3px);
         }
 
+        /* Message Styles */
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .message.success {
+            background: var(--success);
+        }
+
+        .message.error {
+            background: var(--danger);
+        }
+
+        .message.info {
+            background: var(--primary);
+        }
+
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero-content, .contact-content {
@@ -1322,7 +1361,10 @@
     <section class="container" id="apps">
         <h2 class="section-title">التطبيقات المميزة</h2>
         <div class="apps-grid" id="apps-container">
-            <!-- Apps will be loaded here by JavaScript -->
+            <div class="loading-apps" style="text-align: center; grid-column: 1/-1; padding: 40px;">
+                <div class="loading" style="margin: 0 auto;"></div>
+                <p>جاري تحميل التطبيقات...</p>
+            </div>
         </div>
     </section>
 
@@ -1409,6 +1451,10 @@
     </footer>
 
     <script>
+        // JSONbin.io configuration
+        const JSONBIN_BIN_ID = '67ba0e63ad19ca34f85d5e3c';
+        const JSONBIN_API_KEY = '$2a$10$QFf1o82LpJByWKHzuFf5LOT1IGnx/2JuI95P.ux77wHHHddxrpoki';
+        
         // Default apps data
         const defaultApps = [
             {
@@ -1456,8 +1502,11 @@
         const loginModal = document.getElementById('login-modal');
         const closeModal = document.getElementById('close-modal');
         const loginForm = document.getElementById('login-form');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userMenu = document.getElementById('user-menu');
+        const userAvatar = document.getElementById('user-avatar');
 
-        // Admin credentials (in a real app, this would be handled server-side)
+        // Admin credentials
         const ADMIN_EMAIL = "admin@appstore.com";
         const ADMIN_PASSWORD = "admin123";
 
@@ -1467,45 +1516,146 @@
         let currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
         // Initialize the page
-        function init() {
-            loadApps();
+        async function init() {
+            await loadApps();
             updateUI();
             setupEventListeners();
         }
 
-        // Load apps from localStorage or use default apps
-        function loadApps() {
-            let apps = JSON.parse(localStorage.getItem('apps'));
-            if (!apps || apps.length === 0) {
-                apps = defaultApps;
-                localStorage.setItem('apps', JSON.stringify(apps));
+        // Load apps from JSONbin.io
+        async function loadApps() {
+            try {
+                showLoading(true);
+                
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch apps');
+                }
+                
+                const data = await response.json();
+                const apps = data.record || defaultApps;
+                
+                renderApps(apps);
+                if (isAdmin) {
+                    renderAdminAppsList(apps);
+                }
+                return apps;
+                
+            } catch (error) {
+                console.error('Error loading apps:', error);
+                // استخدام التطبيقات الافتراضية في حالة الخطأ
+                const apps = defaultApps;
+                renderApps(apps);
+                if (isAdmin) {
+                    renderAdminAppsList(apps);
+                }
+                return apps;
+            } finally {
+                showLoading(false);
             }
-            renderApps(apps);
-            renderAdminAppsList(apps);
-            return apps;
         }
 
-        // Save apps to localStorage
-        function saveApps(apps) {
-            localStorage.setItem('apps', JSON.stringify(apps));
-            renderApps(apps);
-            renderAdminAppsList(apps);
+        // Save apps to JSONbin.io
+        async function saveApps(apps) {
+            try {
+                showLoading(true);
+                
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(apps)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to save apps');
+                }
+                
+                const data = await response.json();
+                console.log('Apps saved successfully:', data);
+                
+                // تحديث الواجهة
+                renderApps(apps);
+                if (isAdmin) {
+                    renderAdminAppsList(apps);
+                }
+                
+                // إظهار رسالة نجاح
+                showMessage('تم حفظ التطبيقات بنجاح!', 'success');
+                
+            } catch (error) {
+                console.error('Error saving apps:', error);
+                showMessage('حدث خطأ في حفظ التطبيقات', 'error');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Show/hide loading indicator
+        function showLoading(show) {
+            const loadingElement = document.querySelector('.loading-apps');
+            if (loadingElement) {
+                loadingElement.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Show message to user
+        function showMessage(message, type = 'info') {
+            // إزالة أي رسائل سابقة
+            const existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
         }
 
         // Get all apps
-        function getApps() {
-            return JSON.parse(localStorage.getItem('apps')) || [];
+        async function getApps() {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
+                    headers: {
+                        'X-Master-Key': JSONBIN_API_KEY
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch apps');
+                }
+                
+                const data = await response.json();
+                return data.record || [];
+            } catch (error) {
+                console.error('Error getting apps:', error);
+                return [];
+            }
         }
 
         // Update UI based on login status
         function updateUI() {
             if (isLoggedIn) {
                 loginBtn.style.display = 'none';
+                userMenu.style.display = 'block';
                 if (isAdmin) {
                     adminBtn.style.display = 'block';
                 }
             } else {
                 loginBtn.style.display = 'block';
+                userMenu.style.display = 'none';
                 adminBtn.style.display = 'none';
                 adminPanel.style.display = 'none';
             }
@@ -1618,8 +1768,8 @@
         }
 
         // Edit existing app
-        function editApp(appId) {
-            const apps = getApps();
+        async function editApp(appId) {
+            const apps = await getApps();
             const app = apps.find(a => a.id === appId);
             
             if (!app) return;
@@ -1641,17 +1791,17 @@
         }
 
         // Delete app
-        function deleteApp(appId) {
+        async function deleteApp(appId) {
             if (!confirm('هل أنت متأكد من حذف هذا التطبيق؟')) return;
             
-            const apps = getApps();
+            const apps = await getApps();
             const updatedApps = apps.filter(app => app.id !== appId);
-            saveApps(updatedApps);
+            await saveApps(updatedApps);
         }
 
         // Save app (add new or update existing)
-        function saveApp(appData) {
-            const apps = getApps();
+        async function saveApp(appData) {
+            const apps = await getApps();
             
             if (appData.id) {
                 // Update existing app
@@ -1666,19 +1816,20 @@
                 apps.push(appData);
             }
             
-            saveApps(apps);
+            await saveApps(apps);
             hideAppForm();
         }
 
         // Search functionality
-        function performSearch(query) {
+        async function performSearch(query) {
             if (!query) {
                 searchResults.style.display = 'none';
-                renderApps(getApps());
+                const apps = await getApps();
+                renderApps(apps);
                 return;
             }
             
-            const apps = getApps();
+            const apps = await getApps();
             const filteredApps = apps.filter(app => 
                 app.name.toLowerCase().includes(query.toLowerCase()) ||
                 app.description.toLowerCase().includes(query.toLowerCase()) ||
@@ -1716,24 +1867,25 @@
         function setupEventListeners() {
             // Login button click - FIXED
             loginBtn.addEventListener('click', () => {
-                loginModal.style.display = 'flex';
+                loginModal.classList.add('show');
             });
 
             // Close modal button - FIXED
             closeModal.addEventListener('click', () => {
-                loginModal.style.display = 'none';
+                loginModal.classList.remove('show');
             });
 
             // Close modal when clicking outside - FIXED
             window.addEventListener('click', (e) => {
                 if (e.target === loginModal) {
-                    loginModal.style.display = 'none';
+                    loginModal.classList.remove('show');
                 }
             });
 
             // Admin panel buttons
             adminBtn.addEventListener('click', () => {
                 adminPanel.style.display = 'block';
+                loadApps(); // Refresh the admin list
             });
             
             closeAdminBtn.addEventListener('click', () => {
@@ -1745,8 +1897,20 @@
             
             cancelAppBtn.addEventListener('click', hideAppForm);
             
+            // User menu toggle
+            userAvatar.addEventListener('click', () => {
+                userMenu.classList.toggle('active');
+            });
+            
+            // Close user menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target)) {
+                    userMenu.classList.remove('active');
+                }
+            });
+
             // App management form
-            appManagementForm.addEventListener('submit', (e) => {
+            appManagementForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
                 const appData = {
@@ -1763,7 +1927,7 @@
                     features: document.getElementById('app-features').value.split(',').map(f => f.trim())
                 };
                 
-                saveApp(appData);
+                await saveApp(appData);
             });
             
             // Search input event
@@ -1802,23 +1966,23 @@
                         updateUI();
                         
                         // Close modal
-                        loginModal.style.display = 'none';
+                        loginModal.classList.remove('show');
                         
                         // Reset form
                         loginForm.reset();
                         
                         // Show success message
-                        alert('تم تسجيل الدخول كمدير بنجاح!');
+                        showMessage('تم تسجيل الدخول كمدير بنجاح!', 'success');
                     } else {
-                        alert('بيانات الدخول غير صحيحة');
+                        showMessage('بيانات الدخول غير صحيحة', 'error');
                     }
                 } else {
-                    alert('يرجى ملء جميع الحقول');
+                    showMessage('يرجى ملء جميع الحقول', 'error');
                 }
             });
 
             // Logout functionality
-            document.getElementById('logout-btn').addEventListener('click', (e) => {
+            logoutBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 logout();
             });
@@ -1839,7 +2003,7 @@
             updateUI();
             
             // Show success message
-            alert('تم تسجيل الخروج بنجاح!');
+            showMessage('تم تسجيل الخروج بنجاح!', 'success');
         }
 
         // Initialize the page
