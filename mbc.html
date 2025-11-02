@@ -666,6 +666,22 @@
             background-color: rgba(220, 53, 69, 0.1);
         }
 
+        /* Data Management Styles */
+        .data-management {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-border);
+        }
+
+        .data-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
         /* Login Modal */
         .modal {
             display: none;
@@ -778,6 +794,10 @@
             .app-detail-actions {
                 justify-content: center;
             }
+            
+            .data-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -850,6 +870,8 @@
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Data Management Section will be added here dynamically -->
         </div>
     </section>
 
@@ -1036,8 +1058,18 @@
             password: "admin123"
         };
 
-        // رابط ملف البيانات على GitHub Gist - الرابط الذي حصلت عليه
-        const DATA_URL = 'https://gist.githubusercontent.com/wacelalorshe/48c62c87d04b33b5f55d79cf035cf7c2/raw/26a18f27926739dee4e8031a2e07839e3aa8f533/apps-data.json';
+        // إعدادات GitHub Gist - تم إضافة التوكين الخاص بك
+        const GIST_CONFIG = {
+            GIST_ID: '48c62c87d04b33b5f55d79cf035cf7c2',
+            GITHUB_TOKEN: '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',
+            FILE_NAME: 'apps-data.json'
+        };
+
+        // رابط قراءة البيانات (للجميع)
+        const DATA_URL = `https://gist.githubusercontent.com/wacelalorshe/${GIST_CONFIG.GIST_ID}/raw/${GIST_CONFIG.FILE_NAME}`;
+
+        // رابط الكتابة (للمسؤول فقط)
+        const GIST_API_URL = `https://api.github.com/gists/${GIST_CONFIG.GIST_ID}`;
 
         // DOM Elements
         const appsContainer = document.getElementById('apps-container');
@@ -1187,21 +1219,150 @@
                     throw new Error('فشل في تحميل البيانات: ' + response.status);
                 }
             } catch (error) {
-                console.log('استخدام البيانات المحلية:', error.message);
-                // استخدام البيانات المحفوظة محلياً
+                console.log('خطأ في تحميل البيانات:', error.message);
+                // استخدام البيانات المحلية كنسخة احتياطية
                 const localApps = localStorage.getItem('store_apps');
-                if (localApps) {
-                    currentApps = JSON.parse(localApps);
-                    console.log('تم تحميل البيانات من localStorage:', currentApps.length + ' تطبيقات');
-                } else {
-                    currentApps = [];
+                currentApps = localApps ? JSON.parse(localApps) : [];
+                
+                if (currentApps.length === 0) {
                     console.log('لا توجد بيانات متاحة');
+                    appsContainer.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--warning); margin-bottom: 20px;"></i>
+                            <h3>لا توجد تطبيقات متاحة حالياً</h3>
+                            <p>يرجى المحاولة لاحقاً أو الاتصال بالمسؤول</p>
+                        </div>
+                    `;
+                    showLoading(false);
+                    return;
                 }
             }
             
             renderApps(currentApps);
             renderAdminAppsTable(currentApps);
             showLoading(false);
+        }
+
+        // حفظ التطبيقات إلى GitHub Gist (للمسؤول فقط)
+        async function saveAppsToGist(appsData) {
+            if (!isLoggedIn) {
+                alert('يجب تسجيل الدخول أولاً');
+                return false;
+            }
+
+            showLoading(true);
+
+            try {
+                const response = await fetch(GIST_API_URL, {
+                    method: 'PATCH',
+                    headers: {
+                        'Authorization': `token ${GIST_CONFIG.GITHUB_TOKEN}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        files: {
+                            [GIST_CONFIG.FILE_NAME]: {
+                                content: JSON.stringify(appsData, null, 2)
+                            }
+                        }
+                    })
+                });
+
+                if (response.ok) {
+                    console.log('تم حفظ البيانات في GitHub Gist بنجاح');
+                    showLoading(false);
+                    return true;
+                } else {
+                    const errorData = await response.json();
+                    throw new Error('فشل في حفظ البيانات: ' + response.status + ' - ' + JSON.stringify(errorData));
+                }
+            } catch (error) {
+                console.error('خطأ في حفظ البيانات:', error);
+                // حفظ محلي كنسخة احتياطية
+                localStorage.setItem('store_apps', JSON.stringify(appsData));
+                showLoading(false);
+                alert('تم الحفظ محلياً بسبب خطأ في الاتصال. التطبيقات لن تظهر للآخرين.\n\nتفاصيل الخطأ: ' + error.message);
+                return false;
+            }
+        }
+
+        // حفظ التطبيق (إضافة أو تعديل)
+        async function saveApp(appData) {
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            // Process features
+            if (appData.features) {
+                appData.features = appData.features.split(',').map(f => f.trim()).filter(f => f);
+            } else {
+                appData.features = [];
+            }
+            
+            let newApps = [...currentApps];
+            
+            if (editingAppId) {
+                // Update existing app
+                const index = newApps.findIndex(app => app.id == editingAppId);
+                if (index !== -1) {
+                    newApps[index] = { ...newApps[index], ...appData };
+                }
+            } else {
+                // Add new app
+                const newId = newApps.length > 0 ? Math.max(...newApps.map(app => parseInt(app.id))) + 1 : 1;
+                newApps.push({ 
+                    id: newId.toString(), 
+                    ...appData,
+                    createdAt: new Date().toISOString()
+                });
+            }
+            
+            // محاولة الحفظ في GitHub Gist
+            const savedToGist = await saveAppsToGist(newApps);
+            
+            if (savedToGist) {
+                // إذا تم الحفظ في Gist، تحديث البيانات المحلية
+                currentApps = newApps;
+                localStorage.setItem('store_apps', JSON.stringify(newApps));
+                
+                // Update UI
+                renderApps(currentApps);
+                renderAdminAppsTable(currentApps);
+                applyFilters();
+                
+                // Close modal
+                closeAppModal();
+                
+                alert('تم حفظ التطبيق بنجاح وسيظهر للجميع!');
+            }
+        }
+
+        // حذف التطبيق
+        async function deleteApp(appId) {
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            if (!confirm('هل أنت متأكد من حذف هذا التطبيق؟')) return;
+            
+            const newApps = currentApps.filter(app => app.id != appId);
+            
+            // محاولة الحفظ في GitHub Gist
+            const savedToGist = await saveAppsToGist(newApps);
+            
+            if (savedToGist) {
+                currentApps = newApps;
+                localStorage.setItem('store_apps', JSON.stringify(newApps));
+                
+                // Update UI
+                renderApps(currentApps);
+                renderAdminAppsTable(currentApps);
+                applyFilters();
+                
+                alert('تم حذف التطبيق بنجاح!');
+            }
         }
 
         // Show/hide loading indicator
@@ -1218,7 +1379,13 @@
             appsContainer.innerHTML = '';
             
             if (apps.length === 0) {
-                appsContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">لا توجد تطبيقات متاحة</p>';
+                appsContainer.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-box-open" style="font-size: 3rem; color: var(--gray); margin-bottom: 20px;"></i>
+                        <h3>لا توجد تطبيقات متاحة حالياً</h3>
+                        <p>سيتم عرض التطبيقات هنا عند توفرها</p>
+                    </div>
+                `;
                 return;
             }
             
@@ -1227,7 +1394,6 @@
                 appCard.className = 'app-card';
                 appCard.dataset.appId = app.id;
                 
-                // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
                 const iconContent = app.iconImage 
                     ? `<img src="${app.iconImage}" alt="${app.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'${app.icon || 'fas fa-mobile-alt'}\'></i>'">`
                     : `<i class="${app.icon || 'fas fa-mobile-alt'}"></i>`;
@@ -1365,6 +1531,66 @@
                 
                 adminAppsTable.appendChild(row);
             });
+
+            // إضافة قسم إدارة البيانات
+            addDataManagementSection();
+        }
+
+        function addDataManagementSection() {
+            // إزالة القسم القديم إذا موجود
+            const oldSection = document.querySelector('.data-management');
+            if (oldSection) oldSection.remove();
+
+            const dataSection = document.createElement('div');
+            dataSection.className = 'data-management';
+            dataSection.innerHTML = `
+                <h3>إدارة البيانات المركزية</h3>
+                <div class="data-actions">
+                    <button class="btn btn-outline" id="refresh-data">
+                        <i class="fas fa-sync-alt"></i>
+                        تحديث البيانات من السحابة
+                    </button>
+                    <button class="btn btn-success" id="sync-data">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        مزامنة مع السحابة
+                    </button>
+                </div>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">
+                    <i class="fas fa-info-circle"></i>
+                    حالة التخزين: <span id="storage-status">جاري التحقق...</span>
+                </p>
+                <p style="margin-top: 5px; font-size: 0.8rem; color: var(--secondary);">
+                    التطبيقات المضافة من هنا ستظهر لجميع المستخدمين تلقائياً
+                </p>
+            `;
+
+            adminPanel.appendChild(dataSection);
+
+            // إضافة مستمعي الأحداث
+            document.getElementById('refresh-data').addEventListener('click', () => {
+                loadApps();
+                alert('تم تحديث البيانات من السحابة');
+            });
+
+            document.getElementById('sync-data').addEventListener('click', async () => {
+                const success = await saveAppsToGist(currentApps);
+                if (success) {
+                    document.getElementById('storage-status').textContent = 'مخزن في السحابة ✓';
+                    document.getElementById('storage-status').style.color = 'var(--success)';
+                    alert('تمت المزامنة بنجاح مع السحابة!');
+                }
+            });
+
+            // تحديث حالة التخزين
+            updateStorageStatus();
+        }
+
+        function updateStorageStatus() {
+            const statusElement = document.getElementById('storage-status');
+            if (statusElement) {
+                statusElement.textContent = 'مخزن في السحابة ✓';
+                statusElement.style.color = 'var(--success)';
+            }
         }
 
         // Filter apps by category
@@ -1506,64 +1732,6 @@
             appModal.style.display = 'none';
             appForm.reset();
             editingAppId = null;
-        }
-
-        // Save app (add or update)
-        function saveApp(appData) {
-            if (!isLoggedIn) {
-                showLoginModal();
-                return;
-            }
-            
-            // Process features
-            if (appData.features) {
-                appData.features = appData.features.split(',').map(f => f.trim()).filter(f => f);
-            } else {
-                appData.features = [];
-            }
-            
-            if (editingAppId) {
-                // Update existing app
-                const index = currentApps.findIndex(app => app.id == editingAppId);
-                if (index !== -1) {
-                    currentApps[index] = { ...currentApps[index], ...appData };
-                }
-            } else {
-                // Add new app
-                const newId = currentApps.length > 0 ? Math.max(...currentApps.map(app => parseInt(app.id))) + 1 : 1;
-                currentApps.push({ id: newId.toString(), ...appData });
-            }
-            
-            // Save to localStorage
-            localStorage.setItem('store_apps', JSON.stringify(currentApps));
-            
-            // Update UI
-            renderApps(currentApps);
-            renderAdminAppsTable(currentApps);
-            applyFilters();
-            
-            // Close modal
-            closeAppModal();
-        }
-
-        // Delete app
-        function deleteApp(appId) {
-            if (!isLoggedIn) {
-                showLoginModal();
-                return;
-            }
-            
-            if (confirm('هل أنت متأكد من حذف هذا التطبيق؟')) {
-                currentApps = currentApps.filter(app => app.id != appId);
-                
-                // Save to localStorage
-                localStorage.setItem('store_apps', JSON.stringify(currentApps));
-                
-                // Update UI
-                renderApps(currentApps);
-                renderAdminAppsTable(currentApps);
-                applyFilters();
-            }
         }
 
         // Setup event listeners
