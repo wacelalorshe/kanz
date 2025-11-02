@@ -1,1216 +1,1461 @@
-<!----------  اكواد استايل القنوات  ------------>
-<style type="text/css">
-.grid-container {
-display: grid;
-justify-content: center;
-grid-template-columns: repeat(3, 1fr);
-grid-gap: 5px 5px;
-padding: 0px;
-}
-.grid1-container {
-display: grid;
-justify-content: center;
-grid-template-columns: repeat(1, 1fr);
-grid-gap: 10px;
-
-color: green;
-padding: 40px;
-
-
-
-}
-h1 {
-text-align: center;
-margin-top: 0px;
-
-
-
-}
-
-h2 {
-text-align: center;
-
-
-
-margin-top: 5%;
-font-size: 30px;
-color: #4A00B3;
-border-radius: 10px 10px 10px 10px;
-height: 5%;
-width: 100%;
-}
-
-
-h3 {
-    color: #7100FF;
-    font-size: 6.4rem;
-    direction: rtl;
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 20px 18px 0 rgba(0, 0, 25, 25);
- padding: 50px;
-    margin-block-start: 0em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    border-bottom: 40px double    #BB002E;
-border-left: 0px solid #1700FF;
-
-border-right: 0:px solid #1700FF;
-    border-radius: 0px 0px 79px 79px;
-}
-
-
-
-button {
-  background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);padding: 15px;
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-
-
-
-margin:20px 10px;
-height: 400px;
-width: 265px;
- 
- border-bottom: 15px groove   #000;
-  border-top: 10px groove rgba(0, 0, 0, 1);
-border-left: 0px ridge rgb(255 0 0 / 100%);
-border-right: 0px ridge #f1f8e9;
-border-radius: 55px 55px 55px 55px;
-bord-radius: 20px 80px 20px 50px;" 
-
-
-
-
-} 
-
-} 
-
-.button {
-text-align: center;
-}
- {
-display: block;
-}
-    button:active {
-     border-left: 0px solid rgb(255 213 105 / 80%);
-
-border-right: 0px solid #000BFF;
-
-border-top: 15px double  rgb(255 0 2 / 50%);
-border-bottom: 10px groove rgb(255 219 97 / 100%);
-
-    }
-
-
-</style>
-
-<!----------  اكواد استايل التطبيق شامل  ------------>
-<style type="text/css">
-@import url("https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap");
-body {
-padding: 0;
-margin: 0;
-user-select: none;
-list-style: none;
-background-image: linear-gradient(to right, #D4DBFF, #fff, #D4DBFF, #D4DBFF, #fff, #D4DBFF, #D4DBFF, #fff, #D4DBFF, #D4DBFF, #fff, #D4DBFF, #D4DBFF, #fff, #D4DBFF);
-      background-size: cover;
-font-weight: 500;
-font-size: 16px;
-text-align: right;
-margin: auto;
-/* position: relative; */
-direction: ltr;
-
-/**  تغير  خلفيه التطبيق **/
-/**  تغير  خلفيه التطبيق **/
-}
-
-
-header {
-/**  تغير الون خلفيه اللوجو   **/
-    color: #3545FF;
-    font-size: 0.2rem;
-    direction: rtl;
-    background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E1D7CD, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-
-/**  تغير الون خلفيه اللوجو   **/
-
- 
-   font-size: 0.2rem;
-    direction: rtl;
-    
-
-/**  تغير الون خلفيه اللوجو   **/
-
- 
-   padding: 0px;
-    margin-block-start: 0em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    border-bottom: 0px solid #0001FF;
-    border-radius: 0px 0px 25px 25px;
-padding: 0px;
-
-margin-bottom: 0px;
-position: fixed;
-font-size: 1px;
-top:0;
-height: 0%;
-width: 0%;
-
-}
-
-
-
-
-
-
-#page:hover {
-background: none;
-}
-#page {
-margin-top: 90px;
-width: 100%;
-}
-
-.popup 
-{
-display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E1D7CD, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-  padding: 10px;
-
-z-index: 9999;
-text-align: center;
-align-items: center; 
-border-bottom: 5px groove  #9C9689;
-   border-top: 5px ridge  #fff;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 80px 80px 80px 80px;
-} 
-
-
-h5 {
-
-    color: #721ACF;
-font-weight: bold;
-    font-size: 2.0rem;
-    direction: rtl;
-margin:60px;
-margin-top: -80%;
-    margin-block-start: 0em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    
-    border-bottom: 5px ridge rgb(233 30 99 / 100%);
-
-    border-radius: 200px 200px 390px 390px;
-padding: 15px;
-}
-
-
-
-.popup button 
-{ 
-
-background-image: linear-gradient(to right, #7D796E, #F3EDEA, #FDFDFC, #DED8CC, #E1D7CD, #E8E2D7, #E8E2D7, #FDFDFC, #FDFDFC, #FDFDFC);
-border-color: #5A00E9;
-padding: 0px;
-text-align: center;
-        text-decoration: none;
-        text-align: center;
-color: #721ACF;
-font-size: 40px;
-font-weight: bold;
-margin:20px;
-max-width: 100%;
-height: 100%;
-height: 95px;
-width: 400px;
-border-bottom: 10px groove  #9C9689;
-   border-top: 9px groove  #fff;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 50px 50px 50px 50px;
-}
-.popup img
-{
-max-width: 100%;
-height: auto;
-margin-bottom: 10px;
-max-height: 150px; 
-}
-
-.empty-space 
-
-{
-background-color: rgba(0, 0, 0, 0.0);
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 9999;
-display: none; }
-
-</style>
-
-</head> 
-
-<header>
-
-
-
-
-
-
-<div class="empty-space" onclick="hidePopup()"></div>
-
-<div class="empty-space" onclick="hidePopup()"></div>
-
-
-<div id="popup" class="popup"> <h2> راديو الانترنت الضعيف</h2> 
-<button onclick="window.open('go:LowadioPr1')"> جودة ضعيفة 1</button> 
-<button onclick="window.open('go:LowadioPr2')">  جودة ضعيفة 2</button>
-<button onclick="window.open('go:LowadioPr3')"> جودة ضعيفة 3</button> 
-<button onclick="window.open( 'go:Lowadior1' )"> جودة ضعيفة 4</button> 
-<button onclick="window.open('go:Lowadior2')"> جودة ضعيفة 5</button> 
-<button onclick="window.open('go:Lowadior3')"> جودة ضعيفة 6</button> 
-
-
-
-
-
-
-</div> 
-
-
-
-
-
-
-
-
-
-<div id="popup2" class="popup"> <h2>راديو الانترنت الضعيف 2</h2> 
-<button onclick="window.open('go:Radiobein1')"> جودة ضعيفة 1</button> 
-<button onclick="window.open('go:Radiobein2')">  جودة ضعيفة 2</button>
-<button onclick="window.open('go:Radiobein3')"> جودة ضعيفة 3</button> 
-<button onclick="window.open( 'go:Radiobein4' )"> جودة ضعيفة 4</button> 
-<button onclick="window.open('go:Radiobein5')"> جودة ضعيفة 5</button> 
-<button onclick="window.open('go:Radiossc1')"> الدوري السعودي</button> 
-<button onclick="window.open('go:Radioadp')"> الدوري الايطالي</button> 
-
-
-
-
-
-
-
-</div> 
-
-
-
-
-
-
-<div id="popup3" class="popup"> <h2>للانترنت القوي</h2> 
-<button onclick="window.open('go:radioPr1')"> جودة عالية 1</button> 
-<button onclick="window.open('go:radioPr2')">   جودة عالية 2</button>
-<button onclick="window.open('go:radioP1')">  جودة عالية 3</button> 
-<button onclick="window.open( 'go:radioP2' )">  جودة عالية 4</button> 
-<button onclick="window.open('go:radioP3')">  جودة عالية 5</button> 
-<button onclick="window.open('go:P1')">  جودة عالية 6</button> 
-<button onclick="window.open('go:Live7')">  جودة عالية 7</button> 
-
-
-</div> 
-
-
-
-
-
-</div> <div id="popup4" class="popup"> <h2>SSC SPORT 4</h2> 
-
-<button onclick="window.open('go:Ssc4web')"> جودة متعددة</button> 
-<button onclick="window.open('go:SSC4s')">  جودة متوسطة </button> 
-<button onclick="window.open('go:SSC4live')">  جودة متوسطة </button> 
-
-</div> 
-
-
-
-
-
-<div id="popup5" class="popup"> <h2>SSC SPORT 5</h2> 
-<button onclick="window.open('go:Ssc5web')"> جودة متعددة</button> 
-<button onclick="window.open('go:SSC5s')">  جودة متوسطة </button> 
-<button onclick="window.open('go:SSC5live')">  جودة متوسطة </button> 
-
-
-</div> 
-
-
-<div id="popup6" class="popup"> <h2>SSC EXTRA 1 </h2>
-
-<button onclick="window.open( 'go:WebSsc6' )"> H  جودة متعددة</button> 
-<button onclick="window.open('go:Ssc2web')"> جودة متعددة</button> 
-<button onclick="window.open('go:SSC1lextra')">  جودة متوسطة 2</button> 
-<button onclick="window.open('go:SSCEXTRA1l')">  جودة متوسطة 7</button> 
-<button onclick="window.open('go:SSCEXTRA1s')">  جودة متوسطة 7</button> 
-<button onclick="window.open('go:SSC1lextra')">  جودة متوسطة 7</button> 
-
-</div> 
-
-
-
-
-<div id="popup7" class="popup"> <h2>SSC EXTRA 2 </h2>
-
-<button onclick="window.open( 'go:WebSsc6' )"> H  جودة متعددة</button> 
-<button onclick="window.open('go:SSC1lextra')">  جودة متوسطة 2</button> 
-<button onclick="window.open('go:SSCextra2l')">  جودة متوسطة 7</button> 
-<button onclick="window.open('go:SSCextra2s')">  جودة متوسطة 7</button> 
-<button onclick="window.open('go:SSC2lextra')">  جودة متوسطة 7</button> 
-
-</div> 
-
-
-
-
-
-
-
-
-
-
-
-<div id="popup8" class="popup"> <h2></h2> 
- </div> </div>
-<script> function showPopup(adType) { if (adType === 'ADPRE1')
-{ document.getElementById("popup").style.display = "block"; } else if (adType === 'ADPRE2') { document.getElementById("popup2").style.display = "block"; } else if (adType === 'ADPRE3') { document.getElementById("popup3").style.display = "block"; } else if (adType === 'ADPRE4') { document.getElementById("popup4").style.display = "block"; } else if (adType === 'ADPRE5') { document.getElementById("popup5").style.display = "block"; } else if (adType === 'ADPRE6') { document.getElementById("popup6").style.display = "block"; } else if (adType === 'ADPRE7') {  document.getElementById("popup7").style.display = "block"; } document.querySelector('.empty-space').style.display = 'block'; } function hidePopup() { document.getElementById("popup").style.display = "none"; document.getElementById("popup2").style.display = "none"; document.getElementById("popup3").style.display = "none"; document.getElementById("popup4").style.display = "none"; document.getElementById("popup5").style.display = "none"; document.getElementById("popup6").style.display = "none"; document.getElementById("popup7").style.display = "none"; document.getElementById("popup8").style.display = "none"; document.querySelector('.empty-space').style.display = 'none'; } </script> </
-body> </html> 
-
-
-
-</style>
-
-<!----------  اكواد استايل القائمة  ------------>
-
-.
-
-
-
-
-
-    
-
-
-<!--- اسم القسم --->
-<style>
-
-
-    
-
-
-</style>
-
-<!----------  اكواد استايل التطبيق شامل  ------------>
-<style type="text/css">
-@import url("https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap");
-body {
-
-
-/**  تغير  خلفيه التطبيق **/
-background-image: linear-gradient(to right, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7, #E8E2D7);
-   /**  تغير  خلفيه التطبيق **/
-}
-
-
-
-
-
-
-
-#page:hover {
-background: none;
-}
-#page {
-margin-top: 100px;
-width: 100%;
-}
-
-
-
-</style>
-
-<!----------  اكواد استايل القائمة  ------------>
-
-
-
-<!--- اسم القسم --->
-<style>
-    .btn { background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);padding: 25px;
-box-shadow: 0 0px 25px  rgba(187, 0, 0, 5);
-   border-top: 10px groove  #FF0052;
-border-left:0px ridge  #6D42B8;
-border-right:0px groove  #6D42B8;
-border-bottom: 10px groove  #0012FF; padding: 25px;
-border-radius: 50px 50px 50px 50px;margin-top: 15%;
-  display: flex;      
-        color: #0046FF;
-        font-size: 200px;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الكنز المجاني - نظام مركزي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a5bd9;
+            --secondary: #6c757d;
+            --light: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-border: #e9ecef;
+            --dark: #1d2144;
+            --gray: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --border-radius: 12px;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--light);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: var(--light);
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: var(--light);
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--light-border);
+            border-radius: var(--border-radius);
+            background-color: var(--light-bg);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: none;
+            overflow: hidden;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--dark);
+            border-bottom: 1px solid var(--light-border);
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: var(--light-bg);
+        }
+
+        .search-result-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            color: var(--primary);
+        }
+
+        .search-result-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-name {
+            font-weight: 500;
+        }
+
+        .search-result-category {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        /* Apps Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .app-card {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 6px groove #000; 
+            border-top: 6px groove #000; 
+            border-left: 0px ridge #000;
+            border-right: 0px groove #000; 
+            border-radius: 19px 19px 19px 19px;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-image {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary), #6a11cb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .app-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background-color: var(--light-bg);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .app-rating i {
+            color: var(--warning);
+        }
+
+        .app-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .app-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: var(--light);
+            border: 1px solid var(--light-border);
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary);
+            color: var(--light);
+            border-color: var(--primary);
+        }
+
+        /* Loading */
+        .loading-apps {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--light);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin: 30px 0;
+            display: none;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-border);
+            border-radius: var(--border-radius);
+            background-color: var(--light-bg);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .admin-apps-list {
+            margin-top: 30px;
+        }
+
+        .apps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .apps-table th, .apps-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .apps-table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .apps-table tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .table-icon {
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .table-edit {
+            color: var(--primary);
+        }
+
+        .table-edit:hover {
+            background-color: rgba(74, 108, 247, 0.1);
+        }
+
+        .table-delete {
+            color: var(--danger);
+        }
+
+        .table-delete:hover {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-border);
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--danger);
+        }
+
+        .login-form {
+            padding: 20px 0;
+        }
+
+        .login-message {
+            padding: 10px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .login-error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-container {
+                width: 100%;
+            }
+            
+            .apps-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .category-filter {
+                gap: 10px;
+            }
+            
+            .admin-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    <span>الكنز المجاني</span>
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="#home">الرئيسية</a>
+                    <a href="#apps">التطبيقات</a>
+                    <a href="#categories">الفئات</a>
+                    <a href="#about">عن المتجر</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="search-input" placeholder="ابحث عن تطبيق...">
+                        <div class="search-results" id="search-results"></div>
+                    </div>
+                    <button class="btn btn-outline" id="admin-toggle">
+                        <i class="fas fa-cog"></i>
+                        login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Panel -->
+    <section class="container">
+        <div class="admin-panel" id="admin-panel">
+            <div class="admin-header">
+                <h2 class="admin-title">لوحة تحكم التطبيقات</h2>
+                <div class="admin-actions">
+                    <button class="btn btn-success" id="add-app-btn">
+                        <i class="fas fa-plus"></i>
+                        إضافة تطبيق جديد
+                    </button>
+                    <button class="btn btn-outline" id="close-admin-btn">
+                        <i class="fas fa-times"></i>
+                        إغلاق اللوحة
+                    </button>
+                    <button class="btn btn-danger" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-apps-list">
+                <h3>التطبيقات المضافة</h3>
+                <table class="apps-table">
+                    <thead>
+                        <tr>
+                            <th>اسم التطبيق</th>
+                            <th>الفئة</th>
+                            <th>السعر</th>
+                            <th>التقييم</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-apps-table">
+                        <!-- Apps will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section class="container" id="apps">
+        <h2 style="margin: 30px 0 20px; text-align: center;">التطبيقات المتاحة</h2>
         
-    
- 
+        <!-- Category Filter -->
+        <div class="category-filter" id="category-filter">
+            <button class="category-btn active" data-category="all">الكل</button>
+            <button class="category-btn" data-category="التصميم">التصميم</button>
+            <button class="category-btn" data-category="tv">tv</button>
+            <button class="category-btn" data-category="التعليم">التعليم</button>
+            <button class="category-btn" data-category="الأدوات">الأدوات</button>
+            <button class="category-btn" data-category="الموسيقى">الموسيقى</button>
+            <button class="category-btn" data-category="العمل">العمل</button>
+            <button class="category-btn" data-category="المال">المال</button>
+            <button class="category-btn" data-category="الطبخ">الطبخ</button>
+            <button class="category-btn" data-category="السفر">السفر</button>
+            <button class="category-btn" data-category="الأخبار">الأخبار</button>
+        </div>
         
-        font-weight: bold;
-        text-align: center;
-        padding: 2px;
-        display: flex;
-        justify-content: center; /* توسيط العنصر في وسط الخلفية *
-        
-        
-
-
-        display: flex;
-        justify-content: center; /* توسيط العنصر في وسط الخلفية */
-        color: #FF001C;
-        font-size: 50px;
-        
-max-width: 100%;
-
-
-      height: auto;
-    
-
-
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        text-align: center;
-       border-radius: 100px;
-        margin: 0px;
-            padding: 10px; /* اختياري: إضافة تباعد داخلي للعنصر */
-
-
-    }
-
-
-.colorاحمر {
-  color: #FF0035;
-}
-
-
-.color2 {
-  color: #FF0035;
-}
-
-
-.color3 {
-  color: #1d7d99;
-}
-
-
-.color4 {
-  color: #9D856C;
-}
-
-.colorازرق {
-  color: #002DFF;
-}
-
-
-.colorبنفسجي {
-  color: #CD00FF;
-}
-
-    .colorخياري {
-  color: #2290B1;
-}
-
-
-
-.colorذهبي {
-  color: #FFBA00;
-}
-
-
-
-.colorاخضر {
-  color: #008215;
-}
-        
-
-
-.colorحقي {
-  color: #E6EAFF;
-}
-
-
-
-.colorفضي {
-  color: #593289،;
-}
-        
-
-
-.colorاسود {
-  color: #000;
-}
-
-
-.colorad {
-  color: #FFD000;
-}
-        
-
-
-.colorاسود {
-  color: #000;
-}
-
-.colorbein {
-  color: #593289;
-}
-
-
-.colorاخقوي {
-  color: #E1FF00;
-}
-
-
-.colorرمادي {
-  color: #8f8f8f;
-}
-
-.colorوردي {
-  color: #FF0088;
-}
-
-
-.colorsh2 {
-  color: #00CD9A;
-}
-
-.colorsh1 {
-  color: #00D358;
-}
-
-
-.colorsh3 {
-  color: #009AFF;
-}
-
-.colorشاهد2 {
-  color: #3EFFFF;
-}
-
-
-.colorkids{
-  color:#F8D800;
-}
-.colorحلو {
-  color:#c5cae9;
-}
-
-.colorحلوة {
-  color: #E1E6FF;
-}
-
-.colorاخبار {
-  color:#F86838;
-}
-
-.colorعربية {
-  color:#18F880;
-}
-
-
-.colorوياك {
-  color:#FF7F00;
-}
-
-
-.colorوياك2 {
-  color:#FFB872;
-}
-
-        .colorابيض {
-  color:#fff;
-}
-
-        
-
-</style>
- 
-  	
-<!-- /بداية كود شريط اخباري-->
-		
-
-    
-   
-	
-        
-
-
-   
-
-    
-   
-   
-   
-	
-</header>
-<div id="page">
-<div class="grid1-container">
-<div align="center" class="button">
-<div id="buttons-list">
-	
-	
-	
-<!--- اقسام التطبيق --->
-
-	<section class="matchesHp">
-    <div class="ttl">
-   
-        
-          
-
-
-
-
-
-
-
-	
- 
-
-
-<button onclick="window.open( '   go:mbc1'   )"> <img src=" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIoAAABOBAMAAAAN0JP1AAAAIVBMVEVHcEwglvMhlvMhlvMhlvMhlvIhlvMglvMglvMglvMhlvMfkkZvAAAACnRSTlMAFPQzzlSzkuR0Gn22ggAAAq5JREFUWMPtl7+P2jAUxw0kR8kUelKHTPRU6aRMoe1QMZ06MiFVJ1VM145MHSsmpA6tbmKsbkqAS4j/ysPxs/1NiEFtbmilvMXEcT5+v20Ya6WVVmrF44XcNOUsBWXXlNIplGHPokxjSvAPUebP4d3CL1ljyuJA2TamhAdK3JjCrZTeO/8PKb9Dfh2V5l+JF/vS3JTKRZbNnR6Jsg3NM8lbuYSvMc8/U6J/wHGnKPzok66ei46S67BqIkYfEh8pe+0S+Xz96fZrihRXzH5jzCG+RxRZjTz3O1Nw87yYnImf/ZuqF2e0i3hJo9w1o5hvYEuxZ20sItobKAPzQVf3q8L8xBZR3+jygsud+8YfHZ3FobVCcW/aWMTIgaxbkEkXVlWUJRc0Cu+mpBNfmS7sq268rqO4FUvEylx9ERmKcMyD1aCqJeKLR2Yirtwbq3SupaAOGY1JDSU5WaAehQJ1iGFeUbZk/MpKSUGHACgZrMkobDMrJQcd5jQG4APx7g1Vom+loCVLGifgA096/gwFLRHtdvRXFLTknigBUALpuxOUqg4h9TYPKEvpuxPenYAOK6KsqTPEcByoSNdfRh5odUgrdOIvDIVD7sbWw2tEK+5MoyhaQwJt8nQFLMgSVa4m8QP1o6sssV9G7kEHaHny0HitXXemM4RlHTRlcAiG+0O7pZhzrI5R3qSVqt0wNy0dQdsyz9J2GTRv2fCnj3gErYxtyfnm7WhKl6eC7oagQJ9bPIPHkU+ma49tfkmG3n9pTrXBqOaCwWXe9Ex+OnDERthfOf85vvy+r168NhSrPdF2pjjKqjD2Us+VCqqIQE65kNPxl6P+shey0kldvo2opXuZxHrMTJFVb5rvi3VHpX05Hg+HIuGGw061e/Q+Xl19Ofrgdtz+32qllVZa+c/lCdyzhQ/qCApVAAAAAElFTkSuQmCC     " 
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 3px 20px  rgba(0, 196, 255, 5);
-   border-top: 10px ridge  #00C4FF;
-border-left:0px ridge  #00C4FF;
-border-right:0px groove  #00C4FF;
-border-bottom: 10px groove  #00C4FF;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorsh3">mb<span class="colorsh3">c <span class="colorاسود"> 1</span><span class="colorاسود"></span></p></h2></h2>
-</button>
-
-<button onclick="window.open(' go:mbcact ')"> <img src=" data:image/jpeg;base64,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 " style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(235, 177, 6, 50);
-   border-top: 10px ridge  #F2B91A;
-border-left:0px ridge  #F2B91A;
-border-right:0px groove  #F2B91A;
-border-bottom: 10px groove  #F2B91A;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorاسود">mb<span class="colorاسود">c <span class="colorاحمر"> action</span><span class="colorاحمر">ort</span></p></h2></h2>
-</button>
-  
-
-<button onclick="window.open( 'https://wacetvllive.blogspot.com/2023/08/1.html?m=1' )">
-<img src="  data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCcZGBYWGDAiJBwnOTI8OzgyNzY/R1pMP0NVRDY3TmtPVV1gZWZlPUtvd25idlpjZWH/2wBDARESEhgVGC4ZGS5hQTdBYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWH/wAARCACMAI0DASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAAQDBQYCAQf/xAA6EAABAwIDBAcGBQMFAAAAAAABAAIDBBEFEiETMUFRBiIyYXGB0SNCkaGxwRQzUmLhcoLwJUNzksL/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAgMEAQX/xAAiEQACAgIBBAMBAAAAAAAAAAAAAQIRAzEhBBITQRQyUWH/2gAMAwEAAhEDEQA/APoCEIQAhCEAIXhIG8peWrZHxuUAwi4HFVrqyV56osO9ce2edXHy0QFpnbzQHtPFVogkd77/AIrvYP4yP+IQFhcHihVx28e6QHxFl2ysc02kbbvQD6FFHMyQaEFSID1CEIAQhCAEIQgPFxLK2NtyV5NK2NhJKqZ5nTO5IDqqr3OOVl1zSjbDXR3Ec0u8xwML5HBoCQkxKTNenGyA3OPa9FKMHLRGU1HZo9jHE3NI5rGje5xsAonYph0OjqlpP7QXfRZOWUyPL5ZHSO5uJJURmaFoXT/pS8/4bE47hw02x/6O9EDG8Od/vkf2O9FjNuO5G3b3KXx0R87NzFV0lTpDURvJ90O1+CHwX3LDh7XJ2kxKqpbbGYlo9x/Wb/HkoS6drROOZezUup8urCWkcRxXUNS5rgyUWPA8CkaLHIaq0crdjMdACeq7wP2TMrc2/VZ2muGXJp6LEEEXC6VbTVBY4MebjgVYA3FwuHTpCEIAXLnZRcr1K1khsGN7TtAgFaiQzPOvVBt5pWolZTxF79w3DiTyTzacAC50HBZ3EKgVNUSz8qO7WW48z/nIKcIdzohOXarIpZXTP2kp3dlvBoUD3tOlguJHclFqStySWjI3Z5LEXaxu15FdQYNitVrHSPDf1PIb9VqMBwpkcLKqdodI4XYD7o4HxV5dUy6hp0i2OFPlmHHRLEyO3TjxefRRSdGMWjF2xRyf0yD72W9JRdQ+TMn4YnzGpgqqN4bUwvivuLhofA8Vyycr6XUwRVULoZ2NfG4WLXDesBjuEnCq3Iwl0EgzRuPzB7x6K/FmU+Hspni7eUcslDxYq7wrE3Zm01S+4OjHk/IrMRkgp2N2ZuqnkxqSIwk4uzXzMc3eCE1Q1GYZXHUJHA641dIY5TeWKwJPvDgU1KwRkSsFsu+3ELzmmnTNqdqyxXqjifnYCFIuHTwmwSAO0qnOPuCwHinZDZhKRpz1C473OJ+32QEOLVBpsPle0gOIyt14nT+fJZlo9kPBW3SWUhlPENxcXHyH8qogeHAsJ1GoWvDGo2ZsruVERbcqalgbJURsebNc4AnkL6ldbPVdtYrG+CKRs2Pa4dUgjuN15NKIoXyHUNaSskImu7TQfEKaGNsd8rQ0HeG6XWbxf0v8gni0L6thnkcXyt1N91u4cE90SrJzM+je9zogzM0E3y2I0HdquxGHCxFwdE7geFmhD5pR7V/VA5N/n0U5SioUyEU+6y5uqHpfG1+GxEjVsot8Cry6zvSeoDzFStN8vXd9vuqsX3RZk+rMqGWKnZ1Wk8lJs1FUuEbAzi76L0LsxtD+EVP4bEYX3GV52bvA/wA2WucAQQVgmE5Lg6hbmGUTU8co3PaHfELH1EadmjA+KJKBxAMZN8psnVXQHLVkfqAKsFnLyOo/Kck4fyWp2cXickIj7Mac/qgKTpG729OOQcfoqNz3RyBzTqFedIx7SnP9X2VDNvW/BzAxZfuWVNMyobcaOG9vJNNas8xzo3hzCQRxCs6fEQQBMLfuClKD9BS/SxaFNEx0jw1gJJ4BR0o/FPDYSHee4K8p4WU8eVm87zzWecu0thFyOaWjbDZzyHSfIeCbuoy628qqrMWOsdIQecvD+3n4/VUJObLm1FDeI4kyjZlbZ8xHVby7z/nqs1Jmle57yXOcbkniV1JIxmZ8rwLm5LjqSq+pxRjRaBuY/qO4LXjxdpnnksmqJY6ePM868BxKqto6WQvdvPyUUsr5n5pHFxK6i3haYxopbsdi7C2lA/8A0yl/4mj5LFs7C19G/LhtM0jURN+iydR6LsG2NxXM7Hc7i3w9VYqqpCXTgctVarIajx4uwhVjTlc9vJytFX1LCyoBG52nnw/zvQFTj8WejZI0C8bxx4HT0WdlFwtvNRtqKaSKR3baRpw5LGPjcxzo5G2ewlrhyIWvp5cUZc0ebFCNV2wXK9c2xTOGRZ66K98rTmPlqtMnSspSt0aTC6ZtFSgEe1fq89/LyTm070ntDyKNoeRXmSbbtm9KlRPUsbUxbN0j2tJ1ykC/cVXvwWB971dXrye0f+UztDyK92h5FdjOUdHHFPZXHo1QONzNUk972+iRxfAqOioH1EMkxe0gAOcLanwV/tDyKrcfffC3j9zfqrseWbklZXPHFRboyQ3qeIaqJoumoWLezITxsLsrGi5cQ0ea1xAa0NG4CwVDgsBlrRIR1IRmv+7h6+S0D7HevPzyuVGrCqVk+HNJeXKzStFHkiBO86ppUF4Jeqi2kZ5pheHUIBKKQvZr2hoR3qk6QUJD/wAZELjdKB8nfb4K6qIzE/aMuQe0OYXmZr28HNI+KlGTi7RGUVJUYosBFwuSzuVviWGOpSZqdpdDvLBqWeoVWZWW6oJW2E1JGOUXHZ41o5KKpqmwtLWWc/6LiaWRwsOqO5KlhVqS9kbZATcknUneUKXIjIp8HLZHZehqlEd1KyJOELOI47lNRsJIa0EucbADivI2EuDGNLnk2AG8rQ4bhopRtZrGYjcNQzw9VRlyqKLIQcmMUFKKOlEe951eeZTkLDLKBwGpUYBcQGjUqzpYNkzXeVgbvlmxKuCZoyiwXSELh0EIQgOXNDhYpCeF0Li5gu06kKxXhAI1QFfEWuFyb9yRr8DpKsmSM7CU7y0dU+IVnNSXOaM5XJYukjNpGkd4XU2tHGk9mYqcEr6c6RCZvOI3+W9V0jDG7LIxzHcWuFiFumzcjdd7UOFiAR3q5Z5IqeFPR8/s3uR1VvTT0bzd1LAT3sC7jhpY9WU8TD+1oCn8h/hHwf0wkNPLMbQwyP5lrbgeasqXAqmWxnc2BnK+Z3y0WqnI0I8Eu54BtfXlxVcs8mSWFLYrBRU9E20Lese092ripmhzjYC5UzIJJiNMrfmnoadkQ0GqqbstSojpaYMGZ2rimkL1cOghCEAIQhACEIQHi5cxrhqF2hAKyUUbjcaHmFCaJzey824KwQgK5tNK298rvEH7FAppz74HgFYoQCIo3O7b3Ect30U0dLHHuaEwhAeAAbl6hCAEIQgBCEID/9k= 
-" style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 10px 25px  rgba(63, 81, 181, 5);
-   border-top: 10px groove  rgba(63, 81, 181, 5);
-border-left:0px ridge  #6D42B8;
-border-right:0px groove  #6D42B8;
-border-bottom: 10px groove  rgba(63, 81, 181, 5); padding: 15px;
-border-radius: 50px 50px 50px 50px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorازرق">mb<span class="colorاسود">c <span class="colorاسود"> 2</span></p></h2>
-</button>
-
-
-
-
-
-<button onclick="window.open( 'go:mbc4' )">
-<img src=" data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCACNAI0DASIAAhEBAxEB/8QAGwABAQEAAwEBAAAAAAAAAAAAAAQDAQIFBgf/xAAwEAEAAQIDBQYFBQEAAAAAAAAAAQIDBBEzEhMxUXEFIUFTkaEUFSI0UjJCYWKB4f/EABcBAQEBAQAAAAAAAAAAAAAAAAADBAL/xAAhEQEAAgIBAwUAAAAAAAAAAAAAAQIDEVEEEyESFDEyQf/aAAwDAQACEQMRAD8A/QAAAABwA5AAAAAAAAAAAB5Hal3FUXJnD3ZjZjvpy4vK+bY3zp9Hr437mrpDy8ZhNvO7aj6/GnmtjtHxLPmpb7Vl0+bY3zp9D5tjfOn0RC/prwx9y3L18B2zcpu7OKq2qKv3cn0FNUVUxNMxMTwmHxD0+yu1Jw1UWr052pnjP7UsmP8AYXxZteLPpXLrTVFVMTTMTE+MOWdtcgA6XJmmiZjin31fP2b3tKrokBpvq+fsb6vn7MwGm+r5+xvq+fszAab6vn7N7NU1UZzxSKsPpggx33NXSE6jHfc1dITgjxmE3md21H1+NPN53q91TRbtzREzbpmei1cuo1LNk6eLTuPD5kzfUbq35dHobq35dHo670cOPazy8nsntScLVFm9MzZnhP4/8fS01RVTFVM5xPCYQbq35dHossREWoiIiI/hK9otO4hox0msamdtHIOFGd7Sq6JFd7Sq6JAAAAAFWH00qrD6YIMd9zV0hOqx9OV+J5wlA8FdvThJ4K7enAOwACuxpQkV2NKAaAAzvaVXRIrvaVXRIAAAAAqw+mlVYfTB1xVnfW+79Ud8PLmJicp7ph7aPF4Xb+uiPq8Y5g8/wV29OEk92cSqtTnbjIHcABrRemmmIyzZANviJ/GD4ifxhiA1rvTVTMZR3sgAAAAAVYfTSqsPpg1cOQE9/C0Xe/8ATVzSxYu2ZmJp2qZ8Y8HpOAQmU8l2UGUcgQ5TykynlK7KDKAQ5Tyk/wAldlHIyjkCH/BXe06uiQAAAABVh9NKqsacA1AAAAAAAAABne0quiRXe0quiQAAAAHMRtVRELaYyjKGVm1sxtVcWwAAAAAAAAAAM72lV0SLa6dqmY4Zsfhv7AwG/wAN/ZzGHiOMzIJ4iZnKIzUWrOzlVVxaU0U0R3Q7gAAAAAAAAAAAAAAAAAAAA//Z "  
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 25px  rgba(0, 185, 255, 5);
-   border-top: 10px ridge  #00B9FF;
-border-left:0px ridge  #00B9FF;
-border-right:0px groove  #00B9FF;
-border-bottom: 10px groove  #00B9FF;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorاسود">mb<span class="colorاسود">c <span class="colorاحمر"> 4</span><span class="colorاحمر">ort</span></p></h2></h2>
-</button>
-
-
-
-<button onclick="window.open( 'go:mbc5' )">
-<img src="   data:image/jpeg;base64,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 "  
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 25px  rgba(0, 185, 255, 5);
-   border-top: 10px ridge  #00B9FF;
-border-left:0px ridge  #00B9FF;
-border-right:0px groove  #00B9FF;
-border-bottom: 10px groove  #00B9FF;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorاسود">mb<span class="colorاسود">c <span class="colorاحمر">sp</span><span class="colorاحمر"> 5</span></p></h2></h2>
-</button>
-
-
-
-
-<button onclick="window.open( 'go:mbcdrama' )">
-<img src="   data:image/jpeg;base64,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 "  
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 25px  rgba(255, 13, 180, 5);
-   border-top: 10px ridge  #FF0DB4;
-border-left:0px ridge  #FF0DB4;
-border-right:0px groove  #FF0DB4;
-border-bottom: 10px groove  #FF0DB4;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-"><p><p><span class="colorوردي">mbc  <span class="colorاسود">drama<span class="colorاحمر"></span><span class="colorاحمر"></span></p></h2></h2>
-</button>
-
-<button onclick="window.open( 'go:mbciraq' )">
-<img src="  data:image/jpeg;base64,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  " 
-
- style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(253, 0, 0, 5);
-   border-top: 10px ridge  #FD0000;
-border-left:0px ridge  #FD0000;
-border-right:0px groove  #FD0000;
-border-bottom: 10px groove  #FD0000;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorوردي">osn <span class="colorازرق">gro</span><span class="colorازرق">up</span></p></h2></h2>
-</button>
-  
-
-
-
-
-<button onclick="window.open( 'go:mbcbolwod' )">
-<img src=" data:image/jpeg;base64,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  "  
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 25px  rgba(255, 13, 180, 5);
-   border-top: 10px ridge  #FF0DB4;
-border-left:0px ridge  #FF0DB4;
-border-right:0px groove  #FF0DB4;
-border-bottom: 10px groove  #FF0DB4;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-"><p><p><span class="colorوردي">mbc  <span class="colorاسود">bolwod<span class="colorاحمر"></span><span class="colorاحمر"></span></p></h2></h2>
-</button>
-
-
-
-<button onclick="window.open( 'go:mbcmasr' )">
-<img src="  data:image/jpeg;base64,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 " 
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(253, 0, 0, 5);
-   border-top: 10px ridge  #E20309;
-border-left:0px ridge  #E20309;
-border-right:0px groove  #E20309;
-border-bottom: 10px groove  #E20309;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-"><p><p><span class="colorاحمر">mbc <span class="colorاحمر">masr  <span class="colorوردي"> 1</span><span class="colorوردي"></span></p></h2></h2>
-</button>
-  
-
-
-<button onclick="window.open( 'go:mbcmasr2' )">
-<img src="  data:image/jpeg;base64,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 " 
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(253, 0, 0, 5);
-   border-top: 10px ridge  #E20309;
-border-left:0px ridge  #E20309;
-border-right:0px groove  #E20309;
-border-bottom: 10px groove  #E20309;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-"><p><p><span class="colorاحمر">mbc <span class="colorاحمر">masr  <span class="colorوردي"> 2</span><span class="colorوردي"></span></p></h2></h2>
-</button>
-  
-
-<button onclick="window.open( 'go:mbcwnasah' )">
-<img src="  data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCkbGBYWGDIkJh4pOzQ+PTo0OThBSV5QQUVZRjg5Um9TWWFkaWppP09ze3Jmel5naWX/2wBDARESEhgVGDAbGzBlQzlDZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWX/wAARCACKAIoDASIAAhEBAxEB/8QAGwABAAMBAQEBAAAAAAAAAAAAAAQFBgEDAgf/xAA9EAACAgECAgYGBwUJAAAAAAAAAQIDBQQREiEGFjFRU5MTNUFxcrEjMjQ2QmHRFBWBkrIiM1JzgpGiwcL/xAAZAQEBAQEBAQAAAAAAAAAAAAAAAwIBBQT/xAAmEQEAAgIBAwQBBQAAAAAAAAAAAQIDERIEFDEhIkHwUSNCcaHB/9oADAMBAAIRAxEAPwD9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAB0FTmOkOgw8Wr7OK7beNUOcn+n8Syps9LTXZttxxUtu7dAegAAAAAAABw6R9dqoaLR3am36lUXJgfOt1+lx9PpdXfCqHscn2+4p5dNcKnt6eb91bMvVC3MaiWRyEnPjf0VT+rGJMjDTOTrjGrij2xSW6PiydZWltRG9Prx9La0bmdLvrthfGs8tjrthfGs8tmYzddccZY4winuuaX5krT1VvS1N1w34F+FdxyetjhFtO9pPLjte9dsN41nlsddsN7LrPLZk9BXB5jXpwi0mtlt2HrnKq44ybjCKfFHmku813cc4przpntp4Tbfhp+u2F8azy2V2S6W3a6X7Lg4STa/tXzW3D7kRKKav2ar6OH1F+FdxBxiUcrr0kkk12E+83FtR4b7XU13PlHyWgjp8dZdZJ3aick5WSfPtNbpummHr01UJW2KUYJP6N9qRnekHqufxR+ZMoqq9BX9HD6q/Cu4xj6qaY+VvXcy3fp4vfjX01C7674XxbfLZzrvhfFt8tmVx0ISymvThFpSSS27CxnCiuPFOFUY98kkit+s421xTp0vKN7azG5zHZRuOk1EZTX4Hyl/sywPznV46FiV+lfodRDnCdfLdmt6LZeWWxnFcttRTL0dv5vvL4c9c0bhDLhtin1XQALpBR9NG49Fta0/ZBf84l4UXTX7q633Q/riBn9GktHSl4cfkVui+8Gs+H9Cy0n2Sn/Lj8is0clHP6xyaS29r9x4dPXn/H+vXv8As+/CRnfVdnvXzJem+y1fAvkdm6bI8M5VyXc2mdVlSSSnBJezdEpmeEV0pqOc22rcf65yHvR6571XZ8UfmTIuiM5Ti61KXa01uxN02R4ZuuUe5tM3z/Ui+vGv6Z4Rwmu/Jp/s1XwL5FfjvW2Q96+ZYqypJJTgkl3orcfOKyuvblFJtbPf8zuOJmt/vy5eYi1Pvw98zRO/HWRrW8ltLbv2PnS5TRvSRlK6MJRilKLfNP3E70tfiQ/mRGs0egsnxzrpcu1vc5SYmvG8S7aJ5cqzCFhbY367W2xTUZyTW/8AE98/v+7Jbf4o/M8cY4QyWu5xjHiW3NJFnN02R4ZyrlHubTKZJ45otr8MY43imu/y+qv7mHwr5EvoNy12YiuxWQ2X8xGW23Ls2JPQf1hmfjh/6K9DPvsn1keyGvAB6rzQoumv3V1v+j+uJekLL4+GUx1uism4Qscd5Jc+Uk/+gMDpL9TkfRaHF1uVnBFTtf1a+XNmj03QfGwpitU7b7nznPja3fuL3H47TY3TKjSVKEF297fe37SUTx4q449ql8lr+Wd6k4bwrfNY6k4bwrfNZowb0mznUnDeDb5rHUnDeDb5rNGBoZzqThvBt81jqThvBt81mjB0ZzqThvCt81jqThvBt81mjAGc6k4XwbfNZUdKOjONxmFs1WlrsjbGUUm5t9rN0VnSDGSy+Mlo4TVfHOLcmt9knu+RzQxas1OuuhoMXHjt4Vx2eytbd5scBg6cLppQjJ2XWbO2x/if6c2e2HxGmw+kVGnju3znN9sn3k8nixVxxqFMmS2Sdy6ACqYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2Q==   "
-
-
-style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(251, 117, 20, 5);
-   border-top: 10px ridge  #FB7514;
-border-left:0px ridge  #FB7514;
-border-right:0px groove  #FB7514;
-border-bottom: 10px groove  #FB7514;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-"><p><p><span class="colorوياك">mbc <span class="colorوياك2">winasah<span class="colorوياك"></span><span class="colorوياك2"></span></p></h2></h2>
-</button>
-  
-
-
-<button onclick="window.open( 'go:mbcmax' )"><img src="   data:image/jpeg;base64,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  " style="
-background-image: linear-gradient(to right, #9C9689, #FDFDFC, #F3EDEA, #DED8CC, #E8ECFF, #E8E2D7, #E8E2D7, #F3EDEA, #FDFDFC, #9C9689);
-box-shadow: 0 5px 20px  rgba(235, 177, 6, 50);
-   border-top: 10px ridge  #F2B91A;
-border-left:0px ridge  #F2B91A;
-border-right:0px groove  #F2B91A;
-border-bottom: 10px groove  #F2B91A;
-
-padding: 15px;
-border-radius: 39px 39px 39px 39px;margin-top: 15%;
-"  height="160px" width="160px" vspace="8px">
-
-  <h2 style="display: flex; /* استخدام Flexbox للعناصر */
-    justify-content: center; /* توسيط العناصر أفقيًا */
-    align-items: center; /* توسيط العناصر عموديًا */
-
-border-bottom: 5px groove  #000; 
-    border-top: 3px groove  rgba(0, 100, 100, 10);;
-border-left: 0px ridge #000;
-border-right: 0px groove #fff;
-border-radius: 51px 50px 50px 51px;
-max-width: 80%; 
-height: 15%;
-width: 80%; 
-color: rgb(25 216 205  / 100%);
-;background-image: linear-gradient(to right, #9C9689, #DED8CC, #F3EDEA, #FDFDFC, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #fff, #fff, #fff,#fff, #fff, #fff, #fff, #fff, #FDFDFC, #F3EDEA, #DED8CC, #9C9689);
-         box-shadow: 0 7px 10px  rgba(0, 0, 100, 5);
-  
-
-;margin-top: 10%;
-margin-left: 12%;
-font-size: 25px;
-font-weight: bold;
-
-
-"><p><p><span class="colorاسود">mbc <span class="colorاسود">ma<span class="colorاحمر">x</span><span class="colorاحمر"></span></p></h2></h2>
-</button>
-
-
-
-
-
-</div>
-
-<script>
-function openNav() {
-document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-document.getElementById("mySidenav").style.width = "0";
-}
-</script>
-</div>
-</div>
-</div>
-</header>
+        <div class="apps-grid" id="apps-container">
+            <!-- Apps will be loaded here -->
+        </div>
+        <div class="loading-apps" id="loading-apps">
+            <div class="loading"></div>
+            <p>جاري تحميل التطبيقات...</p>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">تسجيل الدخول لlogin</h3>
+                <button class="modal-close" id="login-modal-close">&times;</button>
+            </div>
+            <div class="login-form">
+                <div class="login-message" id="login-message"></div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">اسم المستخدم</label>
+                        <input type="text" id="username" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">كلمة المرور</label>
+                        <input type="password" id="password" class="form-input" required>
+                    </div>
+                    <div class="admin-actions" style="margin-top: 20px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-outline" id="cancel-login-btn">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit App Modal -->
+    <div class="modal" id="app-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">إضافة تطبيق جديد</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <form id="app-form">
+                <input type="hidden" id="app-id">
+                <div class="admin-form">
+                    <div class="form-group">
+                        <label for="app-name" class="form-label">اسم التطبيق</label>
+                        <input type="text" id="app-name" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-category" class="form-label">الفئة</label>
+                        <select id="app-category" class="form-select" required>
+                            <option value="">اختر الفئة</option>
+                            <option value="التصميم">التصميم</option>
+                            <option value="tv">tv</option>
+                            <option value="التعليم">التعليم</option>
+                            <option value="الأدوات">الأدوات</option>
+                            <option value="الموسيقى">الموسيقى</option>
+                            <option value="العمل">العمل</option>
+                            <option value="المال">المال</option>
+                            <option value="الطبخ">الطبخ</option>
+                            <option value="السفر">السفر</option>
+                            <option value="الأخبار">الأخبار</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="app-description" class="form-label">الوصف</label>
+                        <textarea id="app-description" class="form-textarea" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-price" class="form-label">السعر</label>
+                        <input type="number" id="app-price" class="form-input" min="0" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-rating" class="form-label">التقييم</label>
+                        <input type="number" id="app-rating" class="form-input" min="0" max="5" step="0.1" value="4.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-icon" class="form-label">أيقونة التطبيق (Font Awesome)</label>
+                        <input type="text" id="app-icon" class="form-input" placeholder="fas fa-app" value="fas fa-mobile-alt">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-icon-image" class="form-label">صورة الأيقونة (رابط)</label>
+                        <input type="text" id="app-icon-image" class="form-input" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-download-link" class="form-label">رابط التحميل</label>
+                        <input type="text" id="app-download-link" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-website" class="form-label">الموقع الإلكتروني</label>
+                        <input type="text" id="app-website" class="form-input">
+                    </div>
+                </div>
+                <div class="admin-actions" style="margin-top: 20px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" id="cancel-app-btn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ التطبيق</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الاعتماد الافتراضية (يمكنك تغييرها)
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "admin123" // يمكنك تغيير كلمة المرور هنا
+        };
+
+        // Default apps data
+        const defaultApps = [
+            {
+                id: 1,
+                name: "MT Manager Pro Vip",
+                description: "تحميل تطبيق ام تي مانجر MT Manager Pro Vip مهكر هو أداة قوية لإدارة الملفات على أجهزة الأندرويد، يتيح للمستخدمين القيام بمهام متقدمة مثل تحرير الملفات وتعديلها، واستخراج وضغط الملفات، وحتى تعديل تطبيقات الأندرويد (APKs)، يُعتبر هذا التطبيق مثاليًا للمستخدمين المتقدمين والمطورين الذين يحتاجون إلى تحكم كامل في ملفات نظام الأندرويد، بالإضافة إلى ذلك يوفر التطبيق واجهة مستخدم بسيطة وسهلة الاستخدام، مع ميزات مثل تحرير النصوص البرمجية، وتعديل التصاريح، والبحث والاستبدال في النصوص، وإدارة التطبيقات المثبتة.",
+                category: "التعليم",
+                price: 0,
+                rating: 4.8,
+                icon: "fas fa-camera",
+                iconImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsnyrGjaDXGdGduL0jLdKwhwa0egn14-fTj4_MwDZxBQ&s",
+                downloadLink: "https://www.mediafire.com/file/x9jh2c47u7tfngq/MT_Manager_2.14.5-clone%2528password_is%2529_12345.zip/file?dkey=1ktgahtp68s&r=1909",
+                website: "https://www.mediafire.com/file/x9jh2c47u7tfngq/MT_Manager_2.14.5-clone%2528password_is%2529_12345.zip/file?dkey=1ktgahtp68s&r=1909"
+            },
+            {
+                id: 2,
+                name: "ES File Explorer لـ Android - قم بتنزيل تطبيق مهكر",
+                description: "البرنامج يسمح لأي مستخدم أندرويد أن يدير كل ملفاته بسهولة ، و يتمكن من الولوج في أي وقت على جهازه المحمول ثم يشاركه إذا أراد. رفع الصور، مشاهدة الأفلام.",
+                category: "التعليم",
+                price: 0,
+                rating: 4.6,
+                icon: "fas fa-running",
+                iconImage: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ45aEy0sGMNT77ZnHA9A1q2IVd1W2Oq5LDKnFBtdzVfWpk6EphKa5P2GYDOioRCyfqUlwME-D-RUB4LkznO50dgNZXGeSWbwPqVJR5oA",
+                downloadLink: "https://www.mediafire.com/file/lp5zk4n6sg70hp9/UltData_v3.4.21.apk/file?dkey=sv5abna0e6j&r=1424",
+                website: "https://fittracker.com"
+            },
+            {
+                id: 3,
+                name: "aseel tv",
+                description: "ويتميز التطبيق Aseel Live tv يقدم بتوفير جدول المباريات بشكل يومي لمشاهدتها بشكل مباشر، حيث يمكنك متابعة مبارياتك المفضلة ومشاهدتها",
+                category: "tv",
+                price: 0,
+                rating: 4.9,
+                icon: "fas fa-book",
+                iconImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNiIkZhiQmGLtZi7kGoyZ4eG2PLk3yw8pGC9OmXIobJw&s=10",
+                downloadLink: "https://wacelalorshe.github.io/kanz/Aseel.html",
+                website: "https://languagelearn.com"
+            },
+            {
+                id: 4,
+                name: "تحميل تطبيق دراما بوكس DramaBox مهكر Apk للاندرويد 2026 اخر اصدار مجانا",
+                description: "مميزات تحميل تطبيق درامابوكس DramaBox مهكر · مشاهدة جميع المسلسلات العربية والعالمية مجانًا بدون أي اشتراك شهري. · واجهة سهلة وبسيطة.",
+                category: "tv",
+                price: 0,
+                rating: 4.7,
+                icon: "fas fa-cloud-sun",
+                iconImage: "https://img.utdstc.com/icon/1cb/cda/1cbcda7e556f5173bbaf9a04caec6c1815a1111b7551538739a7acea2a3d40d5:200",
+                downloadLink: "https://wacelalorshe.github.io/kanz/dramabox.html",
+                website: "https://weatherpro.com"
+            },
+            {
+                id: 5,
+                name: "see drama",
+                description: "إذا كنت تبحث عن طريقة مريحة وسهلة للوصول إلى جميع الأعمال الدرامية المفضلة لديك، القنوات التلفزيونية، والبث المباشر، فإن هذا التطبيق هو الحل المثالي بالنسبة لك. تم تصميم التطبيق ليكون وجهتك الشاملة للاستمتاع بكل ما تحب مشاهدته، سواء كنت من عشاق المسلسلات الكلاسيكية أو الأعمال الحديثة",
+                category: "tv",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " https://seedrama.app/wp-content/uploads/2025/07/wood-logo-white-reserve-300x300.webp",
+                downloadLink: "https://wacelalorshe.blogspot.com/2024/08/see-drama-vip-2024.html?m=1",
+                website: "https://wacelalorshe.blogspot.com/2024/08/see-drama-vip-2024.html?m=1"
+            },
+            {
+                id: 6,
+                name: "iMemo pro",
+                description: "يُعد iMemo تطبيقًا لتدوين الملاحظات يستند إلى الذكاء الاصطناعي، ويقوم بتسجيل الصوت وتحويله إلى نص، ثم يقدّم ملخصات مُولّدة بواسطة الذكاء الاصطناعي. نظرًا لأن iMemo تطبيق مخصص للأجهزة المحمولة، يمكن لمستخدمي Android تنزيله وتثبيته على شكل ملف APK. ",
+                category: "العمل",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhOxmHPv705ixYXv99AZMs41ozxu6yhh2NOxazxT9KPEbFQy9OnsFp7E&s=10",
+                downloadLink: "https://cuty.io/iMemo",
+                website: "رابط"
+            },
+            {
+                id: 7,
+                name: "تحميل شاهد vip مهكر مجانا [بدون اعلانات] 2025 لـ أندروي",
+                description: "استمتع بعالم لا حدود له من الترفيه مع شاهد، المنصة الرائدة التي تقدم لك أفضل الإنتاجات العربية الأصلية، المسلسلات الحصرية، الأفلام الضخمة، القنوات المباشرة ",
+                category: "العمل",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " https://apk-baba.net/wp-content/uploads/شاهد-vip-مهكر-icon-apkbaba.webp ",
+                downloadLink: "https://cuty.io/iMemo",
+                website: "رابط"
+            },
+            {
+                id: 8,
+                name: "SnapTube v7.49.0.74950410 MOD APK (VIP) Unlocked",
+                description: "أكثر من 1 مليار مستخدم يستخدمون Snaptube لتنزيل الفيديو والموسيقى من اليوتيوب و من مواقع أخرى مختلفة",
+                category: "الأدوات",
+                price: 0,
+                rating: 4.5,
+                icon: "fas fa-music",
+                iconImage: " https://img.utdstc.com/icon/b11/7ce/b117ce7ff728bd1bf2883fdffdcb170f487a793a8f65db956649a846861e138c:200",
+                downloadLink: "https://wacelalorshe.github.io/Mbc-c/snaptube.html",
+                website: "https://wacelalorshe.github.io/Mbc-c/snaptube.html"
+            }
+        ];
+
+        // DOM Elements
+        const appsContainer = document.getElementById('apps-container');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const categoryFilter = document.getElementById('category-filter');
+        const loadingApps = document.getElementById('loading-apps');
+        const adminPanel = document.getElementById('admin-panel');
+        const adminToggle = document.getElementById('admin-toggle');
+        const closeAdminBtn = document.getElementById('close-admin-btn');
+        const addAppBtn = document.getElementById('add-app-btn');
+        const adminAppsTable = document.getElementById('admin-apps-table');
+        const appModal = document.getElementById('app-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalClose = document.getElementById('modal-close');
+        const cancelAppBtn = document.getElementById('cancel-app-btn');
+        const appForm = document.getElementById('app-form');
+        const loginModal = document.getElementById('login-modal');
+        const loginForm = document.getElementById('login-form');
+        const loginModalClose = document.getElementById('login-modal-close');
+        const cancelLoginBtn = document.getElementById('cancel-login-btn');
+        const loginMessage = document.getElementById('login-message');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Current state
+        let currentApps = [];
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+        let editingAppId = null;
+        let isLoggedIn = false;
+
+        // Initialize the page
+        function init() {
+            loadApps();
+            setupEventListeners();
+            
+            // Check if user is already logged in
+            checkLoginStatus();
+        }
+
+        // Check login status from localStorage
+        function checkLoginStatus() {
+            const loginStatus = localStorage.getItem('admin_logged_in');
+            if (loginStatus === 'true') {
+                isLoggedIn = true;
+                adminToggle.textContent = 'login ';
+            }
+        }
+
+        // Login function
+        function login(username, password) {
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isLoggedIn = true;
+                localStorage.setItem('admin_logged_in', 'true');
+                closeLoginModal();
+                showAdminPanel();
+                return true;
+            } else {
+                showLoginMessage('اسم المستخدم أو كلمة المرور غير صحيحة', true);
+                return false;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            isLoggedIn = false;
+            localStorage.removeItem('admin_logged_in');
+            adminPanel.style.display = 'none';
+            adminToggle.textContent = 'login';
+            showLoginMessage('تم تسجيل الخروج بنجاح', false);
+        }
+
+        // Show login message
+        function showLoginMessage(message, isError) {
+            loginMessage.textContent = message;
+            loginMessage.className = 'login-message ' + (isError ? 'login-error' : '');
+            loginMessage.style.display = 'block';
+            
+            if (!isError) {
+                setTimeout(() => {
+                    loginMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Show login modal
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            loginForm.reset();
+            loginMessage.style.display = 'none';
+        }
+
+        // Close login modal
+        function closeLoginModal() {
+            loginModal.style.display = 'none';
+        }
+
+        // Show admin panel
+        function showAdminPanel() {
+            if (isLoggedIn) {
+                adminPanel.style.display = 'block';
+                adminToggle.textContent = 'login ';
+            } else {
+                showLoginModal();
+            }
+        }
+
+        // Load apps
+        function loadApps() {
+            showLoading(true);
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                currentApps = JSON.parse(localStorage.getItem('store_apps')) || defaultApps;
+                renderApps(currentApps);
+                renderAdminAppsTable(currentApps);
+                showLoading(false);
+            }, 800);
+        }
+
+        // Show/hide loading indicator
+        function showLoading(show) {
+            if (loadingApps) {
+                loadingApps.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // Render apps to the main page
+        function renderApps(apps = []) {
+            if (!appsContainer) return;
+            
+            appsContainer.innerHTML = '';
+            
+            if (apps.length === 0) {
+                appsContainer.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">لا توجد تطبيقات متاحة</p>';
+                return;
+            }
+            
+            apps.forEach(app => {
+                const appCard = document.createElement('a');
+                appCard.className = 'app-card';
+                appCard.href = app.downloadLink;
+                appCard.target = "_blank";
+                
+                // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
+                const iconContent = app.iconImage 
+                    ? `<img src="${app.iconImage}" alt="${app.name}">`
+                    : `<i class="${app.icon}"></i>`;
+                
+                appCard.innerHTML = `
+                    <div class="app-image">
+                        ${iconContent}
+                    </div>
+                    <div class="app-content">
+                        <div class="app-header">
+                            <h3 class="app-title">${app.name}</h3>
+                            <div class="app-rating">
+                                <i class="fas fa-star"></i>
+                                <span>${app.rating}</span>
+                            </div>
+                        </div>
+                        <p class="app-description">${app.description.substring(0, 120)}...</p>
+                        <div class="app-footer">
+                            <span class="app-price">${app.price === 0 ? 'مجاني' : `$${app.price}`}</span>
+                            <span class="btn btn-primary">${app.price === 0 ? 'تحميل' : 'شراء'}</span>
+                        </div>
+                    </div>
+                `;
+                
+                appsContainer.appendChild(appCard);
+            });
+        }
+
+        // Render admin apps table
+        function renderAdminAppsTable(apps = []) {
+            if (!adminAppsTable) return;
+            
+            adminAppsTable.innerHTML = '';
+            
+            if (apps.length === 0) {
+                adminAppsTable.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 20px;">لا توجد تطبيقات مضافة</td></tr>';
+                return;
+            }
+            
+            apps.forEach(app => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${app.name}</td>
+                    <td>${app.category}</td>
+                    <td>${app.price === 0 ? 'مجاني' : `$${app.price}`}</td>
+                    <td>${app.rating}</td>
+                    <td>
+                        <div class="table-actions">
+                            <i class="fas fa-edit table-icon table-edit" data-id="${app.id}"></i>
+                            <i class="fas fa-trash table-icon table-delete" data-id="${app.id}"></i>
+                        </div>
+                    </td>
+                `;
+                
+                adminAppsTable.appendChild(row);
+            });
+        }
+
+        // Filter apps by category
+        function filterAppsByCategory(category) {
+            if (category === 'all') {
+                return currentApps;
+            }
+            
+            return currentApps.filter(app => app.category === category);
+        }
+
+        // Search functionality - محسّن
+        function performSearch(query) {
+            currentSearchQuery = query;
+            
+            if (!query) {
+                searchResults.style.display = 'none';
+                applyFilters();
+                return;
+            }
+            
+            // تقسيم النص إلى كلمات للبحث عن كل كلمة
+            const searchTerms = query.toLowerCase().split(' ');
+            
+            // فلترة التطبيقات بناءً على البحث
+            const filteredApps = currentApps.filter(app => {
+                const appName = app.name.toLowerCase();
+                const appDescription = app.description.toLowerCase();
+                const appCategory = app.category.toLowerCase();
+                
+                // البحث عن تطابق مع أي من كلمات البحث
+                return searchTerms.some(term => 
+                    appName.includes(term) || 
+                    appDescription.includes(term) || 
+                    appCategory.includes(term)
+                );
+            });
+            
+            // تحديث نتائج البحث المنسدلة
+            searchResults.innerHTML = '';
+            
+            if (filteredApps.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">لا توجد نتائج تطابق بحثك</div>';
+            } else {
+                filteredApps.slice(0, 5).forEach(app => {
+                    const resultItem = document.createElement('a');
+                    resultItem.className = 'search-result-item';
+                    resultItem.href = app.downloadLink;
+                    resultItem.target = "_blank";
+                    
+                    // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
+                    const iconContent = app.iconImage 
+                        ? `<img src="${app.iconImage}" alt="${app.name}">`
+                        : `<i class="${app.icon}"></i>`;
+                    
+                    resultItem.innerHTML = `
+                        <div class="search-result-icon">
+                            ${iconContent}
+                        </div>
+                        <div class="search-result-info">
+                            <div class="search-result-name">${app.name}</div>
+                            <div class="search-result-category">${app.category}</div>
+                        </div>
+                    `;
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+            
+            searchResults.style.display = 'block';
+            
+            // حفظ نتائج البحث لتطبيق المرشحات
+            currentSearchResults = filteredApps;
+            applyFilters();
+        }
+
+        // Apply both category and search filters
+        function applyFilters() {
+            let filteredApps = currentApps;
+            
+            // Apply category filter
+            if (currentCategory !== 'all') {
+                filteredApps = filteredApps.filter(app => app.category === currentCategory);
+            }
+            
+            // Apply search filter
+            if (currentSearchQuery) {
+                const searchTerms = currentSearchQuery.toLowerCase().split(' ');
+                filteredApps = filteredApps.filter(app => {
+                    const appName = app.name.toLowerCase();
+                    const appDescription = app.description.toLowerCase();
+                    const appCategory = app.category.toLowerCase();
+                    
+                    return searchTerms.some(term => 
+                        appName.includes(term) || 
+                        appDescription.includes(term) || 
+                        appCategory.includes(term)
+                    );
+                });
+            }
+            
+            renderApps(filteredApps);
+        }
+
+        // Show app modal for adding/editing
+        function showAppModal(app = null) {
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            if (app) {
+                // Editing mode
+                modalTitle.textContent = 'تعديل التطبيق';
+                document.getElementById('app-id').value = app.id;
+                document.getElementById('app-name').value = app.name;
+                document.getElementById('app-category').value = app.category;
+                document.getElementById('app-description').value = app.description;
+                document.getElementById('app-price').value = app.price;
+                document.getElementById('app-rating').value = app.rating;
+                document.getElementById('app-icon').value = app.icon;
+                document.getElementById('app-icon-image').value = app.iconImage || '';
+                document.getElementById('app-download-link').value = app.downloadLink;
+                document.getElementById('app-website').value = app.website || '';
+                editingAppId = app.id;
+            } else {
+                // Adding mode
+                modalTitle.textContent = 'إضافة تطبيق جديد';
+                appForm.reset();
+                document.getElementById('app-id').value = '';
+                editingAppId = null;
+            }
+            
+            appModal.style.display = 'flex';
+        }
+
+        // Close app modal
+        function closeAppModal() {
+            appModal.style.display = 'none';
+            appForm.reset();
+            editingAppId = null;
+        }
+
+        // Save app (add or update)
+        function saveApp(appData) {
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            if (editingAppId) {
+                // Update existing app
+                const index = currentApps.findIndex(app => app.id === editingAppId);
+                if (index !== -1) {
+                    currentApps[index] = { ...currentApps[index], ...appData };
+                }
+            } else {
+                // Add new app
+                const newId = currentApps.length > 0 ? Math.max(...currentApps.map(app => app.id)) + 1 : 1;
+                currentApps.push({ id: newId, ...appData });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('store_apps', JSON.stringify(currentApps));
+            
+            // Update UI
+            renderApps(currentApps);
+            renderAdminAppsTable(currentApps);
+            applyFilters();
+            
+            // Close modal
+            closeAppModal();
+        }
+
+        // Delete app
+        function deleteApp(appId) {
+            if (!isLoggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            if (confirm('هل أنت متأكد من حذف هذا التطبيق؟')) {
+                currentApps = currentApps.filter(app => app.id !== appId);
+                
+                // Save to localStorage
+                localStorage.setItem('store_apps', JSON.stringify(currentApps));
+                
+                // Update UI
+                renderApps(currentApps);
+                renderAdminAppsTable(currentApps);
+                applyFilters();
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input event
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    performSearch(e.target.value);
+                });
+            }
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', (e) => {
+                if (searchResults && !e.target.closest('.search-container')) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Category filter buttons
+            if (categoryFilter) {
+                categoryFilter.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('category-btn')) {
+                        // Remove active class from all buttons
+                        document.querySelectorAll('.category-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked button
+                        e.target.classList.add('active');
+                        
+                        // Update current category
+                        currentCategory = e.target.getAttribute('data-category');
+                        
+                        // Apply filters
+                        applyFilters();
+                    }
+                });
+            }
+            
+            // Admin panel toggle
+            if (adminToggle) {
+                adminToggle.addEventListener('click', () => {
+                    showAdminPanel();
+                });
+            }
+            
+            // Close admin panel
+            if (closeAdminBtn) {
+                closeAdminBtn.addEventListener('click', () => {
+                    adminPanel.style.display = 'none';
+                adminToggle.textContent = 'login';
+                if (isLoggedIn) {
+                    adminToggle.textContent = 'login ';
+                }
+                });
+            }
+            
+            // Add app button
+            if (addAppBtn) {
+                addAppBtn.addEventListener('click', () => {
+                    showAppModal();
+                });
+            }
+            
+            // Modal close buttons
+            if (modalClose) {
+                modalClose.addEventListener('click', closeAppModal);
+            }
+            
+            if (cancelAppBtn) {
+                cancelAppBtn.addEventListener('click', closeAppModal);
+            }
+            
+            // App form submission
+            if (appForm) {
+                appForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const appData = {
+                        name: document.getElementById('app-name').value,
+                        category: document.getElementById('app-category').value,
+                        description: document.getElementById('app-description').value,
+                        price: parseFloat(document.getElementById('app-price').value) || 0,
+                        rating: parseFloat(document.getElementById('app-rating').value) || 4.5,
+                        icon: document.getElementById('app-icon').value,
+                        iconImage: document.getElementById('app-icon-image').value,
+                        downloadLink: document.getElementById('app-download-link').value,
+                        website: document.getElementById('app-website').value
+                    };
+                    
+                    saveApp(appData);
+                });
+            }
+            
+            // Admin table actions (edit/delete)
+            if (adminAppsTable) {
+                adminAppsTable.addEventListener('click', (e) => {
+                    const appId = parseInt(e.target.getAttribute('data-id'));
+                    
+                    if (e.target.classList.contains('table-edit')) {
+                        const app = currentApps.find(app => app.id === appId);
+                        if (app) {
+                            showAppModal(app);
+                        }
+                    } else if (e.target.classList.contains('table-delete')) {
+                        deleteApp(appId);
+                    }
+                });
+            }
+            
+            // Login form submission
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    
+                    login(username, password);
+                });
+            }
+            
+            // Login modal close buttons
+            if (loginModalClose) {
+                loginModalClose.addEventListener('click', closeLoginModal);
+            }
+            
+            if (cancelLoginBtn) {
+                cancelLoginBtn.addEventListener('click', closeLoginModal);
+            }
+            
+            // Logout button
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', logout);
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
+</html>
