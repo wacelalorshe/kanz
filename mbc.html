@@ -157,6 +157,11 @@
             background-color: #e0a800;
         }
 
+        .btn-large {
+            padding: 12px 25px;
+            font-size: 1rem;
+        }
+
         /* Search Bar */
         .search-container {
             position: relative;
@@ -266,6 +271,7 @@
             border-left: 0px ridge #000;
             border-right: 0px groove #000; 
             border-radius: 19px 19px 19px 19px;
+            cursor: pointer;
         }
 
         .app-card:hover {
@@ -338,6 +344,143 @@
         .app-price {
             font-weight: 600;
             color: var(--primary);
+        }
+
+        /* App Detail Page */
+        .app-detail-page {
+            display: none;
+            padding: 30px 0;
+        }
+
+        .app-detail-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .app-detail-image {
+            flex: 0 0 200px;
+            height: 200px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), #6a11cb);
+            color: var(--light);
+            font-size: 4rem;
+        }
+
+        .app-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .app-detail-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .app-detail-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .app-detail-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .app-detail-category {
+            background-color: var(--light-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .app-detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--warning);
+            font-weight: 500;
+        }
+
+        .app-detail-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .app-detail-description {
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .app-detail-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .app-detail-section {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+            border-bottom: 2px solid var(--light-border);
+            padding-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: var(--light-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .feature-item i {
+            color: var(--primary);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            color: var(--primary-dark);
         }
 
         /* Category Filter */
@@ -621,6 +764,20 @@
                 flex-direction: column;
                 gap: 0;
             }
+            
+            .app-detail-header {
+                flex-direction: column;
+            }
+            
+            .app-detail-image {
+                flex: 0 0 150px;
+                height: 150px;
+                align-self: center;
+            }
+            
+            .app-detail-actions {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -648,7 +805,7 @@
                     </div>
                     <button class="btn btn-outline" id="admin-toggle">
                         <i class="fas fa-cog"></i>
-                        login
+                        لوحة التحكم
                     </button>
                 </div>
             </div>
@@ -697,7 +854,7 @@
     </section>
 
     <!-- Apps Section -->
-    <section class="container" id="apps">
+    <section class="container" id="apps-section">
         <h2 style="margin: 30px 0 20px; text-align: center;">التطبيقات المتاحة</h2>
         
         <!-- Category Filter -->
@@ -724,11 +881,61 @@
         </div>
     </section>
 
+    <!-- App Detail Page -->
+    <section class="container app-detail-page" id="app-detail-page">
+        <a href="#" class="back-button" id="back-button">
+            <i class="fas fa-arrow-right"></i>
+            العودة إلى القائمة
+        </a>
+        
+        <div class="app-detail-header">
+            <div class="app-detail-image" id="app-detail-image">
+                <!-- App image or icon will be loaded here -->
+            </div>
+            <div class="app-detail-info">
+                <h1 class="app-detail-title" id="app-detail-title">اسم التطبيق</h1>
+                <div class="app-detail-meta">
+                    <span class="app-detail-category" id="app-detail-category">الفئة</span>
+                    <div class="app-detail-rating" id="app-detail-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.5</span>
+                    </div>
+                    <div class="app-detail-price" id="app-detail-price">مجاني</div>
+                </div>
+                <p class="app-detail-description" id="app-detail-description">وصف التطبيق</p>
+                <div class="app-detail-actions">
+                    <a href="#" class="btn btn-primary btn-large" id="app-download-btn" target="_blank">
+                        <i class="fas fa-download"></i>
+                        تحميل التطبيق
+                    </a>
+                    <a href="#" class="btn btn-outline btn-large" id="app-website-btn" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        زيارة الموقع
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="app-detail-section">
+            <h3 class="section-title">مميزات التطبيق</h3>
+            <div class="features-grid" id="app-features">
+                <!-- Features will be loaded here -->
+            </div>
+        </div>
+        
+        <div class="app-detail-section">
+            <h3 class="section-title">معلومات إضافية</h3>
+            <div class="app-detail-info-grid" id="app-additional-info">
+                <!-- Additional info will be loaded here -->
+            </div>
+        </div>
+    </section>
+
     <!-- Login Modal -->
     <div class="modal" id="login-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">تسجيل الدخول لlogin</h3>
+                <h3 class="modal-title">تسجيل الدخول للوحة التحكم</h3>
                 <button class="modal-close" id="login-modal-close">&times;</button>
             </div>
             <div class="login-form">
@@ -809,6 +1016,10 @@
                         <label for="app-website" class="form-label">الموقع الإلكتروني</label>
                         <input type="text" id="app-website" class="form-input">
                     </div>
+                    <div class="form-group full-width">
+                        <label for="app-features" class="form-label">المميزات (افصل بينها بفاصلة)</label>
+                        <input type="text" id="app-features" class="form-input" placeholder="ميزة 1, ميزة 2, ميزة 3">
+                    </div>
                 </div>
                 <div class="admin-actions" style="margin-top: 20px; justify-content: flex-end;">
                     <button type="button" class="btn btn-outline" id="cancel-app-btn">إلغاء</button>
@@ -819,111 +1030,14 @@
     </div>
 
     <script>
-        // بيانات الاعتماد الافتراضية (يمكنك تغييرها)
+        // بيانات الاعتماد الافتراضية
         const ADMIN_CREDENTIALS = {
             username: "admin",
-            password: "admin123" // يمكنك تغيير كلمة المرور هنا
+            password: "admin123"
         };
 
-        // Default apps data
-        const defaultApps = [
-            {
-                id: 1,
-                name: "MT Manager Pro Vip",
-                description: "تحميل تطبيق ام تي مانجر MT Manager Pro Vip مهكر هو أداة قوية لإدارة الملفات على أجهزة الأندرويد، يتيح للمستخدمين القيام بمهام متقدمة مثل تحرير الملفات وتعديلها، واستخراج وضغط الملفات، وحتى تعديل تطبيقات الأندرويد (APKs)، يُعتبر هذا التطبيق مثاليًا للمستخدمين المتقدمين والمطورين الذين يحتاجون إلى تحكم كامل في ملفات نظام الأندرويد، بالإضافة إلى ذلك يوفر التطبيق واجهة مستخدم بسيطة وسهلة الاستخدام، مع ميزات مثل تحرير النصوص البرمجية، وتعديل التصاريح، والبحث والاستبدال في النصوص، وإدارة التطبيقات المثبتة.",
-                category: "التعليم",
-                price: 0,
-                rating: 4.8,
-                icon: "fas fa-camera",
-                iconImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsnyrGjaDXGdGduL0jLdKwhwa0egn14-fTj4_MwDZxBQ&s",
-                downloadLink: "https://www.mediafire.com/file/x9jh2c47u7tfngq/MT_Manager_2.14.5-clone%2528password_is%2529_12345.zip/file?dkey=1ktgahtp68s&r=1909",
-                website: "https://www.mediafire.com/file/x9jh2c47u7tfngq/MT_Manager_2.14.5-clone%2528password_is%2529_12345.zip/file?dkey=1ktgahtp68s&r=1909"
-            },
-            {
-                id: 2,
-                name: "ES File Explorer لـ Android - قم بتنزيل تطبيق مهكر",
-                description: "البرنامج يسمح لأي مستخدم أندرويد أن يدير كل ملفاته بسهولة ، و يتمكن من الولوج في أي وقت على جهازه المحمول ثم يشاركه إذا أراد. رفع الصور، مشاهدة الأفلام.",
-                category: "التعليم",
-                price: 0,
-                rating: 4.6,
-                icon: "fas fa-running",
-                iconImage: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ45aEy0sGMNT77ZnHA9A1q2IVd1W2Oq5LDKnFBtdzVfWpk6EphKa5P2GYDOioRCyfqUlwME-D-RUB4LkznO50dgNZXGeSWbwPqVJR5oA",
-                downloadLink: "https://www.mediafire.com/file/lp5zk4n6sg70hp9/UltData_v3.4.21.apk/file?dkey=sv5abna0e6j&r=1424",
-                website: "https://fittracker.com"
-            },
-            {
-                id: 3,
-                name: "aseel tv",
-                description: "ويتميز التطبيق Aseel Live tv يقدم بتوفير جدول المباريات بشكل يومي لمشاهدتها بشكل مباشر، حيث يمكنك متابعة مبارياتك المفضلة ومشاهدتها",
-                category: "tv",
-                price: 0,
-                rating: 4.9,
-                icon: "fas fa-book",
-                iconImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNiIkZhiQmGLtZi7kGoyZ4eG2PLk3yw8pGC9OmXIobJw&s=10",
-                downloadLink: "https://wacelalorshe.github.io/kanz/Aseel.html",
-                website: "https://languagelearn.com"
-            },
-            {
-                id: 4,
-                name: "تحميل تطبيق دراما بوكس DramaBox مهكر Apk للاندرويد 2026 اخر اصدار مجانا",
-                description: "مميزات تحميل تطبيق درامابوكس DramaBox مهكر · مشاهدة جميع المسلسلات العربية والعالمية مجانًا بدون أي اشتراك شهري. · واجهة سهلة وبسيطة.",
-                category: "tv",
-                price: 0,
-                rating: 4.7,
-                icon: "fas fa-cloud-sun",
-                iconImage: "https://img.utdstc.com/icon/1cb/cda/1cbcda7e556f5173bbaf9a04caec6c1815a1111b7551538739a7acea2a3d40d5:200",
-                downloadLink: "https://wacelalorshe.github.io/kanz/dramabox.html",
-                website: "https://weatherpro.com"
-            },
-            {
-                id: 5,
-                name: "see drama",
-                description: "إذا كنت تبحث عن طريقة مريحة وسهلة للوصول إلى جميع الأعمال الدرامية المفضلة لديك، القنوات التلفزيونية، والبث المباشر، فإن هذا التطبيق هو الحل المثالي بالنسبة لك. تم تصميم التطبيق ليكون وجهتك الشاملة للاستمتاع بكل ما تحب مشاهدته، سواء كنت من عشاق المسلسلات الكلاسيكية أو الأعمال الحديثة",
-                category: "tv",
-                price: 0,
-                rating: 4.5,
-                icon: "fas fa-music",
-                iconImage: " https://seedrama.app/wp-content/uploads/2025/07/wood-logo-white-reserve-300x300.webp",
-                downloadLink: "https://wacelalorshe.blogspot.com/2024/08/see-drama-vip-2024.html?m=1",
-                website: "https://wacelalorshe.blogspot.com/2024/08/see-drama-vip-2024.html?m=1"
-            },
-            {
-                id: 6,
-                name: "iMemo pro",
-                description: "يُعد iMemo تطبيقًا لتدوين الملاحظات يستند إلى الذكاء الاصطناعي، ويقوم بتسجيل الصوت وتحويله إلى نص، ثم يقدّم ملخصات مُولّدة بواسطة الذكاء الاصطناعي. نظرًا لأن iMemo تطبيق مخصص للأجهزة المحمولة، يمكن لمستخدمي Android تنزيله وتثبيته على شكل ملف APK. ",
-                category: "العمل",
-                price: 0,
-                rating: 4.5,
-                icon: "fas fa-music",
-                iconImage: " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhOxmHPv705ixYXv99AZMs41ozxu6yhh2NOxazxT9KPEbFQy9OnsFp7E&s=10",
-                downloadLink: "https://cuty.io/iMemo",
-                website: "رابط"
-            },
-            {
-                id: 7,
-                name: "تحميل شاهد vip مهكر مجانا [بدون اعلانات] 2025 لـ أندروي",
-                description: "استمتع بعالم لا حدود له من الترفيه مع شاهد، المنصة الرائدة التي تقدم لك أفضل الإنتاجات العربية الأصلية، المسلسلات الحصرية، الأفلام الضخمة، القنوات المباشرة ",
-                category: "العمل",
-                price: 0,
-                rating: 4.5,
-                icon: "fas fa-music",
-                iconImage: " https://apk-baba.net/wp-content/uploads/شاهد-vip-مهكر-icon-apkbaba.webp ",
-                downloadLink: "https://cuty.io/iMemo",
-                website: "رابط"
-            },
-            {
-                id: 8,
-                name: "SnapTube v7.49.0.74950410 MOD APK (VIP) Unlocked",
-                description: "أكثر من 1 مليار مستخدم يستخدمون Snaptube لتنزيل الفيديو والموسيقى من اليوتيوب و من مواقع أخرى مختلفة",
-                category: "الأدوات",
-                price: 0,
-                rating: 4.5,
-                icon: "fas fa-music",
-                iconImage: " https://img.utdstc.com/icon/b11/7ce/b117ce7ff728bd1bf2883fdffdcb170f487a793a8f65db956649a846861e138c:200",
-                downloadLink: "https://wacelalorshe.github.io/Mbc-c/snaptube.html",
-                website: "https://wacelalorshe.github.io/Mbc-c/snaptube.html"
-            }
-        ];
+        // رابط ملف البيانات على GitHub Gist - الرابط الذي حصلت عليه
+        const DATA_URL = 'https://gist.githubusercontent.com/wacelalorshe/48c62c87d04b33b5f55d79cf035cf7c2/raw/26a18f27926739dee4e8031a2e07839e3aa8f533/apps-data.json';
 
         // DOM Elements
         const appsContainer = document.getElementById('apps-container');
@@ -947,6 +1061,19 @@
         const cancelLoginBtn = document.getElementById('cancel-login-btn');
         const loginMessage = document.getElementById('login-message');
         const logoutBtn = document.getElementById('logout-btn');
+        const appsSection = document.getElementById('apps-section');
+        const appDetailPage = document.getElementById('app-detail-page');
+        const backButton = document.getElementById('back-button');
+        const appDetailImage = document.getElementById('app-detail-image');
+        const appDetailTitle = document.getElementById('app-detail-title');
+        const appDetailCategory = document.getElementById('app-detail-category');
+        const appDetailRating = document.getElementById('app-detail-rating');
+        const appDetailPrice = document.getElementById('app-detail-price');
+        const appDetailDescription = document.getElementById('app-detail-description');
+        const appDownloadBtn = document.getElementById('app-download-btn');
+        const appWebsiteBtn = document.getElementById('app-website-btn');
+        const appFeatures = document.getElementById('app-features');
+        const appAdditionalInfo = document.getElementById('app-additional-info');
 
         // Current state
         let currentApps = [];
@@ -954,14 +1081,24 @@
         let currentSearchQuery = '';
         let editingAppId = null;
         let isLoggedIn = false;
+        let currentAppDetail = null;
 
         // Initialize the page
         function init() {
             loadApps();
             setupEventListeners();
-            
-            // Check if user is already logged in
+            handleURLRouting();
             checkLoginStatus();
+        }
+
+        // Handle URL routing for app details
+        function handleURLRouting() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const appId = urlParams.get('app');
+            
+            if (appId) {
+                showAppDetail(parseInt(appId));
+            }
         }
 
         // Check login status from localStorage
@@ -969,7 +1106,7 @@
             const loginStatus = localStorage.getItem('admin_logged_in');
             if (loginStatus === 'true') {
                 isLoggedIn = true;
-                adminToggle.textContent = 'login ';
+                adminToggle.textContent = 'لوحة التحكم (مسجل دخول)';
             }
         }
 
@@ -992,7 +1129,7 @@
             isLoggedIn = false;
             localStorage.removeItem('admin_logged_in');
             adminPanel.style.display = 'none';
-            adminToggle.textContent = 'login';
+            adminToggle.textContent = 'لوحة التحكم';
             showLoginMessage('تم تسجيل الخروج بنجاح', false);
         }
 
@@ -1025,23 +1162,46 @@
         function showAdminPanel() {
             if (isLoggedIn) {
                 adminPanel.style.display = 'block';
-                adminToggle.textContent = 'login ';
+                adminToggle.textContent = 'لوحة التحكم (مسجل دخول)';
             } else {
                 showLoginModal();
             }
         }
 
-        // Load apps
-        function loadApps() {
+        // تحميل التطبيقات من GitHub Gist
+        async function loadApps() {
             showLoading(true);
             
-            // Simulate loading delay
-            setTimeout(() => {
-                currentApps = JSON.parse(localStorage.getItem('store_apps')) || defaultApps;
-                renderApps(currentApps);
-                renderAdminAppsTable(currentApps);
-                showLoading(false);
-            }, 800);
+            try {
+                console.log('جاري تحميل البيانات من:', DATA_URL);
+                const response = await fetch(DATA_URL + '?t=' + new Date().getTime());
+                
+                if (response.ok) {
+                    const appsData = await response.json();
+                    currentApps = appsData;
+                    console.log('تم تحميل البيانات بنجاح:', currentApps.length + ' تطبيقات');
+                    
+                    // حفظ في localStorage كنسخة احتياطية
+                    localStorage.setItem('store_apps', JSON.stringify(currentApps));
+                } else {
+                    throw new Error('فشل في تحميل البيانات: ' + response.status);
+                }
+            } catch (error) {
+                console.log('استخدام البيانات المحلية:', error.message);
+                // استخدام البيانات المحفوظة محلياً
+                const localApps = localStorage.getItem('store_apps');
+                if (localApps) {
+                    currentApps = JSON.parse(localApps);
+                    console.log('تم تحميل البيانات من localStorage:', currentApps.length + ' تطبيقات');
+                } else {
+                    currentApps = [];
+                    console.log('لا توجد بيانات متاحة');
+                }
+            }
+            
+            renderApps(currentApps);
+            renderAdminAppsTable(currentApps);
+            showLoading(false);
         }
 
         // Show/hide loading indicator
@@ -1063,15 +1223,14 @@
             }
             
             apps.forEach(app => {
-                const appCard = document.createElement('a');
+                const appCard = document.createElement('div');
                 appCard.className = 'app-card';
-                appCard.href = app.downloadLink;
-                appCard.target = "_blank";
+                appCard.dataset.appId = app.id;
                 
                 // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
                 const iconContent = app.iconImage 
-                    ? `<img src="${app.iconImage}" alt="${app.name}">`
-                    : `<i class="${app.icon}"></i>`;
+                    ? `<img src="${app.iconImage}" alt="${app.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'${app.icon || 'fas fa-mobile-alt'}\'></i>'">`
+                    : `<i class="${app.icon || 'fas fa-mobile-alt'}"></i>`;
                 
                 appCard.innerHTML = `
                     <div class="app-image">
@@ -1088,13 +1247,94 @@
                         <p class="app-description">${app.description.substring(0, 120)}...</p>
                         <div class="app-footer">
                             <span class="app-price">${app.price === 0 ? 'مجاني' : `$${app.price}`}</span>
-                            <span class="btn btn-primary">${app.price === 0 ? 'تحميل' : 'شراء'}</span>
+                            <span class="btn btn-primary">عرض التفاصيل</span>
                         </div>
                     </div>
                 `;
                 
                 appsContainer.appendChild(appCard);
             });
+        }
+
+        // Show app detail page
+        function showAppDetail(appId) {
+            const app = currentApps.find(a => a.id === appId);
+            if (!app) return;
+            
+            currentAppDetail = app;
+            
+            // Update URL without page reload
+            const newUrl = `${window.location.pathname}?app=${appId}`;
+            window.history.pushState({}, '', newUrl);
+            
+            // Hide apps section and show detail page
+            appsSection.style.display = 'none';
+            appDetailPage.style.display = 'block';
+            
+            // Update app detail content
+            appDetailTitle.textContent = app.name;
+            appDetailCategory.textContent = app.category;
+            appDetailRating.innerHTML = `<i class="fas fa-star"></i><span>${app.rating}</span>`;
+            appDetailPrice.textContent = app.price === 0 ? 'مجاني' : `$${app.price}`;
+            appDetailDescription.textContent = app.description;
+            
+            // Set app image or icon
+            if (app.iconImage) {
+                appDetailImage.innerHTML = `<img src="${app.iconImage}" alt="${app.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'${app.icon || 'fas fa-mobile-alt'}\'></i>'">`;
+            } else {
+                appDetailImage.innerHTML = `<i class="${app.icon || 'fas fa-mobile-alt'}"></i>`;
+            }
+            
+            // Set download and website links
+            appDownloadBtn.href = app.downloadLink;
+            if (app.website && app.website !== 'رابط') {
+                appWebsiteBtn.href = app.website;
+                appWebsiteBtn.style.display = 'inline-flex';
+            } else {
+                appWebsiteBtn.style.display = 'none';
+            }
+            
+            // Render features
+            appFeatures.innerHTML = '';
+            if (app.features && app.features.length > 0) {
+                app.features.forEach(feature => {
+                    const featureItem = document.createElement('div');
+                    featureItem.className = 'feature-item';
+                    featureItem.innerHTML = `
+                        <i class="fas fa-check-circle"></i>
+                        <span>${feature}</span>
+                    `;
+                    appFeatures.appendChild(featureItem);
+                });
+            } else {
+                appFeatures.innerHTML = '<p>لا توجد مميزات محددة لهذا التطبيق</p>';
+            }
+            
+            // Render additional info
+            appAdditionalInfo.innerHTML = `
+                <div class="feature-item">
+                    <i class="fas fa-folder"></i>
+                    <span><strong>الفئة:</strong> ${app.category}</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <span><strong>التقييم:</strong> ${app.rating}/5</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span><strong>السعر:</strong> ${app.price === 0 ? 'مجاني' : `$${app.price}`}</span>
+                </div>
+            `;
+        }
+
+        // Hide app detail and show apps list
+        function hideAppDetail() {
+            appsSection.style.display = 'block';
+            appDetailPage.style.display = 'none';
+            
+            // Update URL without page reload
+            const newUrl = window.location.pathname;
+            window.history.pushState({}, '', newUrl);
         }
 
         // Render admin apps table
@@ -1172,13 +1412,12 @@
                 filteredApps.slice(0, 5).forEach(app => {
                     const resultItem = document.createElement('a');
                     resultItem.className = 'search-result-item';
-                    resultItem.href = app.downloadLink;
-                    resultItem.target = "_blank";
+                    resultItem.href = `?app=${app.id}`;
                     
                     // تحديد ما إذا كان سيتم استخدام صورة أو أيقونة
                     const iconContent = app.iconImage 
-                        ? `<img src="${app.iconImage}" alt="${app.name}">`
-                        : `<i class="${app.icon}"></i>`;
+                        ? `<img src="${app.iconImage}" alt="${app.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\'${app.icon || 'fas fa-mobile-alt'}\'></i>'">`
+                        : `<i class="${app.icon || 'fas fa-mobile-alt'}"></i>`;
                     
                     resultItem.innerHTML = `
                         <div class="search-result-icon">
@@ -1249,6 +1488,7 @@
                 document.getElementById('app-icon-image').value = app.iconImage || '';
                 document.getElementById('app-download-link').value = app.downloadLink;
                 document.getElementById('app-website').value = app.website || '';
+                document.getElementById('app-features').value = app.features ? app.features.join(', ') : '';
                 editingAppId = app.id;
             } else {
                 // Adding mode
@@ -1275,16 +1515,23 @@
                 return;
             }
             
+            // Process features
+            if (appData.features) {
+                appData.features = appData.features.split(',').map(f => f.trim()).filter(f => f);
+            } else {
+                appData.features = [];
+            }
+            
             if (editingAppId) {
                 // Update existing app
-                const index = currentApps.findIndex(app => app.id === editingAppId);
+                const index = currentApps.findIndex(app => app.id == editingAppId);
                 if (index !== -1) {
                     currentApps[index] = { ...currentApps[index], ...appData };
                 }
             } else {
                 // Add new app
-                const newId = currentApps.length > 0 ? Math.max(...currentApps.map(app => app.id)) + 1 : 1;
-                currentApps.push({ id: newId, ...appData });
+                const newId = currentApps.length > 0 ? Math.max(...currentApps.map(app => parseInt(app.id))) + 1 : 1;
+                currentApps.push({ id: newId.toString(), ...appData });
             }
             
             // Save to localStorage
@@ -1307,7 +1554,7 @@
             }
             
             if (confirm('هل أنت متأكد من حذف هذا التطبيق؟')) {
-                currentApps = currentApps.filter(app => app.id !== appId);
+                currentApps = currentApps.filter(app => app.id != appId);
                 
                 // Save to localStorage
                 localStorage.setItem('store_apps', JSON.stringify(currentApps));
@@ -1356,6 +1603,25 @@
                 });
             }
             
+            // App card clicks
+            if (appsContainer) {
+                appsContainer.addEventListener('click', (e) => {
+                    const appCard = e.target.closest('.app-card');
+                    if (appCard) {
+                        const appId = appCard.dataset.appId;
+                        showAppDetail(appId);
+                    }
+                });
+            }
+            
+            // Back button
+            if (backButton) {
+                backButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    hideAppDetail();
+                });
+            }
+            
             // Admin panel toggle
             if (adminToggle) {
                 adminToggle.addEventListener('click', () => {
@@ -1367,10 +1633,10 @@
             if (closeAdminBtn) {
                 closeAdminBtn.addEventListener('click', () => {
                     adminPanel.style.display = 'none';
-                adminToggle.textContent = 'login';
-                if (isLoggedIn) {
-                    adminToggle.textContent = 'login ';
-                }
+                    adminToggle.textContent = 'لوحة التحكم';
+                    if (isLoggedIn) {
+                        adminToggle.textContent = 'لوحة التحكم (مسجل دخول)';
+                    }
                 });
             }
             
@@ -1404,7 +1670,8 @@
                         icon: document.getElementById('app-icon').value,
                         iconImage: document.getElementById('app-icon-image').value,
                         downloadLink: document.getElementById('app-download-link').value,
-                        website: document.getElementById('app-website').value
+                        website: document.getElementById('app-website').value,
+                        features: document.getElementById('app-features').value
                     };
                     
                     saveApp(appData);
@@ -1414,7 +1681,7 @@
             // Admin table actions (edit/delete)
             if (adminAppsTable) {
                 adminAppsTable.addEventListener('click', (e) => {
-                    const appId = parseInt(e.target.getAttribute('data-id'));
+                    const appId = e.target.getAttribute('data-id');
                     
                     if (e.target.classList.contains('table-edit')) {
                         const app = currentApps.find(app => app.id === appId);
@@ -1452,6 +1719,11 @@
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', logout);
             }
+            
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', () => {
+                handleURLRouting();
+            });
         }
 
         // Initialize the page
