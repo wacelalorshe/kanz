@@ -1221,21 +1221,27 @@
         function loadApps() {
             showLoading(true);
             
-            // محاولة تحميل من URL parameter (للمشاركة)
+            // محاولة تحميل من رابط المشاركة
             const urlParams = new URLSearchParams(window.location.search);
-            const sharedData = urlParams.get('data');
+            const shareId = urlParams.get('share');
             
-            if (sharedData) {
-                try {
-                    currentApps = JSON.parse(decodeURIComponent(sharedData));
-                    localStorage.setItem('store_apps', JSON.stringify(currentApps));
-                    console.log('تم تحميل البيانات من الرابط');
-                } catch (error) {
-                    console.log('خطأ في تحميل البيانات من الرابط');
+            if (shareId) {
+                const sharedData = localStorage.getItem(shareId);
+                if (sharedData) {
+                    try {
+                        currentApps = JSON.parse(sharedData);
+                        localStorage.setItem('store_apps', JSON.stringify(currentApps));
+                        console.log('تم تحميل البيانات من رابط المشاركة');
+                        
+                        // تنظيف البيانات القديمة (اختياري)
+                        localStorage.removeItem(shareId);
+                    } catch (error) {
+                        console.log('خطأ في تحميل البيانات من رابط المشاركة');
+                    }
                 }
             }
             
-            // إذا لم تكن هناك بيانات من الرابط، جرب localStorage
+            // إذا لم تكن هناك بيانات من رابط المشاركة، جرب localStorage العادي
             if (!currentApps || currentApps.length === 0) {
                 const localData = localStorage.getItem('store_apps');
                 if (localData) {
@@ -1254,17 +1260,21 @@
             showLoading(false);
         }
 
-        // إنشاء رابط للمشاركة
+        // إنشاء رابط للمشاركة باستخدام المعرفات الفريدة
         function generateShareLink() {
-            const dataStr = JSON.stringify(currentApps);
-            const encodedData = encodeURIComponent(dataStr);
-            const shareUrl = `${window.location.origin}${window.location.pathname}?data=${encodedData}`;
+            // إنشاء معرف فريد للتطبيقات
+            const shareId = 'app_store_' + Date.now();
+            
+            // حفظ البيانات في localStorage باستخدام هذا المعرف
+            localStorage.setItem(shareId, JSON.stringify(currentApps));
+            
+            // إنشاء رابط قصير يحتوي على المعرف فقط
+            const shareUrl = `${window.location.origin}${window.location.pathname}?share=${shareId}`;
             
             // نسخ الرابط للحافظة
             navigator.clipboard.writeText(shareUrl).then(() => {
                 alert('تم نسخ رابط المشاركة! أرسله للآخرين ليظهر لهم التطبيقات.');
             }).catch(() => {
-                // إذا فشل النسخ، عرض الرابط
                 prompt('انسخ هذا الرابط وأرسله للآخرين:', shareUrl);
             });
         }
