@@ -1,0 +1,3330 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wacel play-وسـيـل بلاي</title>
+    <meta name="google-site-verification" content="yv8Fapy9yxl2XxCh03uMYT4h-T8OShA4EnsGmg_Hbh0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <style>
+        
+        /* جميع أنماط CSS من الملفات السابقة */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --primary-light: #e6ebff;
+            --secondary: #ff6b6b;
+            --accent: #06d6a0;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a68;
+            --text-light: #8a8aa3;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9ff;
+            --bg-tertiary: #f0f2ff;
+            --bg-card: #ffffff;
+            --border: #e1e5f1;
+            --border-light: #f0f3ff;
+            --shadow: 0 4px 20px rgba(67, 97, 238, 0.15);
+            --shadow-md: 0 8px 25px rgba(67, 97, 238, 0.15);
+            --shadow-lg: 0 12px 35px rgba(67, 97, 238, 0.15);
+            --radius: 16px;
+            --radius-lg: 20px;
+            --gradient-primary: linear-gradient(135deg, #4361ee, #3a56d4);
+            --gradient-secondary: linear-gradient(135deg, #ff6b6b, #ff5252);
+            --gradient-accent: linear-gradient(135deg, #06d6a0, #05c793);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Tahoma', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            direction: rtl;
+            padding-bottom: 80px;
+        }
+
+        /* الشريط العلوي المحسن */
+        .top-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: var(--secondary);
+            background: none;
+            -webkit-text-fill-color: var(--secondary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-icon-top {
+            width: clamp(2.5rem, 10vw, 3rem);
+            height: clamp(2.5rem, 10vw, 3rem);
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow);
+        }
+
+        .search-icon-top i {
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+        }
+
+        .search-icon-top:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-login, .btn-logout {
+            width: clamp(2.5rem, 7vw, 3rem);
+            height: clamp(2.5rem, 7vw, 3rem);
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-login i, .btn-logout i {
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+        }
+
+        .btn-login:hover, .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* الشريط السفلي المحسن */
+        .bottom-navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 0.75rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(67, 97, 238, 0.1);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .bottom-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            min-width: clamp(3rem, 15vw, 4rem);
+            position: relative;
+        }
+
+        .bottom-nav-item i {
+            font-size: clamp(1rem, 4vw, 1.4rem);
+            margin-bottom: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav-item span {
+            font-size: clamp(0.6rem, 2.5vw, 0.85rem);
+            font-weight: 500;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .bottom-nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            width: 5px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .bottom-nav-item:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 2rem;
+        }
+
+        /* قسم الهيرو المحسن */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* شريط تصفية الفئات الأفقي */
+        .categories-section {
+            margin-bottom: 3rem;
+        }
+
+        .categories-scroll-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .categories-scroll {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+            padding: 0.5rem 0;
+            margin: 0 -1.5rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .categories-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-filter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            flex-shrink: 0;
+            box-shadow: var(--shadow);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border: none;
+            font-family: inherit;
+        }
+
+        .category-filter:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: var(--primary);
+        }
+
+        .category-filter.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .category-filter i {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .category-filter span {
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* أقسام التطبيقات المحسنة */
+        .all-apps-section,
+        .ads-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .view-all:hover {
+            gap: 0.75rem;
+        }
+
+        /* شبكة التطبيقات المحسنة */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.9);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-bottom: 9px groove #000;
+            border-top: 6px ridge #000;
+            border-left: 0px ridge #fff;
+            border-right: 0px ridge #fff;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .app-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* توحيد أنماط الأيقونات */
+        .app-icon, .share-app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-icon img, .share-app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .app-icon i, .share-app-icon i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .app-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            text-align: right;
+        }
+
+        .app-info {
+            flex: 1;
+        }
+
+        .app-info h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .app-category {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 900;
+            font-family: Arial, sans-serif;
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .app-description-container {
+            position: relative;
+            margin: 0.8rem 0;
+            flex: 1;
+        }
+
+        .app-description {
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.95rem;
+            font-weight: 900;
+            font-family: Arial, sans-serif;
+            max-height: 4.2em;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-bottom: 0.3rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .app-description.expanded {
+            max-height: none;
+            -webkit-line-clamp: unset;
+            display: block;
+        }
+
+        .show-more {
+            color: var(--primary);
+            background-image: linear-gradient(to right, #000, #151825, #151825, #151825, #151825, #151825, #151825, #151825, #151825,#151825, #151825, #151825, #151825, #151825, #151825, #151825, #151825, #000);
+            border-bottom: 3px groove #000;
+            border-top: 3px ridge #000;
+            border-left: 0px ridge #fff;
+            border-right: 0px ridge #fff;
+            color: #fff;
+            direction: rtl;
+            border-radius: 20px 20px 20px 20px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-decoration: underline;
+            padding-right: 5%; 
+            padding-left: 5%; 
+            margin-top: 0.3rem;
+            display: inline-block;
+        }
+
+        .show-more:hover {
+            color: #3AFF00;
+        }
+
+        .app-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .app-downloads {
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+
+        .app-shares {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .app-shares i {
+            color: var(--secondary);
+            font-size: 0.8rem;
+        }
+
+        .featured-badge, .trending-badge {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .trending-badge {
+            background: var(--gradient-accent);
+            top: 2.5rem;
+        }
+
+        /* تحسين أزرار التطبيقات */
+        .app-actions {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: auto;
+            padding-top: 0.5rem;
+        }
+
+        .download-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 0.1;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            box-shadow: var(--shadow);
+            min-height: 32px;
+            line-height: 1;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            background: var(--primary-dark);
+        }
+
+        .share-btn {
+            background: #00CB1C;
+            color: white;
+            border: none;
+            padding: 0.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            flex: 0.1;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            box-shadow: var(--shadow);
+            min-height: 32px;
+            line-height: 1;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, #ff5252, #ff2b2b);
+        }
+
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.4rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex: 0.1;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            font-size: 0.75rem;
+            box-shadow: var(--shadow);
+            min-height: 32px;
+            min-width: 32px;
+            line-height: 1;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            background: #c0392b;
+        }
+
+        /* تحسين الأيقونات داخل الأزرار */
+        .download-btn i,
+        .share-btn i,
+        .delete-btn i {
+            font-size: 0.7rem;
+        }
+
+        /* زر عرض المزيد */
+        .load-more-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .load-more-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 44px;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            background: var(--primary-dark);
+        }
+
+        /* أقسام خاصة */
+        .special-sections {
+            margin-bottom: 3rem;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .section-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .section-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            color: var(--primary);
+        }
+
+        .section-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .special-section-content {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* قسم الإعلانات المحسن */
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ad-card {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .ad-card:nth-child(2) {
+            background: var(--gradient-accent);
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .ad-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .ad-card p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .loading-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .loading-state i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .error-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .error-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ef4444;
+        }
+
+        /* المودال المحسن */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+            animation: modalAppear 0.3s ease-out;
+            border: 1px solid var(--border-light);
+        }
+
+        .search-modal {
+            max-width: 600px;
+            margin: 5% auto;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--bg-secondary);
+            font-family: inherit;
+        }
+
+        .modal-content input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .submit-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        #loginMessage {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            min-height: 20px;
+        }
+
+        .test-credentials {
+            margin-top: 1.5rem;
+            padding: 1.25rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border-right: 4px solid var(--primary);
+        }
+
+        .test-credentials h4 {
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .test-credentials p {
+            margin: 0.25rem 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* شريط البحث في المودال */
+        .search-container {
+            width: 100%;
+        }
+
+        .search-bar {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .search-bar:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .search-icon {
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0.75rem 0.5rem;
+            font-size: 1rem;
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* أنماط إضافية للبحث */
+        .search-results-header {
+            background: var(--primary-light);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--primary);
+            font-weight: 500;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .category-card.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .temp-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .temp-message.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .temp-message.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .icon-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+        }
+
+        .icon-btn:hover {
+            background: #333;
+        }
+
+        .icon-w {
+            color: #006FFF;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* أنماط صفحة المشاركة */
+        .share-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 1rem;
+        }
+        
+        .share-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .app-share-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+        }
+        
+        .share-app-icon {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .share-app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+        
+        .app-info {
+            flex: 1;
+        }
+        
+        .app-info h2 {
+            margin: 0 0 0.5rem;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        .app-category {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .app-description {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+        
+        .app-details {
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+        }
+        
+        .app-details h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .share-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .share-actions {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-share-social {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .btn-twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .btn-facebook {
+            background: #1877F2;
+            color: white;
+        }
+        
+        .btn-copy-link {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+        }
+        
+        .btn-back {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            width: 100%;
+            border: 1px solid var(--border);
+        }
+        
+        .btn-download {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-size: 1rem;
+        }
+        
+        .btn-share-social:hover,
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            filter: brightness(1.1);
+        }
+        
+        .btn-back:hover {
+            background: #e9ecef;
+        }
+        
+        .error-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+        
+        .error-state i {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ef4444;
+        }
+        
+        .error-state h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .download-info {
+            background: var(--primary-light);
+            padding: 1.25rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            text-align: right;
+            border-right: 4px solid var(--primary);
+            color: var(--text-primary);
+        }
+        
+        .download-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+        
+        .loading-state i {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .app-features {
+            margin: 1.5rem 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .feature-list i {
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .app-meta {
+            display: flex;
+            gap: 0.0rem;
+            margin-top: 0.15rem;
+            padding-top: 0.5rem;
+            border-top: 0px solid var(--border);
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        /* إخفاء أقسام المشاركة بشكل افتراضي */
+        .share-section {
+            display: none;
+        }
+
+        /* التصميم المتجاوب */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .main-content {
+                padding: 4rem 1rem 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .categories-scroll {
+                gap: 0.5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                margin: 0 -1rem;
+            }
+
+            .category-filter {
+                padding: 0.75rem 1rem;
+                min-width: 70px;
+            }
+
+            .category-filter i {
+                font-size: 1.25rem;
+            }
+
+            .category-filter span {
+                font-size: 0.75rem;
+            }
+            
+            .apps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ads-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-nav-container {
+                padding: 0 0.5rem;
+            }
+            
+            .bottom-nav-item {
+                min-width: clamp(2.5rem, 12vw, 3.5rem);
+                padding: 0.3rem;
+            }
+            
+            .bottom-nav-item i {
+                font-size: clamp(0.9rem, 3.5vw, 1.3rem);
+            }
+            
+            .bottom-nav-item span {
+                font-size: clamp(0.55rem, 2vw, 0.75rem);
+            }
+            
+            .app-icon, .share-app-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .app-header {
+                gap: 0.8rem;
+            }
+            
+            .section-tabs {
+                gap: 0.5rem;
+            }
+            
+            .section-tab {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .app-actions {
+                flex-direction: column;
+            }
+            
+            .download-btn, .share-btn {
+                width: 100%;
+            }
+            
+            .app-share-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem;
+            }
+            
+            .share-actions {
+                flex-direction: column;
+            }
+            
+            .btn-share-social, .btn-download {
+                width: 100%;
+            }
+            
+            .share-stats {
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+           
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            
+            .categories-scroll {
+                gap: 0.4rem;
+            }
+
+            .category-filter {
+                padding: 0.6rem 0.8rem;
+                min-width: 65px;
+            }
+
+            .category-filter i {
+                font-size: 1.1rem;
+            }
+
+            .category-filter span {
+                font-size: 0.7rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+            
+            .search-modal {
+                margin: 10% auto;
+            }
+            
+            .app-icon, .share-app-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .app-header {
+                gap: 0.6rem;
+            }
+            
+            .app-info h4 {
+                font-size: 1rem;
+            }
+            
+            .section-tabs {
+                flex-direction: column;
+            }
+            
+            .section-tab {
+                justify-content: center;
+            }
+            
+            .app-actions {
+                gap: 0.3rem;
+            }
+            
+            .download-btn, .share-btn, .delete-btn {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+                min-height: 32px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .app-icon, .share-app-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+            }
+            
+            .bottom-nav-item i {
+                font-size: 1.4rem;
+            }
+            
+            .bottom-nav-item span {
+                font-size: 0.85rem;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <nav class="top-navbar">
+        <div class="nav-container">
+            <div class="logo-section">
+                <h1 class="logo"><i class="fab fa-google-play"></i> وسـيـل بلاي</h1>
+            </div>
+            <div class="nav-actions">
+                <div class="search-icon-top" id="searchIconTop">
+                    <i class="fas fa-search"></i>
+                </div>
+                <button id="loginBtn" class="icon-btn">
+                    <span class="icon-w">W</span>
+                </button>
+                <button id="logoutBtn" class="btn-logout" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- قسم الهيرو -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">اكتشف عالم التطبيقات</h1>
+                <p class="hero-subtitle">احصل على أفضل التطبيقات المدفوعة من وسيل ستور مجانا </p>
+            </div>
+        </section>
+
+        <!-- شريط تصفية الفئات -->
+        <section class="categories-section">
+            <div class="categories-scroll-container">
+                <div class="categories-scroll">
+                    <button class="category-filter active" data-category="all" onclick="filterApps('all')">
+                        <i class="fas fa-th-large"></i>
+                        <span>الكل</span>
+                    </button>
+                    <button class="category-filter" data-category="games" onclick="filterApps('games')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>الألعاب</span>
+                    </button>
+                    <button class="category-filter" data-category="social" onclick="filterApps('social')">
+                        <i class="fas fa-comments"></i>
+                        <span>التواصل</span>
+                    </button>
+                    <button class="category-filter" data-category="entertainment" onclick="filterApps('entertainment')">
+                        <i class="fas fa-film"></i>
+                        <span>الترفيه</span>
+                    </button>
+                    <button class="category-filter" data-category="productivity" onclick="filterApps('productivity')">
+                        <i class="fas fa-briefcase"></i>
+                        <span>فتوغرافي</span>
+                    </button>
+                    <button class="category-filter" data-category="education" onclick="filterApps('education')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>الذكاء الاصطناعي</span>
+                    </button>
+                    <button class="category-filter" data-category="utility" onclick="filterApps('utility')">
+                        <i class="fas fa-tools"></i>
+                        <span>الأدوات</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- جميع التطبيقات -->
+        <section class="all-apps-section">
+            <div class="section-header">
+                <h2 class="section-title">كل التطبيقات</h2>
+            </div>
+            <div id="apps-list" class="apps-grid">
+                <div class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>جاري تحميل التطبيقات...</p>
+                </div>
+            </div>
+            <div id="load-more-container" class="load-more-container" style="display: none;">
+                <button id="loadMoreBtn" class="load-more-btn">
+                    <i class="fas fa-chevron-down"></i>
+                    عرض المزيد من التطبيقات
+                </button>
+            </div>
+        </section>
+
+        <!-- أقسام خاصة -->
+        <section class="special-sections">
+            <div class="section-tabs">
+                <button class="section-tab" data-section="featured" onclick="displaySpecialSection('featured')">
+                    <i class="fas fa-star"></i>
+                    <span>مقترحة لك</span>
+                </button>
+                <button class="section-tab" data-section="trending" onclick="displaySpecialSection('trending')">
+                    <i class="fas fa-fire"></i>
+                    <span>الأكثر رواجاً</span>
+                </button>
+                <button class="section-tab" data-section="top" onclick="displaySpecialSection('top')">
+                    <i class="fas fa-crown"></i>
+                    <span>التطبيقات المميزة</span>
+                </button>
+            </div>
+            
+            <div id="featured-section" class="special-section-content" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">مقترحة لك</h2>
+                </div>
+                <div id="featured-apps" class="apps-grid">
+                    <!-- سيتم تعبئة التطبيقات المميزة هنا -->
+                </div>
+            </div>
+            
+            <div id="trending-section" class="special-section-content" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">الأكثر رواجاً</h2>
+                </div>
+                <div id="trending-apps" class="apps-grid">
+                    <!-- سيتم تعبئة التطبيقات الشائعة هنا -->
+                </div>
+            </div>
+            
+            <div id="top-section" class="special-section-content" style="display: none;">
+                <div class="section-header">
+                    <h2 class="section-title">التطبيقات المميزة</h2>
+                </div>
+                <div id="top-apps" class="apps-grid">
+                    <!-- سيتم تعبئة التطبيقات المميزة هنا -->
+                </div>
+            </div>
+        </section>
+
+        <!-- إعلانات مقترحة -->
+        <section class="ads-section">
+            <div class="section-header">
+                <h2 class="section-title">إعلانات مقترحة لك</h2>
+            </div>
+            <div class="ads-grid">
+                <div class="ad-card">
+                    <div class="ad-badge">2025</div>
+                    <h3>التدريبات المنزلية - بدون معدات</h3>
+                    <p>احصل على جسم مثالي من منزلك</p>
+                </div>
+                <div class="ad-card">
+                    <div class="ad-badge">جديد</div>
+                    <h3>دورات تعليمية مجانية</h3>
+                    <p>طور مهاراتك مع أفضل المدربين</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المشاركة (مخفي بشكل افتراضي) -->
+        <section id="shareSection" class="share-section">
+            <div class="share-container">
+                <div class="share-card">
+                    <div id="shareContent">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>جاري تحميل معلومات التطبيق...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الشريط السفلي -->
+    <nav class="bottom-navbar">
+        <div class="bottom-nav-container">
+            <a href="#games" class="bottom-nav-item active">
+                <i class="fas fa-gamepad"></i>
+                <span>الألعاب</span>
+            </a>
+            <a href="#apps" class="bottom-nav-item">
+                <i class="fas fa-th-large"></i>
+                <span>التطبيقات</span>
+            </a>
+            <a href="#search" class="bottom-nav-item" id="bottomSearchBtn">
+                <i class="fas fa-search"></i>
+                <span>بحث</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- شريط البحث المنبثق -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content search-modal">
+            <span class="close">&times;</span>
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="ابحث عن التطبيقات...">
+                    <button class="search-btn" onclick="performSearch()">بحث</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج تسجيل الدخول -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" id="loginEmail" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+            </form>
+            <div id="loginMessage"></div>
+            
+            <div class="test-credentials">
+                <h4><i class="fas fa-info-circle"></i> بيانات الاختبار:</h4>
+                <p><strong>البريد الإلكتروني:</strong> </p>
+                <p><strong>كلمة المرور:</strong> </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================
+        // Firebase Configuration
+        // ================================
+        console.log("تحميل إعدادات Firebase...");
+
+        // إعدادات Firebase الخاصة بمشروعك
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6h-oOG7xteSiJt2jDpSyGitiPp0aDimI",
+            authDomain: "wacelmarkt.firebaseapp.com",
+            projectId: "wacelmarkt",
+            storageBucket: "wacelmarkt.firebasestorage.app",
+            messagingSenderId: "662446208797",
+            appId: "1:662446208797:web:a3cc83551d42761e4753f4"
+        };
+
+        // التحقق من تحميل Firebase SDK
+        if (typeof firebase === 'undefined') {
+            console.error("Firebase SDK لم يتم تحميله بشكل صحيح");
+        } else {
+            console.log("Firebase SDK محمل بنجاح");
+        }
+
+        // تهيئة Firebase
+        let app, db, auth;
+
+        try {
+            app = firebase.initializeApp(firebaseConfig);
+            db = firebase.firestore();
+            auth = firebase.auth();
+            console.log("تم تهيئة Firebase بنجاح");
+        } catch (error) {
+            console.error("خطأ في تهيئة Firebase:", error);
+            // استخدام قيم افتراضية للاختبار
+            app = { name: "[DEFAULT]" };
+            db = {
+                collection: () => ({ 
+                    get: () => Promise.resolve({ empty: true, forEach: () => {} }),
+                    add: () => Promise.resolve({ id: 'test-id' })
+                }),
+                doc: () => ({ 
+                    get: () => Promise.resolve({ exists: false, data: () => null }),
+                    delete: () => Promise.resolve(),
+                    update: () => Promise.resolve()
+                })
+            };
+            auth = {
+                signInWithEmailAndPassword: () => Promise.reject({ code: 'auth/not-supported' }),
+                signOut: () => Promise.resolve(),
+                onAuthStateChanged: () => () => {}
+            };
+        }
+
+        // جعل المتغيرات متاحة عالمياً
+        window.firebaseApp = app;
+        window.firebaseDb = db;
+        window.firebaseAuth = auth;
+
+        console.log("تم تحميل إعدادات Firebase بنجاح");
+
+        // ================================
+        // Authentication System
+        // ================================
+        console.log("تحميل نظام المصادقة...");
+
+        // عناصر واجهة المستخدم
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+
+        // فتح نافذة تسجيل الدخول
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => {
+                if (loginModal) loginModal.style.display = 'block';
+            });
+        }
+
+        // إغلاق نافذة تسجيل الدخول
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                if (modal) modal.style.display = 'none';
+            });
+        });
+
+        // إغلاق النافذة عند النقر خارجها
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // تسجيل الدخول
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                const message = document.getElementById('loginMessage');
+                
+                try {
+                    console.log("محاولة تسجيل الدخول بـ:", email);
+                    
+                    // بيانات الاختبار
+                    if (email === 'admin@wacelmarkt.com' && password === 'Admin123456') {
+                        console.log("تم تسجيل الدخول بنجاح (اختبار)");
+                        
+                        // حفظ بيانات المستخدم في localStorage
+                        localStorage.setItem('user', JSON.stringify({
+                            uid: 'test-user-id',
+                            email: email
+                        }));
+                        
+                        localStorage.setItem('isAdmin', 'true');
+                        
+                        if (message) {
+                            message.textContent = 'تم تسجيل الدخول بنجاح!';
+                            message.style.color = 'green';
+                        }
+                        
+                        // تحديث واجهة المستخدم
+                        updateAuthUI(true);
+                        
+                        // إغلاق النافذة بعد ثانية
+                        setTimeout(() => {
+                            if (loginModal) loginModal.style.display = 'none';
+                            if (loginForm) loginForm.reset();
+                            
+                            // إظهار رابط لوحة التحكم
+                            showAdminLink();
+                        }, 1000);
+                        
+                    } else {
+                        // محاولة تسجيل الدخول عبر Firebase
+                        if (window.firebaseAuth) {
+                            const userCredential = await firebaseAuth.signInWithEmailAndPassword(email, password);
+                            const user = userCredential.user;
+                            
+                            console.log("تم تسجيل الدخول بنجاح:", user.email);
+                            
+                            // حفظ بيانات المستخدم في localStorage
+                            localStorage.setItem('user', JSON.stringify({
+                                uid: user.uid,
+                                email: user.email
+                            }));
+                            
+                            localStorage.setItem('isAdmin', 'true');
+                            
+                            if (message) {
+                                message.textContent = 'تم تسجيل الدخول بنجاح!';
+                                message.style.color = 'green';
+                            }
+                            
+                            // تحديث واجهة المستخدم
+                            updateAuthUI(true);
+                            
+                            // إغلاق النافذة بعد ثانية
+                            setTimeout(() => {
+                                if (loginModal) loginModal.style.display = 'none';
+                                if (loginForm) loginForm.reset();
+                                
+                                // إظهار رابط لوحة التحكم
+                                showAdminLink();
+                            }, 1000);
+                        } else {
+                            throw new Error('بيانات الدخول غير صحيحة أو Firebase غير متوفر');
+                        }
+                    }
+                    
+                } catch (error) {
+                    console.error("خطأ في تسجيل الدخول:", error);
+                    if (message) {
+                        message.textContent = getAuthErrorMessage(error.code || error.message);
+                        message.style.color = 'red';
+                    }
+                }
+            });
+        }
+
+        // تسجيل الخروج
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
+                try {
+                    if (window.firebaseAuth) {
+                        await firebaseAuth.signOut();
+                    }
+                    
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isAdmin');
+                    updateAuthUI(false);
+                    hideAdminLink();
+                } catch (error) {
+                    console.error("Error signing out:", error);
+                }
+            });
+        }
+
+        // تحديث واجهة المستخدم بناءً على حالة المصادقة
+        function updateAuthUI(isLoggedIn) {
+            if (loginBtn && logoutBtn) {
+                if (isLoggedIn) {
+                    loginBtn.style.display = 'none';
+                    logoutBtn.style.display = 'block';
+                } else {
+                    loginBtn.style.display = 'block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+        }
+
+        // إظهار رابط لوحة التحكم للمستخدمين المسجلين
+        function showAdminLink() {
+            let adminLink = document.querySelector('a[href="admin.html"]');
+            if (!adminLink) {
+                // إنشاء رابط لوحة التحكم إذا لم يكن موجوداً
+                const navActions = document.querySelector('.nav-actions');
+                if (navActions) {
+                    adminLink = document.createElement('a');
+                    adminLink.href = '#';
+                    adminLink.textContent = 'لوحة التحكم';
+                    adminLink.style.marginRight = '15px';
+                    adminLink.style.padding = '8px 16px';
+                    adminLink.style.background = 'var(--gradient-primary)';
+                    adminLink.style.color = 'white';
+                    adminLink.style.borderRadius = '20px';
+                    adminLink.style.textDecoration = 'none';
+                    adminLink.style.fontWeight = '500';
+                    adminLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showAdminPanel();
+                    });
+                    navActions.insertBefore(adminLink, loginBtn);
+                }
+            }
+        }
+
+        // إخفاء رابط لوحة التحكم
+        function hideAdminLink() {
+            const adminLink = document.querySelector('a[href="#"]');
+            if (adminLink && adminLink.textContent === 'لوحة التحكم') {
+                adminLink.remove();
+            }
+        }
+
+        // الحصول على رسالة الخطأ
+        function getAuthErrorMessage(errorCode) {
+            const errorMessages = {
+                'auth/invalid-email': 'البريد الإلكتروني غير صالح',
+                'auth/user-disabled': 'هذا الحساب معطل',
+                'auth/user-not-found': 'لم يتم العثور على حساب بهذا البريد',
+                'auth/wrong-password': 'كلمة المرور غير صحيحة',
+                'auth/too-many-requests': 'محاولات تسجيل دخول كثيرة، حاول لاحقاً',
+                'auth/network-request-failed': 'خطأ في الاتصال بالشبكة'
+            };
+            return errorMessages[errorCode] || 'حدث خطأ غير متوقع: ' + errorCode;
+        }
+
+        // التحقق من حالة المصادقة عند تحميل الصفحة
+        function checkAuthState() {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            const isAdmin = localStorage.getItem('isAdmin');
+            
+            if (user && isAdmin) {
+                updateAuthUI(true);
+                showAdminLink();
+                console.log("المستخدم مسجل دخول:", user.email);
+            } else {
+                updateAuthUI(false);
+                hideAdminLink();
+                console.log("لا يوجد مستخدم مسجل");
+            }
+        }
+
+        // مراقبة تغييرات حالة المصادقة (لـ Firebase فقط)
+        if (window.firebaseAuth) {
+            firebaseAuth.onAuthStateChanged((user) => {
+                if (user) {
+                    console.log("تغيير حالة المصادقة: مستخدم مسجل", user.email);
+                    localStorage.setItem('user', JSON.stringify({
+                        uid: user.uid,
+                        email: user.email
+                    }));
+                    localStorage.setItem('isAdmin', 'true');
+                    updateAuthUI(true);
+                    showAdminLink();
+                } else {
+                    console.log("تغيير حالة المصادقة: لا يوجد مستخدم");
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isAdmin');
+                    updateAuthUI(false);
+                    hideAdminLink();
+                }
+            });
+        }
+
+        // ================================
+        // Main App Store Functionality
+        // ================================
+        console.log("تحميل تطبيق المتجر...");
+
+        let allApps = [];
+        let currentFilter = 'all';
+        let visibleAppsCount = 5;
+        let currentDisplayedApps = [];
+
+        // بيانات تجريبية للاختبار
+        const sampleApps = [
+            {
+                id: '1',
+                name: 'تطبيق التواصل الاجتماعي',
+                description: 'تطبيق رائع للتواصل مع الأصدقاء والعائلة مع ميزات متقدمة مثل المراسلة الفورية ومشاركة الصور والفيديو والمحادثات الجماعية. يدعم اللغة العربية بشكل كامل ويتوافق مع جميع الأجهزة.',
+                version: '1.0.0',
+                size: '25',
+                category: 'social',
+                downloadURL: 'https://example.com/app1.zip',
+                rating: 4.5,
+                downloads: 1500,
+                featured: true,
+                trending: true,
+                shareCount: 45,
+                iconURL: '',
+                createdAt: new Date('2024-03-15').toISOString(),
+                updatedAt: new Date('2024-03-15').toISOString()
+            },
+            {
+                id: '2',
+                name: 'تطبيق الألعاب',
+                description: 'ألعاب مسلية ومثيرة للجميع تحتوي على أكثر من 100 لعبة مختلفة. يشمل ألعاب الذكاء والألغاز والرياضة والسباقات. مناسب لجميع الأعمال مع واجهة مستخدم بديهية وسهلة الاستخدام.',
+                version: '2.1.0',
+                size: '45',
+                category: 'games',
+                downloadURL: 'https://example.com/app2.zip',
+                rating: 4.2,
+                downloads: 2300,
+                trending: true,
+                shareCount: 67,
+                iconURL: '',
+                createdAt: new Date('2024-03-14').toISOString(),
+                updatedAt: new Date('2024-03-14').toISOString()
+            },
+            {
+                id: '3',
+                name: 'تطبيق الموسيقى',
+                description: 'استمع إلى ملايين الأغاني والموسيقى من جميع أنحاء العالم. يدعم جميع الأنواع الموسيقية ويوفر تجربة استماع فريدة مع جودة صوت عالية.',
+                version: '1.5.0',
+                size: '35',
+                category: 'entertainment',
+                downloadURL: 'https://example.com/app3.zip',
+                rating: 4.7,
+                downloads: 3200,
+                featured: true,
+                shareCount: 89,
+                iconURL: '',
+                createdAt: new Date('2024-03-13').toISOString(),
+                updatedAt: new Date('2024-03-13').toISOString()
+            }
+        ];
+
+        // تنسيق التاريخ والوقت للعرض
+        function formatDateTime(dateString) {
+            if (!dateString) return 'غير محدد';
+            try {
+                const date = new Date(dateString);
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    calendar: 'gregory'
+                };
+                return date.toLocaleDateString('ar-SA', options);
+            } catch (error) {
+                return 'غير محدد';
+            }
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'غير محدد';
+            try {
+                const date = new Date(dateString);
+                const options = { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    calendar: 'gregory'
+                };
+                return date.toLocaleDateString('ar-SA', options);
+            } catch (error) {
+                return 'غير محدد';
+            }
+        }
+
+        // إنشاء رابط المشاركة
+        function generateShareLink(appId) {
+            const baseUrl = window.location.origin + window.location.pathname;
+            return `${baseUrl}?share=${appId}`;
+        }
+
+        // الانتقال إلى صفحة المشاركة
+        function goToSharePage(appId) {
+            showSharePage(appId);
+        }
+
+        // عرض صفحة المشاركة
+        function showSharePage(appId) {
+            // إخفاء الأقسام الرئيسية
+            document.querySelector('.hero-section').style.display = 'none';
+            document.querySelector('.categories-section').style.display = 'none';
+            document.querySelector('.all-apps-section').style.display = 'none';
+            document.querySelector('.special-sections').style.display = 'none';
+            document.querySelector('.ads-section').style.display = 'none';
+            
+            // إظهار قسم المشاركة
+            document.getElementById('shareSection').style.display = 'block';
+            
+            // تحميل معلومات التطبيق وعرضها
+            loadSharedApp(appId);
+        }
+
+        // العودة إلى الصفحة الرئيسية
+        function goToHome() {
+            // إخفاء قسم المشاركة
+            document.getElementById('shareSection').style.display = 'none';
+            
+            // إظهار الأقسام الرئيسية
+            document.querySelector('.hero-section').style.display = 'block';
+            document.querySelector('.categories-section').style.display = 'block';
+            document.querySelector('.all-apps-section').style.display = 'block';
+            document.querySelector('.special-sections').style.display = 'block';
+            document.querySelector('.ads-section').style.display = 'block';
+        }
+
+        // مشاركة التطبيق
+        async function shareApp(appId, appName) {
+            // الانتقال إلى صفحة المشاركة بدلاً من المشاركة المباشرة
+            goToSharePage(appId);
+        }
+
+        // تحميل التطبيقات من Firebase أو استخدام البيانات التجريبية
+        async function loadApps() {
+            try {
+                console.log("بدء تحميل التطبيقات...");
+                
+                const appsContainer = document.getElementById('apps-list');
+                if (appsContainer) {
+                    appsContainer.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i><p>جاري تحميل التطبيقات...</p></div>';
+                }
+
+                // محاولة التحميل من Firebase
+                if (window.firebaseDb) {
+                    const querySnapshot = await firebaseDb.collection("apps").get();
+                    allApps = [];
+                    
+                    if (!querySnapshot.empty) {
+                        querySnapshot.forEach((doc) => {
+                            allApps.push({
+                                id: doc.id,
+                                ...doc.data()
+                            });
+                        });
+                        console.log("تم تحميل التطبيقات من Firebase:", allApps.length);
+                    } else {
+                        allApps = sampleApps;
+                        console.log("تم استخدام البيانات التجريبية:", allApps.length);
+                    }
+                } else {
+                    allApps = sampleApps;
+                    console.log("استخدام البيانات التجريبية (Firebase غير متوفر):", allApps.length);
+                }
+                
+                // الترتيب: المميزة أولاً، ثم الشائعة، ثم المحدثة حديثاً
+                allApps.sort((a, b) => {
+                    if (a.featured && !b.featured) return -1;
+                    if (!a.featured && b.featured) return 1;
+                    
+                    if (a.trending && !b.trending) return -1;
+                    if (!a.trending && b.trending) return 1;
+                    
+                    const aDate = a.updatedAt || a.createdAt;
+                    const bDate = b.updatedAt || b.createdAt;
+                    return new Date(bDate) - new Date(aDate);
+                });
+                
+                displayApps(allApps.slice(0, visibleAppsCount));
+                setupLoadMoreButton();
+                
+            } catch (error) {
+                console.error("خطأ في تحميل التطبيقات:", error);
+                
+                allApps = sampleApps;
+                allApps.sort((a, b) => {
+                    if (a.featured && !b.featured) return -1;
+                    if (!a.featured && b.featured) return 1;
+                    
+                    if (a.trending && !b.trending) return -1;
+                    if (!a.trending && b.trending) return 1;
+                    
+                    const aDate = a.updatedAt || a.createdAt;
+                    const bDate = b.updatedAt || b.createdAt;
+                    return new Date(bDate) - new Date(aDate);
+                });
+                
+                displayApps(allApps.slice(0, visibleAppsCount));
+                setupLoadMoreButton();
+                
+                const appsContainer = document.getElementById('apps-list');
+                if (appsContainer) {
+                    appsContainer.innerHTML = `
+                        <div class="error-state">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>تم تحميل بيانات تجريبية للعرض</p>
+                            <small>${error.message}</small>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // عرض التطبيقات الرئيسية
+        function displayApps(apps) {
+            const appsContainer = document.getElementById('apps-list');
+            currentDisplayedApps = apps;
+            
+            if (!appsContainer) {
+                console.error("لم يتم العثور على عنصر apps-list");
+                return;
+            }
+            
+            if (apps.length === 0) {
+                appsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-box-open"></i><p>لا توجد تطبيقات متاحة</p></div>';
+                return;
+            }
+            
+            let html = '';
+            apps.forEach((app) => {
+                html += createAppCard(app);
+            });
+            
+            appsContainer.innerHTML = html;
+            setupDescriptionToggle();
+            
+            console.log("تم عرض التطبيقات الرئيسية:", apps.length);
+        }
+
+        // إنشاء بطاقة تطبيق
+        function createAppCard(app) {
+            const iconClass = getAppIcon(app.category);
+            const ratingStars = generateRatingStars(app.rating);
+            
+            const appIcon = app.iconURL 
+                ? `<div class="app-icon"><img src="${app.iconURL}" alt="${app.name}" onerror="this.style.display='none'; this.parentNode.innerHTML='<i class=\\'${iconClass}\\'></i>'"></div>`
+                : `<div class="app-icon"><i class="${iconClass}"></i></div>`;
+            
+            return `
+                <div class="app-card" data-category="${app.category}" data-id="${app.id}" onclick="goToSharePage('${app.id}')" style="cursor: pointer;">
+                    <div class="app-header">
+                        ${appIcon}
+                        <div class="app-info">
+                            <h4>${app.name}</h4>
+                            <div class="app-category">${getCategoryName(app.category)}</div>
+                        </div>
+                    </div>
+                    <div class="app-description-container">
+                        <p class="app-description">${app.description}</p>
+                        ${app.description && app.description.length > 100 ? '<span class="show-more">عرض المزيد</span>' : ''}
+                    </div>
+                    <div class="app-meta">
+                        <div class="app-version">الإصدار: ${app.version}</div>
+                        <div class="app-size">${app.size} MB</div>
+                    </div>
+                    <div class="app-meta">
+                        <div class="app-rating">
+                            ${ratingStars}
+                            <span>${app.rating || 'غير مقيم'}</span>
+                        </div>
+                        <div class="app-downloads">${app.downloads || 0} تنزيل</div>
+                    </div>
+                    <div class="app-date-info">
+                        <div class="date-item">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>أضيف في: ${formatDate(app.createdAt)}</span>
+                        </div>
+                    </div>
+                    ${app.featured ? '<div class="featured-badge">⭐ مميز</div>' : ''}
+                    ${app.trending ? '<div class="trending-badge">🔥 شائع</div>' : ''}
+                    <div class="app-actions">
+                        <button class="download-btn" onclick="downloadApp('${app.downloadURL}', '${app.id}'); event.stopPropagation()">
+                            <i class="fas fa-download"></i>
+                            تحميل
+                        </button>
+                        <button class="share-btn" onclick="goToSharePage('${app.id}'); event.stopPropagation()">
+                            <i class="fas fa-share-alt"></i>                     مشاركة                 </button>
+                        ${isAdmin() ? `
+                            <button class="delete-btn" onclick="deleteApp('${app.id}'); event.stopPropagation()">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // إعداد زر "عرض المزيد"
+        function setupLoadMoreButton() {
+            const loadMoreContainer = document.getElementById('load-more-container');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            if (allApps.length > visibleAppsCount) {
+                if (loadMoreContainer) loadMoreContainer.style.display = 'block';
+                if (loadMoreBtn) loadMoreBtn.onclick = showMoreApps;
+            } else {
+                if (loadMoreContainer) loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        // عرض المزيد من التطبيقات
+        function showMoreApps() {
+            visibleAppsCount += 5;
+            const appsToShow = currentFilter === 'all' 
+                ? allApps.slice(0, visibleAppsCount)
+                : allApps.filter(app => app.category === currentFilter).slice(0, visibleAppsCount);
+            
+            displayApps(appsToShow);
+            setupLoadMoreButton();
+        }
+
+        // تحديث العرض الحالي
+        function updateCurrentDisplay() {
+            if (currentDisplayedApps.length > 0) {
+                displayApps(currentDisplayedApps);
+            }
+        }
+
+        // إضافة مستمعات الأحداث لعرض المزيد
+        function setupDescriptionToggle() {
+            document.querySelectorAll('.show-more').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const description = this.previousElementSibling;
+                    if (description.classList.contains('expanded')) {
+                        description.classList.remove('expanded');
+                        this.textContent = 'عرض المزيد';
+                    } else {
+                        description.classList.add('expanded');
+                        this.textContent = 'عرض أقل';
+                    }
+                });
+            });
+        }
+
+        // توليد نجوم التقييم
+        function generateRatingStars(rating) {
+            if (!rating) return '<span style="color: var(--text-light);">غير مقيم</span>';
+            
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+            
+            let stars = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            
+            if (halfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // الحصول على أيقونة التطبيق حسب التصنيف
+        function getAppIcon(category) {
+            const icons = {
+                'games': 'fas fa-gamepad',
+                'social': 'fas fa-comments',
+                'entertainment': 'fas fa-film',
+                'productivity': 'fas fa-briefcase',
+                'education': 'fas fa-graduation-cap',
+                'utility': 'fas fa-tools'
+            };
+            return icons[category] || 'fas fa-mobile-alt';
+        }
+
+        // الحصول على اسم التصنيف
+        function getCategoryName(category) {
+            const categories = {
+                'games': 'الألعاب',
+                'social': 'التواصل الاجتماعي',
+                'entertainment': 'الترفيه',
+                'productivity': 'فتوغرافي',
+                'education': 'الذكاء الاصطناعي',
+                'utility': 'الأدوات'
+            };
+            return categories[category] || category;
+        }
+
+        // تصفية التطبيقات حسب الفئة
+        function filterApps(category) {
+            console.log("تصفية التطبيقات حسب الفئة:", category);
+            
+            currentFilter = category;
+            visibleAppsCount = 5;
+            
+            document.querySelectorAll('.category-filter').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const filteredApps = category === 'all' 
+                ? allApps 
+                : allApps.filter(app => app.category === category);
+            
+            displayApps(filteredApps.slice(0, visibleAppsCount));
+            setupLoadMoreButton();
+            
+            const appsList = document.getElementById('apps-list');
+            if (appsList) {
+                appsList.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // البحث في التطبيقات
+        function searchApps() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            console.log("الببحث عن:", searchTerm);
+            
+            const searchModal = document.getElementById('searchModal');
+            if (searchModal) {
+                searchModal.style.display = 'none';
+            }
+            
+            if (!searchTerm) {
+                visibleAppsCount = 5;
+                displayApps(allApps.slice(0, visibleAppsCount));
+                setupLoadMoreButton();
+                return;
+            }
+            
+            const filteredApps = allApps.filter(app => 
+                app.name.toLowerCase().includes(searchTerm) ||
+                app.description.toLowerCase().includes(searchTerm) ||
+                getCategoryName(app.category).toLowerCase().includes(searchTerm)
+            );
+            
+            visibleAppsCount = filteredApps.length;
+            displayApps(filteredApps);
+            setupLoadMoreButton();
+            
+            const appsContainer = document.getElementById('apps-list');
+            if (appsContainer && filteredApps.length > 0) {
+                const resultsHeader = document.createElement('div');
+                resultsHeader.className = 'search-results-header';
+                resultsHeader.innerHTML = `<p>عرض ${filteredApps.length} نتيجة للبحث عن: "${searchTerm}"</p>`;
+                appsContainer.insertBefore(resultsHeader, appsContainer.firstChild);
+            }
+        }
+
+        // البحث المباشر (عند الضغط على Enter)
+        function performSearch() {
+            searchApps();
+        }
+
+        // تحميل التطبيق
+        function downloadApp(downloadURL, appId) {
+            console.log("تحميل التطبيق:", appId);
+            
+            const app = allApps.find(app => app.id === appId);
+            if (app) {
+                app.downloads = (app.downloads || 0) + 1;
+                updateCurrentDisplay();
+            }
+            
+            if (downloadURL && downloadURL !== 'https://example.com/app1.zip') {
+                window.open(downloadURL, '_blank');
+            } else {
+                alert('هذا رابط تجريبي. في التطبيق الحقيقي، سيبدأ التحميل.');
+            }
+            
+            showTempMessage('جاري تحميل التطبيق...', 'success');
+        }
+
+        // حذف التطبيق (للمسؤول فقط)
+        async function deleteApp(appId) {
+            if (!confirm('هل أنت متأكد من حذف هذا التطبيق؟')) return;
+            
+            try {
+                console.log("جاري حذف التطبيق:", appId);
+                
+                const app = allApps.find(app => app.id === appId);
+                if (app && window.firebaseDb && !sampleApps.some(sample => sample.id === appId)) {
+                    await firebaseDb.doc(`apps/${appId}`).delete();
+                }
+                
+                allApps = allApps.filter(app => app.id !== appId);
+                currentDisplayedApps = currentDisplayedApps.filter(app => app.id !== appId);
+                
+                displayApps(currentDisplayedApps);
+                setupLoadMoreButton();
+                
+                showTempMessage('تم حذف التطبيق بنجاح', 'success');
+                
+            } catch (error) {
+                console.error("خطأ في حذف التطبيق:", error);
+                showTempMessage('خطأ في حذف التطبيق', 'error');
+            }
+        }
+
+        // التحقق إذا كان المستخدم مسؤولاً
+        function isAdmin() {
+            return localStorage.getItem('isAdmin') === 'true';
+        }
+
+        // عرض رسالة مؤقتة
+        function showTempMessage(text, type) {
+            // إزالة أي رسائل سابقة
+            const existingMessages = document.querySelectorAll('.temp-message');
+            existingMessages.forEach(msg => msg.remove());
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `temp-message ${type}`;
+            messageDiv.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
+                <span>${text}</span>
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // عرض الأقسام الخاصة
+        function displaySpecialSection(section) {
+            document.querySelectorAll('.special-section-content').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`.section-tab[data-section="${section}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+            
+            const sectionElement = document.getElementById(`${section}-section`);
+            if (sectionElement) {
+                sectionElement.style.display = 'block';
+                
+                let specialApps = [];
+                
+                switch(section) {
+                    case 'featured':
+                        specialApps = allApps.filter(app => app.featured);
+                        break;
+                    case 'trending':
+                        specialApps = allApps.filter(app => app.trending);
+                        break;
+                    case 'top':
+                        specialApps = allApps.filter(app => app.rating >= 4.5);
+                        break;
+                }
+                
+                const appsContainer = document.getElementById(`${section}-apps`);
+                if (appsContainer) {
+                    if (specialApps.length === 0) {
+                        appsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-star"></i><p>لا توجد تطبيقات في هذا القسم</p></div>';
+                    } else {
+                        let html = '';
+                        specialApps.forEach((app) => {
+                            html += createAppCard(app);
+                        });
+                        appsContainer.innerHTML = html;
+                        setupDescriptionToggle();
+                    }
+                }
+                
+                sectionElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // إعداد التنقل في الشريط السفلي
+        function setupBottomNavigation() {
+            const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+            
+            bottomNavItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    bottomNavItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const target = this.getAttribute('href');
+                    console.log("النقر على:", target);
+                    
+                    switch(target) {
+                        case '#games':
+                            filterApps('games');
+                            break;
+                        case '#apps':
+                            filterApps('all');
+                            break;
+                        case '#search':
+                            document.getElementById('searchModal').style.display = 'block';
+                            break;
+                    }
+                });
+            });
+        }
+
+        // إعداد أحداث الفئات للشريط الأفقي
+        function setupCategoryEvents() {
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        // إعداد أزرار الأقسام الخاصة
+        function setupSectionTabs() {
+            const sectionTabs = document.querySelectorAll('.section-tab');
+            
+            sectionTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    displaySpecialSection(section);
+                });
+            });
+        }
+
+        // ================================
+        // Share Page Functionality - FIXED
+        // ================================
+        let currentApp = null;
+
+        // تحميل التطبيق من Firebase - الإصدار المصحح
+        async function loadSharedApp(appId) {
+            try {
+                if (!appId) {
+                    throw new Error('لم يتم تحديد تطبيق للمشاركة');
+                }
+                
+                console.log("جاري تحميل التطبيق:", appId);
+                
+                // البحث عن التطبيق في البيانات المحلية أولاً
+                let app = allApps.find(a => a.id === appId);
+                
+                if (app) {
+                    console.log("تم العثور على التطبيق محلياً:", app);
+                    currentApp = app;
+                    updateMetaTags(currentApp);
+                    displayShareContent(currentApp);
+                    return;
+                }
+                
+                // إذا لم يوجد محلياً، حاول التحميل من Firebase
+                if (window.firebaseDb) {
+                    console.log("جاري تحميل التطبيق من Firebase...");
+                    
+                    // استخدام Firebase SDK 8.x.x
+                    const docRef = firebaseDb.collection("apps").doc(appId);
+                    const docSnapshot = await docRef.get();
+                    
+                    if (docSnapshot.exists) {
+                        currentApp = {
+                            id: docSnapshot.id,
+                            ...docSnapshot.data()
+                        };
+                        console.log("تم تحميل التطبيق من Firebase:", currentApp);
+                        
+                        // تحديث البيانات المحلية
+                        if (!allApps.some(a => a.id === appId)) {
+                            allApps.push(currentApp);
+                        }
+                        
+                        updateMetaTags(currentApp);
+                        displayShareContent(currentApp);
+                    } else {
+                        throw new Error('التطبيق غير موجود في قاعدة البيانات');
+                    }
+                } else {
+                    throw new Error('Firebase غير متوفر');
+                }
+
+            } catch (error) {
+                console.error('Error loading shared app:', error);
+                showErrorState('عذراً، لم يتم العثور على التطبيق المطلوب.<br><small>' + error.message + '</small>');
+            }
+        }
+
+        // دالة لتحديث بيانات التعريف ديناميكياً
+        function updateMetaTags(app) {
+            if (!app) return;
+            
+            // تحديث العنوان
+            document.title = `${app.name} - تحميل مجاني | وسيل بلاي`;
+            
+            // تحديث وصف الصفحة
+            let metaDescription = document.querySelector('meta[name="description"]');
+            if (!metaDescription) {
+                metaDescription = document.createElement('meta');
+                metaDescription.name = 'description';
+                document.head.appendChild(metaDescription);
+            }
+            metaDescription.content = `${app.description} - حمّل ${app.name} مجاناً من وسيل بلاي. ${app.size}MB | الإصدار ${app.version}`;
+            
+            // تحديث Open Graph
+            updateMetaProperty('og:title', `${app.name} - وسيل بلاي`);
+            updateMetaProperty('og:description', app.description);
+            updateMetaProperty('og:url', window.location.href);
+            
+            if (app.iconURL) {
+                updateMetaProperty('og:image', app.iconURL);
+            }
+            
+            // إضافة Structured Data للتطبيق
+            addAppStructuredData(app);
+        }
+        
+        function updateMetaProperty(property, content) {
+            let meta = document.querySelector(`meta[property="${property}"]`);
+            if (!meta) {
+                meta = document.createElement('meta');
+                meta.setAttribute('property', property);
+                document.head.appendChild(meta);
+            }
+            meta.setAttribute('content', content);
+        }
+        
+        function addAppStructuredData(app) {
+            // إزالة أي Structured Data موجود مسبقاً
+            const existingSchema = document.querySelector('script[type="application/ld+json"]');
+            if (existingSchema) {
+                existingSchema.remove();
+            }
+            
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "SoftwareApplication",
+                "name": app.name,
+                "description": app.description,
+                "applicationCategory": getSchemaCategory(app.category),
+                "operatingSystem": "ANDROID",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                },
+                "author": {
+                    "@type": "Organization",
+                    "name": "وسيل بلاي"
+                },
+                "downloadUrl": app.downloadURL
+            };
+            
+            if (app.rating) {
+                schema.aggregateRating = {
+                    "@type": "AggregateRating",
+                    "ratingValue": app.rating.toString(),
+                    "ratingCount": "100"
+                };
+            }
+            
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(schema);
+            document.head.appendChild(script);
+        }
+        
+        function getSchemaCategory(category) {
+            const categories = {
+                'games': 'GameApplication',
+                'social': 'SocialNetworkingApplication',
+                'entertainment': 'EntertainmentApplication',
+                'productivity': 'BusinessApplication',
+                'education': 'EducationalApplication',
+                'utility': 'UtilityApplication'
+            };
+            return categories[category] || 'MobileApplication';
+        }
+
+        // عرض محتوى المشاركة
+        function displayShareContent(app) {
+            const shareUrl = window.location.href.split('?')[0] + `?share=${app.id}`;
+            const shareText = `اكتشف هذا التطبيق الرائع: ${app.name} - ${app.description}`;
+            
+            const appIcon = app.iconURL 
+                ? `<img src="${app.iconURL}" alt="${app.name}" loading="lazy">`
+                : `<i class="${getAppIcon(app.category)}"></i>`;
+            
+            // التحقق من وجود رابط تحميل
+            const hasDownloadLink = app.downloadURL && app.downloadURL.startsWith('http');
+            const downloadSection = hasDownloadLink ? `
+                <div class="share-actions">
+                    <button class="btn-back" onclick="goToHome()">
+                        <i class="fas fa-arrow-right"></i>
+                        العودة إلى المتجر
+                    </button>
+                    <button class="btn-download" onclick="startDownload()">
+                        <i class="fas fa-download"></i>
+                        تحميل التطبيق
+                    </button>
+                </div>
+            ` : `
+                <div class="download-info">
+                    <h4><i class="fas fa-info-circle"></i> معلومات التحميل</h4>
+                    <p>رابط التحميل غير متوفر حالياً. يرجى زيارة المتجر الرئيسي.</p>
+                </div>
+                <div class="share-actions">
+                    <button class="btn-back" onclick="goToHome()" style="width: 100%;">
+                        <i class="fas fa-arrow-right"></i>
+                        العودة إلى المتجر
+                    </button>
+                </div>
+            `;
+            
+            // إنشاء قائمة الميزات إذا كانت متوفرة
+            const featuresHtml = app.features && app.features.length > 0 ? `
+                <div class="app-features">
+                    <h3>مميزات التطبيق</h3>
+                    <ul class="feature-list">
+                        ${app.features.map(feature => `<li><i class="fas fa-check-circle"></i> ${feature}</li>`).join('')}
+                    </ul>
+                </div>
+            ` : '';
+            
+            // إنشاء معلومات إضافية عن التطبيق
+            const metaInfoHtml = `
+                <div class="app-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>${formatDate(app.createdAt)}</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-sync"></i>
+                        <span>الإصدار ${app.version || '1.0.0'}</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-hdd"></i>
+                        <span>${app.size || 'غير محدد'} MB</span>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('shareContent').innerHTML = `
+                <div class="app-share-header">
+                    <div class="share-app-icon">
+                        ${appIcon}
+                    </div>
+                    <div class="app-info">
+                        <h2>${app.name}</h2>
+                        <div class="app-category">${getCategoryName(app.category)}</div>
+                        <p class="app-description">${app.description}</p>
+                    </div>
+                </div>
+                
+                <div class="app-details">
+                    <div class="share-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">${app.downloads || 0}</div>
+                            <div class="stat-label">تنزيل</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">${app.shareCount || 0}</div>
+                            <div class="stat-label">مشاركة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">${app.rating || '--'}</div>
+                            <div class="stat-label">تقييم</div>
+                        </div>
+                    </div>
+                    
+                    ${featuresHtml}
+                    
+                    <div class="share-actions">
+                        <button class="btn-share-social btn-whatsapp" onclick="shareOnWhatsApp('${shareText}', '${shareUrl}')">
+                            <i class="fab fa-whatsapp"></i>
+                            واتساب
+                        </button>
+                        <button class="btn-share-social btn-twitter" onclick="shareOnTwitter('${shareText}', '${shareUrl}')">
+                            <i class="fab fa-twitter"></i>
+                            تويتر
+                        </button>
+                        <button class="btn-share-social btn-facebook" onclick="shareOnFacebook('${shareUrl}')">
+                            <i class="fab fa-facebook"></i>
+                            فيسبوك
+                        </button>
+                    </div>
+                    
+                    <div class="share-actions">
+                        <button class="btn-copy-link" onclick="copyShareLink('${shareUrl}')">
+                            <i class="fas fa-link"></i>
+                            نسخ رابط المشاركة
+                        </button>
+                    </div>
+                    
+                    ${downloadSection}
+                    ${metaInfoHtml}
+                </div>
+            `;
+        }
+
+        // عرض حالة الخطأ
+        function showErrorState(message) {
+            document.getElementById('shareContent').innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>لم يتم العثور على التطبيق</h3>
+                    <p>${message}</p>
+                    <div class="share-actions" style="margin-top: 2rem;">
+                        <button class="btn-back" onclick="goToHome()">
+                            <i class="fas fa-arrow-right"></i>
+                            العودة إلى المتجر
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // مشاركة على واتساب
+        function shareOnWhatsApp(text, url) {
+            const shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        // مشاركة على تويتر
+        function shareOnTwitter(text, url) {
+            const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        // مشاركة على فيسبوك
+        function shareOnFacebook(url) {
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+            window.open(shareUrl, '_blank');
+        }
+
+        // نسخ رابط المشاركة
+        function copyShareLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                showTempMessage('تم نسخ رابط المشاركة إلى الحافظة!', 'success');
+            }).catch(() => {
+                // Fallback for older browsers
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showTempMessage('تم نسخ رابط المشاركة إلى الحافظة!', 'success');
+            });
+        }
+
+        // بدء التحميل
+        async function startDownload() {
+            if (!currentApp) {
+                showTempMessage('لم يتم تحميل معلومات التطبيق', 'error');
+                return;
+            }
+
+            const downloadURL = currentApp.downloadURL;
+            
+            console.log("رابط التحميل:", downloadURL);
+            
+            if (downloadURL && downloadURL.startsWith('http')) {
+                try {
+                    // فتح رابط التحميل في نافذة جديدة
+                    const newWindow = window.open(downloadURL, '_blank');
+                    
+                    if (newWindow) {
+                        // زيادة عداد التنزيلات
+                        await updateDownloadCount();
+                        showTempMessage('جاري تحميل التطبيق...', 'success');
+                    } else {
+                        // إذا تم منع النافذة المنبثقة
+                        showTempMessage('تم منع النافذة المنبثقة. يرجى السماح بالنوافذ المنبثقة لهذا الموقع.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error opening download link:', error);
+                    showTempMessage('خطأ في فتح رابط التحميل', 'error');
+                }
+            } else {
+                showTempMessage('رابط التحميل غير صالح أو غير متوفر', 'error');
+                console.error('رابط التحميل غير صالح:', downloadURL);
+            }
+        }
+
+        // تحديث عداد التنزيلات
+        async function updateDownloadCount() {
+            try {
+                if (currentApp && currentApp.id) {
+                    const newDownloadCount = (currentApp.downloads || 0) + 1;
+                    
+                    // تحديث في Firebase
+                    if (window.firebaseDb) {
+                        await firebaseDb.collection("apps").doc(currentApp.id).update({
+                            downloads: newDownloadCount
+                        });
+                    }
+                    
+                    // تحديث محلياً
+                    currentApp.downloads = newDownloadCount;
+                    
+                    console.log('تم تحديث عداد التنزيلات إلى:', newDownloadCount);
+                }
+            } catch (error) {
+                console.error('Error updating download count:', error);
+            }
+        }
+
+        // ================================
+        // Initialize the Application
+        // ================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("تهيئة صفحة المتجر...");
+            
+            // تحميل التطبيقات
+            loadApps();
+            
+            // إعداد مستمعات الأحداث للبحث
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+            }
+            
+            // إعداد التنقل في الشريط السفلي
+            setupBottomNavigation();
+            
+            // إعداد أحداث الفئات
+            setupCategoryEvents();
+            
+            // إعداد أزرار الأقسام الخاصة
+            setupSectionTabs();
+            
+            // إدارة شريط البحث
+            document.getElementById('searchIconTop').addEventListener('click', function() {
+                document.getElementById('searchModal').style.display = 'block';
+            });
+
+            document.getElementById('bottomSearchBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('searchModal').style.display = 'block';
+            });
+
+            // إغلاق النافذة المنبثقة
+            document.querySelectorAll('.close').forEach(function(closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+
+            // إغلاق النافذة عند النقر خارجها
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+
+            // البحث عند الضغط على Enter
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            // التحقق من وجود معلمة مشاركة في URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const shareAppId = urlParams.get('share');
+            if (shareAppId) {
+                showSharePage(shareAppId);
+            }
+
+            // التحقق من حالة المصادقة
+            checkAuthState();
+
+            console.log("تم تهيئة صفحة المتجر بالكامل");
+        });
+
+        // جعل الدوال متاحة globally
+        window.filterApps = filterApps;
+        window.searchApps = searchApps;
+        window.performSearch = performSearch;
+        window.downloadApp = downloadApp;
+        window.deleteApp = deleteApp;
+        window.shareApp = shareApp;
+        window.displaySpecialSection = displaySpecialSection;
+        window.goToSharePage = goToSharePage;
+        window.showAdminPanel = showAdminPanel;
+        window.hideAdminPanel = hideAdminPanel;
+        window.openEditModal = openEditModal;
+        window.closeEditModal = closeEditModal;
+        window.updateApp = updateApp;
+        window.searchAdminApps = searchAdminApps;
+        window.clearAdminSearch = clearAdminSearch;
+        window.copyShareLink = copyShareLink;
+        window.generateNewShareLink = generateNewShareLink;
+        window.deleteAdminApp = deleteAdminApp;
+        window.showAddAppForm = showAddAppForm;
+        window.closeAddAppModal = closeAddAppModal;
+        window.shareOnWhatsApp = shareOnWhatsApp;
+        window.shareOnTwitter = shareOnTwitter;
+        window.shareOnFacebook = shareOnFacebook;
+        window.copyShareLink = copyShareLink;
+        window.startDownload = startDownload;
+        window.goToHome = goToHome;
+    </script>
+</body>
+</html>
